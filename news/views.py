@@ -43,7 +43,9 @@ class NewsList(APIView):
             queryset = queryset.filter(Q(title__contains=search) | Q(abstract__contains=search))
         if section and section != 'whole':
             sections = {"economy": "宏观", "finance": "金融", "company": "商业", "japan": "日本"}
-            queryset = queryset.filter(keyword=sections[section])
+            if section in sections.keys():
+                section = sections[section]
+            queryset = queryset.filter(keyword=section)
         queryset = queryset.all().order_by('-id')
 
         paginator = PageNumberPagination()
