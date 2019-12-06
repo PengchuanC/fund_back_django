@@ -114,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'zh-Hans'
+LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'Asia/ShangHai'
 
@@ -129,6 +129,9 @@ USE_TZ = False
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 
 
 # REST FRAMEWORK
@@ -145,7 +148,7 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:8080',
     'http://localhost:80',
     'http://127.0.0.1:80',
-    "https://*",
-    "http://10.170.236.99:8080"
+    "http://10.170.236.99:8080",
+    "http://10.170.139.10:8080"
 )
 CORS_ALLOW_CREDENTIALS = True

@@ -4,7 +4,7 @@ from django.urls import path
 from api import views
 
 urlpatterns = [
-    # path(r"test", views.TestViews.as_view())
+
     path(r"search/fundlist", views.SearchViews.as_view()),
 
     path(r"plot/branch", views.BranchView.as_view()),
