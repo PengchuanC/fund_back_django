@@ -132,6 +132,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 
 # REST FRAMEWORK
@@ -149,6 +150,22 @@ CORS_ORIGIN_WHITELIST = (
     'http://localhost:80',
     'http://127.0.0.1:80',
     "http://10.170.236.99:8080",
-    "http://10.170.139.10:8080"
+    "http://10.170.139.10:8080",
+    'http://0.0.0.0:80',
+    'http://*',
+    'http://0.0.0.0',
+    'http://127.0.0.1',
+    'http://localhost'
 )
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_METHODS = (
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+    'VIEW',
+)
+

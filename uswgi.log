@@ -1,0 +1,865 @@
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 10:43:48 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+writing pidfile to uwsgi.pid
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /Users/pengchuanchao/Code/python/fund_back_django/
+your processes number limit is 1392
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on 127.0.0.1:9001 fd 3
+uwsgi socket 0 bound to TCP address :9090 fd 6
+Python version: 3.8.0 (v3.8.0:fa919fdf25, Oct 14 2019, 10:23:27)  [Clang 6.0 (clang-600.0.57)]
+Python main interpreter initialized at 0x7fd888d02410
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416560 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x7fd888d02410 pid: 51659 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 51659)
+spawned uWSGI worker 1 (pid: 51689, cores: 2)
+spawned uWSGI worker 2 (pid: 51690, cores: 2)
+spawned uWSGI worker 3 (pid: 51691, cores: 2)
+spawned uWSGI worker 4 (pid: 51692, cores: 2)
+spawned uWSGI http 1 (pid: 51693)
+[pid: 51692|app: 0|req: 1/1] 127.0.0.1 () {44 vars in 962 bytes} [Fri Dec  6 10:43:57 2019] GET /admin/ => generated 11225 bytes in 1342 msecs (HTTP/1.1 200) 6 headers in 236 bytes (1 switches on core 0)
+Not Found: /api/
+[pid: 51692|app: 0|req: 2/2] 127.0.0.1 () {42 vars in 927 bytes} [Fri Dec  6 10:47:01 2019] GET /api/ => generated 2178 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /api/news
+[pid: 51691|app: 0|req: 1/3] 127.0.0.1 () {42 vars in 935 bytes} [Fri Dec  6 10:47:06 2019] GET /api/news => generated 2190 bytes in 667 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /api/v1/news
+[pid: 51689|app: 0|req: 1/4] 127.0.0.1 () {42 vars in 941 bytes} [Fri Dec  6 10:47:14 2019] GET /api/v1/news => generated 6089 bytes in 619 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /api/v1/news/
+[pid: 51691|app: 0|req: 2/5] 127.0.0.1 () {42 vars in 943 bytes} [Fri Dec  6 10:47:23 2019] GET /api/v1/news/ => generated 6488 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 51691|app: 0|req: 3/6] 127.0.0.1 () {42 vars in 959 bytes} [Fri Dec  6 10:47:38 2019] GET /api/v1/news/breaking => generated 30110 bytes in 627 msecs (HTTP/1.1 200) 6 headers in 336 bytes (1 switches on core 0)
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+[pid: 51692|app: 0|req: 3/7] 127.0.0.1 () {38 vars in 962 bytes} [Fri Dec  6 10:56:24 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 34667 bytes in 571 msecs (HTTP/1.1 200) 6 headers in 336 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+[pid: 51692|app: 0|req: 5/8] 127.0.0.1 () {38 vars in 909 bytes} [Fri Dec  6 10:56:25 2019] GET /static/rest_framework/css/bootstrap-tweaks.css => generated 2304 bytes in 8 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 51692|app: 0|req: 6/9] 127.0.0.1 () {38 vars in 890 bytes} [Fri Dec  6 10:56:25 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 51692|app: 0|req: 6/10] 127.0.0.1 () {38 vars in 865 bytes} [Fri Dec  6 10:56:25 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap.min.css
+[pid: 51689|app: 0|req: 3/11] 127.0.0.1 () {38 vars in 903 bytes} [Fri Dec  6 10:56:25 2019] GET /static/rest_framework/css/bootstrap.min.css => generated 2295 bytes in 18 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 51689|app: 0|req: 3/12] 127.0.0.1 () {38 vars in 881 bytes} [Fri Dec  6 10:56:25 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/default.js
+[pid: 51692|app: 0|req: 7/13] 127.0.0.1 () {38 vars in 871 bytes} [Fri Dec  6 10:56:25 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/default.css
+Not Found: /static/rest_framework/css/prettify.css
+[pid: 51691|app: 0|req: 5/15] 127.0.0.1 () {38 vars in 891 bytes} [Fri Dec  6 10:56:25 2019] GET /static/rest_framework/css/default.css => generated 2277 bytes in 22 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 51691|app: 0|req: 5/15] 127.0.0.1 () {38 vars in 893 bytes} [Fri Dec  6 10:56:25 2019] GET /static/rest_framework/css/prettify.css => generated 2280 bytes in 23 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 51691|app: 0|req: 6/16] 127.0.0.1 () {38 vars in 889 bytes} [Fri Dec  6 10:56:25 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 51690|app: 0|req: 2/18] 127.0.0.1 () {38 vars in 876 bytes} [Fri Dec  6 10:56:25 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 708 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 51690|app: 0|req: 2/18] 127.0.0.1 () {38 vars in 883 bytes} [Fri Dec  6 10:56:25 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 700 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 51689|app: 0|req: 4/19] 127.0.0.1 () {38 vars in 865 bytes} [Fri Dec  6 10:56:26 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 51692|app: 0|req: 8/20] 127.0.0.1 () {38 vars in 883 bytes} [Fri Dec  6 10:56:26 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 51691|app: 0|req: 7/21] 127.0.0.1 () {38 vars in 881 bytes} [Fri Dec  6 10:56:26 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/default.js
+[pid: 51691|app: 0|req: 8/22] 127.0.0.1 () {38 vars in 871 bytes} [Fri Dec  6 10:56:26 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /favicon.ico
+[pid: 51690|app: 0|req: 3/23] 127.0.0.1 () {38 vars in 859 bytes} [Fri Dec  6 10:56:26 2019] GET /favicon.ico => generated 2199 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+[pid: 51692|app: 0|req: 9/24] 127.0.0.1 () {40 vars in 993 bytes} [Fri Dec  6 10:57:36 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 34667 bytes in 563 msecs (HTTP/1.1 200) 6 headers in 336 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/prettify.css
+[pid: 51692|app: 0|req: 11/25] 127.0.0.1 () {38 vars in 893 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/css/prettify.css => generated 2280 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/css/default.css
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 51692|app: 0|req: 12/26] 127.0.0.1 () {38 vars in 891 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/css/default.css => generated 2277 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 51690|app: 0|req: 5/28] 127.0.0.1 () {38 vars in 890 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 9 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+[pid: 51690|app: 0|req: 5/28] 127.0.0.1 () {38 vars in 876 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 8 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 51692|app: 0|req: 13/29] 127.0.0.1 () {38 vars in 866 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 51692|app: 0|req: 13/30] 127.0.0.1 () {38 vars in 884 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/prettify-min.js
+Not Found: /static/rest_framework/js/default.js
+[pid: 51690|app: 0|req: 7/32] 127.0.0.1 () {38 vars in 882 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+[pid: 51690|app: 0|req: 7/32] 127.0.0.1 () {38 vars in 872 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+[pid: 51691|app: 0|req: 10/33] 127.0.0.1 () {38 vars in 909 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/css/bootstrap-tweaks.css => generated 2304 bytes in 88 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap.min.css
+[pid: 51691|app: 0|req: 10/34] 127.0.0.1 () {38 vars in 903 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/css/bootstrap.min.css => generated 2295 bytes in 91 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 51691|app: 0|req: 11/35] 127.0.0.1 () {38 vars in 890 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 51691|app: 0|req: 12/36] 127.0.0.1 () {38 vars in 876 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 51691|app: 0|req: 13/37] 127.0.0.1 () {38 vars in 866 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 51691|app: 0|req: 14/38] 127.0.0.1 () {38 vars in 884 bytes} [Fri Dec  6 10:57:36 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 51692|app: 0|req: 14/39] 127.0.0.1 () {38 vars in 882 bytes} [Fri Dec  6 10:57:37 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/default.js
+[pid: 51692|app: 0|req: 15/40] 127.0.0.1 () {38 vars in 872 bytes} [Fri Dec  6 10:57:37 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+[pid: 51690|app: 0|req: 8/41] 127.0.0.1 () {40 vars in 993 bytes} [Fri Dec  6 10:57:41 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 34667 bytes in 669 msecs (HTTP/1.1 200) 6 headers in 336 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap.min.css
+[pid: 51691|app: 0|req: 16/42] 127.0.0.1 () {38 vars in 903 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/css/bootstrap.min.css => generated 2295 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+[pid: 51691|app: 0|req: 16/43] 127.0.0.1 () {38 vars in 909 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/css/bootstrap-tweaks.css => generated 2304 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 51690|app: 0|req: 10/45] 127.0.0.1 () {38 vars in 876 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+[pid: 51692|app: 0|req: 17/45] 127.0.0.1 () {38 vars in 890 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/css/default.css
+Not Found: /static/rest_framework/css/prettify.css
+[pid: 51690|app: 0|req: 10/47] 127.0.0.1 () {38 vars in 891 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/css/default.css => generated 2277 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+[pid: 51692|app: 0|req: 17/47] 127.0.0.1 () {38 vars in 893 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/css/prettify.css => generated 2280 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 51689|app: 0|req: 5/48] 127.0.0.1 () {38 vars in 866 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 51691|app: 0|req: 18/49] 127.0.0.1 () {38 vars in 884 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/default.js
+[pid: 51692|app: 0|req: 18/50] 127.0.0.1 () {38 vars in 872 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 51691|app: 0|req: 18/51] 127.0.0.1 () {38 vars in 882 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 51690|app: 0|req: 11/52] 127.0.0.1 () {38 vars in 890 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 51691|app: 0|req: 19/53] 127.0.0.1 () {38 vars in 876 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 51691|app: 0|req: 20/54] 127.0.0.1 () {38 vars in 866 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 51691|app: 0|req: 21/55] 127.0.0.1 () {38 vars in 884 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 51691|app: 0|req: 22/56] 127.0.0.1 () {38 vars in 882 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/default.js
+[pid: 51690|app: 0|req: 12/57] 127.0.0.1 () {38 vars in 872 bytes} [Fri Dec  6 10:57:42 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 51691|app: 0|req: 23/58] 127.0.0.1 () {40 vars in 993 bytes} [Fri Dec  6 10:57:59 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 34667 bytes in 554 msecs (HTTP/1.1 200) 6 headers in 336 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap.min.css
+Not Found: /static/rest_framework/css/prettify.css
+[pid: 51691|app: 0|req: 24/59] 127.0.0.1 () {38 vars in 893 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/css/prettify.css => generated 2280 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 51690|app: 0|req: 13/60] 127.0.0.1 () {38 vars in 890 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+[pid: 51692|app: 0|req: 20/61] 127.0.0.1 () {38 vars in 903 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/css/bootstrap.min.css => generated 2295 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 51692|app: 0|req: 20/63] 127.0.0.1 () {38 vars in 909 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/css/bootstrap-tweaks.css => generated 2304 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 51689|app: 0|req: 6/63] 127.0.0.1 () {38 vars in 876 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/css/default.css
+[pid: 51691|app: 0|req: 26/64] 127.0.0.1 () {38 vars in 891 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/css/default.css => generated 2277 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 51690|app: 0|req: 14/65] 127.0.0.1 () {38 vars in 884 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/default.js
+Not Found: /static/rest_framework/js/csrf.js
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 51691|app: 0|req: 26/67] 127.0.0.1 () {38 vars in 866 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+[pid: 51692|app: 0|req: 21/68] 127.0.0.1 () {38 vars in 872 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+[pid: 51689|app: 0|req: 7/68] 127.0.0.1 () {38 vars in 882 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 51691|app: 0|req: 27/69] 127.0.0.1 () {38 vars in 890 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 51691|app: 0|req: 28/70] 127.0.0.1 () {38 vars in 876 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 51691|app: 0|req: 29/71] 127.0.0.1 () {38 vars in 866 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 51692|app: 0|req: 22/72] 127.0.0.1 () {38 vars in 884 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 51691|app: 0|req: 30/73] 127.0.0.1 () {38 vars in 882 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/default.js
+[pid: 51692|app: 0|req: 23/74] 127.0.0.1 () {38 vars in 872 bytes} [Fri Dec  6 10:58:00 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 51691|app: 0|req: 31/75] 127.0.0.1 () {40 vars in 993 bytes} [Fri Dec  6 10:58:02 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 34667 bytes in 515 msecs (HTTP/1.1 200) 6 headers in 336 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap.min.css
+[pid: 51689|app: 0|req: 8/76] 127.0.0.1 () {38 vars in 903 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/css/bootstrap.min.css => generated 2295 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 51690|app: 0|req: 16/77] 127.0.0.1 () {38 vars in 890 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/prettify.css
+[pid: 51691|app: 0|req: 33/79] 127.0.0.1 () {38 vars in 893 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/css/prettify.css => generated 2280 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/default.css
+[pid: 51691|app: 0|req: 33/79] 127.0.0.1 () {38 vars in 909 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/css/bootstrap-tweaks.css => generated 2304 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 51690|app: 0|req: 17/80] 127.0.0.1 () {38 vars in 891 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/css/default.css => generated 2277 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 51692|app: 0|req: 25/81] 127.0.0.1 () {38 vars in 876 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 9 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 51692|app: 0|req: 25/82] 127.0.0.1 () {38 vars in 866 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 9 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 51690|app: 0|req: 17/83] 127.0.0.1 () {38 vars in 882 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/default.js
+[pid: 51691|app: 0|req: 34/84] 127.0.0.1 () {38 vars in 872 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 51690|app: 0|req: 19/85] 127.0.0.1 () {38 vars in 884 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 51690|app: 0|req: 19/86] 127.0.0.1 () {38 vars in 890 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 51691|app: 0|req: 35/87] 127.0.0.1 () {38 vars in 876 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 51691|app: 0|req: 36/88] 127.0.0.1 () {38 vars in 866 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 51692|app: 0|req: 26/89] 127.0.0.1 () {38 vars in 884 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 51692|app: 0|req: 27/90] 127.0.0.1 () {38 vars in 882 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/default.js
+[pid: 51691|app: 0|req: 37/91] 127.0.0.1 () {38 vars in 872 bytes} [Fri Dec  6 10:58:03 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 51693)
+worker 4 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 10:59:00 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+writing pidfile to uwsgi.pid
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /Users/pengchuanchao/Code/python/fund_back_django/
+your processes number limit is 1392
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :9090 fd 4
+uwsgi socket 0 bound to TCP address 127.0.0.1:65185 (port auto-assigned) fd 3
+Python version: 3.8.0 (v3.8.0:fa919fdf25, Oct 14 2019, 10:23:27)  [Clang 6.0 (clang-600.0.57)]
+Python main interpreter initialized at 0x7ff742701f20
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416560 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x7ff742701f20 pid: 52220 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 52220)
+spawned uWSGI worker 1 (pid: 52250, cores: 2)
+spawned uWSGI worker 2 (pid: 52251, cores: 2)
+spawned uWSGI worker 3 (pid: 52252, cores: 2)
+spawned uWSGI worker 4 (pid: 52253, cores: 2)
+spawned uWSGI http 1 (pid: 52254)
+[pid: 52251|app: 0|req: 1/1] 127.0.0.1 () {38 vars in 736 bytes} [Fri Dec  6 10:59:03 2019] GET /api/v1/news/newslist?page=1&section=japan&date= => generated 15145 bytes in 1143 msecs (HTTP/1.1 200) 6 headers in 200 bytes (1 switches on core 0)
+[pid: 52253|app: 0|req: 1/2] 127.0.0.1 () {38 vars in 736 bytes} [Fri Dec  6 10:59:07 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 20935 bytes in 858 msecs (HTTP/1.1 200) 6 headers in 200 bytes (2 switches on core 1)
+[pid: 52252|app: 0|req: 1/3] 127.0.0.1 () {38 vars in 739 bytes} [Fri Dec  6 10:59:14 2019] GET /api/v1/news/newslist?page=1&section=economy&date= => generated 14043 bytes in 829 msecs (HTTP/1.1 200) 6 headers in 200 bytes (2 switches on core 1)
+[pid: 52253|app: 0|req: 2/4] 127.0.0.1 () {38 vars in 962 bytes} [Fri Dec  6 10:59:40 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 34667 bytes in 594 msecs (HTTP/1.1 200) 6 headers in 336 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/css/bootstrap.min.css
+Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+Not Found: /static/rest_framework/css/prettify.css
+[pid: 52253|app: 0|req: 4/6] 127.0.0.1 () {38 vars in 903 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/css/bootstrap.min.css => generated 2295 bytes in 9 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 52253|app: 0|req: 4/6] 127.0.0.1 () {38 vars in 909 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/css/bootstrap-tweaks.css => generated 2304 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/css/default.css
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 52251|app: 0|req: 3/8] 127.0.0.1 () {38 vars in 893 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/css/prettify.css => generated 2280 bytes in 9 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 52252|app: 0|req: 3/9] 127.0.0.1 () {38 vars in 889 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/css/default.css => generated 2277 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 52251|app: 0|req: 3/9] 127.0.0.1 () {38 vars in 875 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 52253|app: 0|req: 5/10] 127.0.0.1 () {38 vars in 883 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/csrf.js
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 52251|app: 0|req: 4/13] 127.0.0.1 () {38 vars in 881 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 52252|app: 0|req: 4/13] 127.0.0.1 () {38 vars in 888 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 13 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 52252|app: 0|req: 4/13] 127.0.0.1 () {38 vars in 865 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 52252|app: 0|req: 5/14] 127.0.0.1 () {38 vars in 875 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 52253|app: 0|req: 6/15] 127.0.0.1 () {38 vars in 865 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 52250|app: 0|req: 2/16] 127.0.0.1 () {38 vars in 883 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 283 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/default.js
+[pid: 52250|app: 0|req: 2/17] 127.0.0.1 () {38 vars in 871 bytes} [Fri Dec  6 10:59:40 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 442 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 52250|app: 0|req: 3/18] 127.0.0.1 () {38 vars in 881 bytes} [Fri Dec  6 10:59:41 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/default.js
+[pid: 52253|app: 0|req: 7/19] 127.0.0.1 () {38 vars in 872 bytes} [Fri Dec  6 10:59:41 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /favicon.ico
+[pid: 52253|app: 0|req: 8/20] 127.0.0.1 () {38 vars in 860 bytes} [Fri Dec  6 10:59:41 2019] GET /favicon.ico => generated 2199 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 52251|app: 0|req: 5/21] 127.0.0.1 () {38 vars in 669 bytes} [Fri Dec  6 10:59:52 2019] GET /api/v1/summary/bc => generated 2786 bytes in 1177 msecs (HTTP/1.1 200) 6 headers in 199 bytes (1 switches on core 1)
+[pid: 52250|app: 0|req: 4/22] 127.0.0.1 () {38 vars in 736 bytes} [Fri Dec  6 11:00:03 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 20935 bytes in 457 msecs (HTTP/1.1 200) 6 headers in 200 bytes (2 switches on core 1)
+[pid: 52253|app: 0|req: 9/23] 127.0.0.1 () {38 vars in 697 bytes} [Fri Dec  6 11:00:03 2019] GET /api/v1/news/follow/keywords => generated 79 bytes in 479 msecs (HTTP/1.1 200) 6 headers in 191 bytes (1 switches on core 1)
+Not Found: /api/v1/portfolio
+[pid: 52252|app: 0|req: 6/24] 127.0.0.1 () {38 vars in 676 bytes} [Fri Dec  6 11:00:18 2019] GET /api/v1/portfolio => generated 6104 bytes in 8 msecs (HTTP/1.1 404) 5 headers in 156 bytes (1 switches on core 1)
+Not Found: /api/v1/portfolio
+[pid: 52251|app: 0|req: 6/25] 127.0.0.1 () {38 vars in 901 bytes} [Fri Dec  6 11:00:31 2019] GET /api/v1/portfolio => generated 6104 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /api/v1/portfolio/
+[pid: 52253|app: 0|req: 10/26] 127.0.0.1 () {38 vars in 903 bytes} [Fri Dec  6 11:00:35 2019] GET /api/v1/portfolio/ => generated 6107 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /api/v1/portfolio
+[pid: 52253|app: 0|req: 11/27] 127.0.0.1 () {38 vars in 901 bytes} [Fri Dec  6 11:00:40 2019] GET /api/v1/portfolio => generated 6104 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 52250|app: 0|req: 5/28] 127.0.0.1 () {42 vars in 755 bytes} [Fri Dec  6 11:01:17 2019] OPTIONS /api/v1/search/fundlist => generated 0 bytes in 2 msecs (HTTP/1.1 200) 5 headers in 161 bytes (1 switches on core 1)
+[pid: 52251|app: 0|req: 7/29] 127.0.0.1 () {42 vars in 755 bytes} [Fri Dec  6 11:01:18 2019] OPTIONS /api/v1/search/fundlist => generated 0 bytes in 1 msecs (HTTP/1.1 200) 5 headers in 161 bytes (1 switches on core 1)
+[pid: 52252|app: 0|req: 7/30] 127.0.0.1 () {42 vars in 755 bytes} [Fri Dec  6 11:01:19 2019] OPTIONS /api/v1/search/fundlist => generated 0 bytes in 1 msecs (HTTP/1.1 200) 5 headers in 161 bytes (1 switches on core 0)
+[pid: 52252|app: 0|req: 8/31] 127.0.0.1 () {42 vars in 755 bytes} [Fri Dec  6 11:01:19 2019] OPTIONS /api/v1/search/fundlist => generated 0 bytes in 0 msecs (HTTP/1.1 200) 5 headers in 161 bytes (1 switches on core 1)
+[pid: 52253|app: 0|req: 12/32] 127.0.0.1 () {42 vars in 755 bytes} [Fri Dec  6 11:01:19 2019] OPTIONS /api/v1/search/fundlist => generated 0 bytes in 2 msecs (HTTP/1.1 200) 5 headers in 161 bytes (1 switches on core 0)
+[pid: 52252|app: 0|req: 9/33] 127.0.0.1 () {42 vars in 755 bytes} [Fri Dec  6 11:01:20 2019] OPTIONS /api/v1/search/fundlist => generated 0 bytes in 0 msecs (HTTP/1.1 200) 5 headers in 161 bytes (1 switches on core 0)
+[pid: 52253|app: 0|req: 13/34] 127.0.0.1 () {38 vars in 913 bytes} [Fri Dec  6 11:01:51 2019] GET /api/v1/search/fundlist => generated 7797 bytes in 433 msecs (HTTP/1.1 200) 6 headers in 341 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap.min.css
+[pid: 52252|app: 0|req: 10/35] 127.0.0.1 () {38 vars in 878 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/css/bootstrap.min.css => generated 2295 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+[pid: 52253|app: 0|req: 14/36] 127.0.0.1 () {38 vars in 884 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/css/bootstrap-tweaks.css => generated 2304 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 52251|app: 0|req: 8/37] 127.0.0.1 () {38 vars in 865 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/css/default.css
+Not Found: /static/rest_framework/css/prettify.css
+[pid: 52253|app: 0|req: 15/38] 127.0.0.1 () {38 vars in 868 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/css/prettify.css => generated 2280 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 52250|app: 0|req: 6/39] 127.0.0.1 () {38 vars in 851 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 52252|app: 0|req: 12/41] 127.0.0.1 () {38 vars in 866 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/css/default.css => generated 2277 bytes in 9 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 52252|app: 0|req: 12/41] 127.0.0.1 () {38 vars in 841 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 52251|app: 0|req: 10/43] 127.0.0.1 () {38 vars in 859 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 52253|app: 0|req: 16/43] 127.0.0.1 () {38 vars in 857 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/default.js
+[pid: 52251|app: 0|req: 10/44] 127.0.0.1 () {38 vars in 847 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 52253|app: 0|req: 17/45] 127.0.0.1 () {38 vars in 865 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 52253|app: 0|req: 18/46] 127.0.0.1 () {38 vars in 851 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 52253|app: 0|req: 19/47] 127.0.0.1 () {38 vars in 841 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 52253|app: 0|req: 20/48] 127.0.0.1 () {38 vars in 859 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 52253|app: 0|req: 21/49] 127.0.0.1 () {38 vars in 857 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/default.js
+[pid: 52253|app: 0|req: 22/50] 127.0.0.1 () {38 vars in 847 bytes} [Fri Dec  6 11:01:52 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 52253|app: 0|req: 23/51] 127.0.0.1 () {38 vars in 736 bytes} [Fri Dec  6 11:02:04 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 20935 bytes in 413 msecs (HTTP/1.1 200) 6 headers in 200 bytes (2 switches on core 1)
+[pid: 52252|app: 0|req: 13/52] 127.0.0.1 () {38 vars in 697 bytes} [Fri Dec  6 11:02:04 2019] GET /api/v1/news/follow/keywords => generated 79 bytes in 522 msecs (HTTP/1.1 200) 6 headers in 191 bytes (1 switches on core 1)
+[pid: 52251|app: 0|req: 11/53] 127.0.0.1 () {38 vars in 740 bytes} [Fri Dec  6 11:02:12 2019] GET /api/v1/news/newslist?page=1&section=economy&date= => generated 14043 bytes in 378 msecs (HTTP/1.1 200) 6 headers in 200 bytes (1 switches on core 1)
+[pid: 52253|app: 0|req: 24/54] 127.0.0.1 () {38 vars in 740 bytes} [Fri Dec  6 11:02:12 2019] GET /api/v1/news/newslist?page=1&section=economy&date= => generated 14043 bytes in 374 msecs (HTTP/1.1 200) 6 headers in 200 bytes (1 switches on core 0)
+[pid: 52252|app: 0|req: 14/55] 127.0.0.1 () {38 vars in 669 bytes} [Fri Dec  6 11:02:13 2019] GET /api/v1/summary/bc => generated 2786 bytes in 1159 msecs (HTTP/1.1 200) 6 headers in 199 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 52254)
+worker 4 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 11:02:55 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+writing pidfile to uwsgi.pid
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /Users/pengchuanchao/Code/python/fund_back_django/
+your processes number limit is 1392
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on 127.0.0.1:9001 fd 3
+uwsgi socket 0 bound to TCP address :9090 fd 6
+Python version: 3.8.0 (v3.8.0:fa919fdf25, Oct 14 2019, 10:23:27)  [Clang 6.0 (clang-600.0.57)]
+Python main interpreter initialized at 0x7fe2b5901e70
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416560 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x7fe2b5901e70 pid: 52344 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 52344)
+spawned uWSGI worker 1 (pid: 52372, cores: 2)
+spawned uWSGI worker 2 (pid: 52373, cores: 2)
+spawned uWSGI worker 3 (pid: 52374, cores: 2)
+spawned uWSGI worker 4 (pid: 52375, cores: 2)
+spawned uWSGI http 1 (pid: 52376)
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 52376)
+worker 4 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 11:08:20 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+writing pidfile to uwsgi.pid
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /Users/pengchuanchao/Code/python/fund_back_django/
+your processes number limit is 1392
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :9090 fd 4
+uwsgi socket 0 bound to TCP address 127.0.0.1:53627 (port auto-assigned) fd 3
+Python version: 3.8.0 (v3.8.0:fa919fdf25, Oct 14 2019, 10:23:27)  [Clang 6.0 (clang-600.0.57)]
+Python main interpreter initialized at 0x7ff6f4601ea0
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416560 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x7ff6f4601ea0 pid: 52468 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 52468)
+spawned uWSGI worker 1 (pid: 52498, cores: 2)
+spawned uWSGI worker 2 (pid: 52499, cores: 2)
+spawned uWSGI worker 3 (pid: 52500, cores: 2)
+spawned uWSGI worker 4 (pid: 52501, cores: 2)
+spawned uWSGI http 1 (pid: 52502)
+[pid: 52500|app: 0|req: 1/1] 127.0.0.1 () {38 vars in 740 bytes} [Fri Dec  6 11:08:24 2019] GET /api/v1/news/newslist?page=1&section=finance&date= => generated 13005 bytes in 1122 msecs (HTTP/1.1 200) 6 headers in 200 bytes (1 switches on core 0)
+[pid: 52499|app: 0|req: 1/2] 127.0.0.1 () {38 vars in 669 bytes} [Fri Dec  6 11:08:43 2019] GET /api/v1/summary/bc => generated 2786 bytes in 1815 msecs (HTTP/1.1 200) 6 headers in 199 bytes (2 switches on core 0)
+[pid: 52499|app: 0|req: 2/3] 127.0.0.1 () {38 vars in 659 bytes} [Fri Dec  6 11:09:21 2019] GET /api/v1/summary/bc => generated 2786 bytes in 1163 msecs (HTTP/1.1 200) 6 headers in 199 bytes (1 switches on core 1)
+[pid: 52501|app: 0|req: 1/4] 127.0.0.1 () {38 vars in 903 bytes} [Fri Dec  6 11:09:59 2019] GET /api/v1/summary/bc => generated 15153 bytes in 1878 msecs (HTTP/1.1 200) 6 headers in 336 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/css/bootstrap.min.css
+[pid: 52501|app: 0|req: 2/5] 127.0.0.1 () {38 vars in 873 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/css/bootstrap.min.css => generated 2295 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+[pid: 52500|app: 0|req: 2/6] 127.0.0.1 () {38 vars in 879 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/css/bootstrap-tweaks.css => generated 2304 bytes in 8 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/css/prettify.css
+[pid: 52501|app: 0|req: 3/7] 127.0.0.1 () {38 vars in 863 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/css/prettify.css => generated 2280 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/css/default.css
+[pid: 52499|app: 0|req: 3/8] 127.0.0.1 () {38 vars in 861 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/css/default.css => generated 2277 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 52501|app: 0|req: 5/10] 127.0.0.1 () {38 vars in 860 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+[pid: 52501|app: 0|req: 5/10] 127.0.0.1 () {38 vars in 846 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 52501|app: 0|req: 7/11] 127.0.0.1 () {38 vars in 836 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 52501|app: 0|req: 7/12] 127.0.0.1 () {38 vars in 852 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/default.js
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 52501|app: 0|req: 9/14] 127.0.0.1 () {38 vars in 840 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 52501|app: 0|req: 9/14] 127.0.0.1 () {38 vars in 858 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 52501|app: 0|req: 10/15] 127.0.0.1 () {38 vars in 845 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 52500|app: 0|req: 3/16] 127.0.0.1 () {38 vars in 835 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 52498|app: 0|req: 1/17] 127.0.0.1 () {38 vars in 854 bytes} [Fri Dec  6 11:10:00 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 441 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 52499|app: 0|req: 4/18] 127.0.0.1 () {38 vars in 851 bytes} [Fri Dec  6 11:10:01 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/default.js
+[pid: 52501|app: 0|req: 11/19] 127.0.0.1 () {38 vars in 841 bytes} [Fri Dec  6 11:10:01 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 52500|app: 0|req: 4/20] 127.0.0.1 () {40 vars in 934 bytes} [Fri Dec  6 11:10:45 2019] GET /api/v1/summary/bc => generated 15153 bytes in 1261 msecs (HTTP/1.1 200) 6 headers in 336 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap.min.css
+[pid: 52501|app: 0|req: 12/21] 127.0.0.1 () {38 vars in 873 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/css/bootstrap.min.css => generated 2295 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/css/prettify.css
+[pid: 52499|app: 0|req: 5/22] 127.0.0.1 () {38 vars in 863 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/css/prettify.css => generated 2280 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/default.css
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 52500|app: 0|req: 5/24] 127.0.0.1 () {38 vars in 860 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 52498|app: 0|req: 2/24] 127.0.0.1 () {38 vars in 861 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/css/default.css => generated 2277 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+[pid: 52501|app: 0|req: 13/25] 127.0.0.1 () {38 vars in 879 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/css/bootstrap-tweaks.css => generated 2304 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 52500|app: 0|req: 6/26] 127.0.0.1 () {38 vars in 836 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 52499|app: 0|req: 7/27] 127.0.0.1 () {38 vars in 846 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 10 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/default.js
+[pid: 52498|app: 0|req: 3/28] 127.0.0.1 () {38 vars in 842 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 52501|app: 0|req: 14/29] 127.0.0.1 () {38 vars in 854 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 52499|app: 0|req: 7/30] 127.0.0.1 () {38 vars in 852 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 52501|app: 0|req: 15/31] 127.0.0.1 () {38 vars in 860 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 52501|app: 0|req: 16/32] 127.0.0.1 () {38 vars in 846 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 52501|app: 0|req: 17/33] 127.0.0.1 () {38 vars in 836 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 52500|app: 0|req: 7/34] 127.0.0.1 () {38 vars in 854 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 52501|app: 0|req: 18/35] 127.0.0.1 () {38 vars in 852 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/default.js
+[pid: 52501|app: 0|req: 19/36] 127.0.0.1 () {38 vars in 842 bytes} [Fri Dec  6 11:10:47 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 52501|app: 0|req: 20/37] 127.0.0.1 () {40 vars in 977 bytes} [Fri Dec  6 11:11:12 2019] GET /api/v1/summary/bc?format=api => generated 15208 bytes in 1228 msecs (HTTP/1.1 200) 6 headers in 336 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/css/prettify.css
+[pid: 52498|app: 0|req: 4/38] 127.0.0.1 () {38 vars in 874 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/css/prettify.css => generated 2280 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap.min.css
+[pid: 52501|app: 0|req: 22/39] 127.0.0.1 () {38 vars in 884 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/css/bootstrap.min.css => generated 2295 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+Not Found: /static/rest_framework/js/ajax-form.js
+Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+[pid: 52499|app: 0|req: 9/41] 127.0.0.1 () {38 vars in 857 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 52501|app: 0|req: 22/41] 127.0.0.1 () {38 vars in 890 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/css/bootstrap-tweaks.css => generated 2304 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/css/default.css
+[pid: 52500|app: 0|req: 9/42] 127.0.0.1 () {38 vars in 871 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 52500|app: 0|req: 9/43] 127.0.0.1 () {38 vars in 847 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 52499|app: 0|req: 10/44] 127.0.0.1 () {38 vars in 865 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+[pid: 52499|app: 0|req: 10/45] 127.0.0.1 () {38 vars in 872 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/css/default.css => generated 2277 bytes in 11 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 52501|app: 0|req: 23/46] 127.0.0.1 () {38 vars in 863 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/default.js
+[pid: 52500|app: 0|req: 10/47] 127.0.0.1 () {38 vars in 853 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+[pid: 52500|app: 0|req: 11/48] 127.0.0.1 () {38 vars in 871 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 52501|app: 0|req: 24/49] 127.0.0.1 () {38 vars in 857 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 52500|app: 0|req: 12/50] 127.0.0.1 () {38 vars in 847 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 52501|app: 0|req: 25/51] 127.0.0.1 () {38 vars in 865 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 52500|app: 0|req: 13/52] 127.0.0.1 () {38 vars in 863 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/default.js
+[pid: 52501|app: 0|req: 26/53] 127.0.0.1 () {38 vars in 853 bytes} [Fri Dec  6 11:11:13 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 52499|app: 0|req: 11/54] 127.0.0.1 () {40 vars in 990 bytes} [Fri Dec  6 11:11:15 2019] GET /api/v1/summary/bc?format=json => generated 2786 bytes in 1194 msecs (HTTP/1.1 200) 5 headers in 159 bytes (1 switches on core 1)
+[pid: 52501|app: 0|req: 27/55] 127.0.0.1 () {42 vars in 1021 bytes} [Fri Dec  6 11:14:44 2019] GET /api/v1/summary/bc?format=json => generated 2786 bytes in 1264 msecs (HTTP/1.1 200) 5 headers in 159 bytes (1 switches on core 1)
+[pid: 52500|app: 0|req: 14/56] 127.0.0.1 () {38 vars in 903 bytes} [Fri Dec  6 11:14:48 2019] GET /api/v1/summary/bc => generated 15153 bytes in 1229 msecs (HTTP/1.1 200) 6 headers in 336 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/css/prettify.css
+[pid: 52500|app: 0|req: 16/57] 127.0.0.1 () {38 vars in 863 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/css/prettify.css => generated 2280 bytes in 12 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/css/default.css
+[pid: 52500|app: 0|req: 16/58] 127.0.0.1 () {38 vars in 861 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/css/default.css => generated 2277 bytes in 11 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/css/bootstrap.min.css
+[pid: 52501|app: 0|req: 29/59] 127.0.0.1 () {38 vars in 873 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/css/bootstrap.min.css => generated 2295 bytes in 16 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+[pid: 52501|app: 0|req: 29/60] 127.0.0.1 () {38 vars in 879 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/css/bootstrap-tweaks.css => generated 2304 bytes in 15 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 52498|app: 0|req: 5/61] 127.0.0.1 () {38 vars in 846 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 15 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 52500|app: 0|req: 17/62] 127.0.0.1 () {38 vars in 836 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 52501|app: 0|req: 31/63] 127.0.0.1 () {38 vars in 852 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/default.js
+[pid: 52501|app: 0|req: 31/64] 127.0.0.1 () {38 vars in 842 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/jquery-3.4.1.min.js
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 52499|app: 0|req: 13/66] 127.0.0.1 () {38 vars in 860 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/js/jquery-3.4.1.min.js => generated 2298 bytes in 44 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 52499|app: 0|req: 13/66] 127.0.0.1 () {38 vars in 854 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 33 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/rest_framework/js/ajax-form.js
+[pid: 52501|app: 0|req: 32/67] 127.0.0.1 () {38 vars in 846 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/js/ajax-form.js => generated 2277 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/csrf.js
+[pid: 52501|app: 0|req: 33/68] 127.0.0.1 () {38 vars in 836 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/js/csrf.js => generated 2262 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/bootstrap.min.js
+[pid: 52501|app: 0|req: 34/69] 127.0.0.1 () {38 vars in 854 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/js/bootstrap.min.js => generated 2289 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/rest_framework/js/prettify-min.js
+[pid: 52501|app: 0|req: 35/70] 127.0.0.1 () {38 vars in 852 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/js/prettify-min.js => generated 2286 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/rest_framework/js/default.js
+[pid: 52500|app: 0|req: 18/71] 127.0.0.1 () {38 vars in 842 bytes} [Fri Dec  6 11:14:50 2019] GET /static/rest_framework/js/default.js => generated 2271 bytes in 2 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 52502)
+worker 4 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 11:19:34 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+writing pidfile to uwsgi.pid
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /Users/pengchuanchao/Code/python/fund_back_django/
+your processes number limit is 1392
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :9090 fd 4
+uwsgi socket 0 bound to TCP address 127.0.0.1:59375 (port auto-assigned) fd 3
+Python version: 3.8.0 (v3.8.0:fa919fdf25, Oct 14 2019, 10:23:27)  [Clang 6.0 (clang-600.0.57)]
+Python main interpreter initialized at 0x7fafdbe02770
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416560 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x7fafdbe02770 pid: 52997 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 52997)
+spawned uWSGI worker 1 (pid: 53027, cores: 2)
+spawned uWSGI worker 2 (pid: 53028, cores: 2)
+spawned uWSGI worker 3 (pid: 53029, cores: 2)
+spawned uWSGI worker 4 (pid: 53030, cores: 2)
+spawned uWSGI http 1 (pid: 53031)
+[pid: 53030|app: 0|req: 1/1] 127.0.0.1 () {38 vars in 659 bytes} [Fri Dec  6 11:19:52 2019] GET /api/v1/summary/bc => generated 2786 bytes in 1838 msecs (HTTP/1.1 200) 6 headers in 199 bytes (2 switches on core 0)
+Not Found: /api/v1/portfolio
+[pid: 53030|app: 0|req: 2/2] 127.0.0.1 () {38 vars in 665 bytes} [Fri Dec  6 11:20:37 2019] GET /api/v1/portfolio => generated 6104 bytes in 7 msecs (HTTP/1.1 404) 5 headers in 156 bytes (1 switches on core 1)
+[uwsgi-http key: 0.0.0.0:9090 client_addr: 127.0.0.1 client_port: 10218] hr_read(): Connection reset by peer [plugins/http/http.c line 917]
+[pid: 53030|app: 0|req: 4/3] 127.0.0.1 () {38 vars in 726 bytes} [Fri Dec  6 11:20:40 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 20935 bytes in 418 msecs (HTTP/1.1 200) 6 headers in 200 bytes (2 switches on core 0)
+[pid: 53030|app: 0|req: 4/4] 127.0.0.1 () {38 vars in 687 bytes} [Fri Dec  6 11:20:40 2019] GET /api/v1/news/follow/keywords => generated 79 bytes in 519 msecs (HTTP/1.1 200) 6 headers in 191 bytes (2 switches on core 1)
+Not Found: /
+[pid: 53030|app: 0|req: 5/5] 127.0.0.1 () {44 vars in 863 bytes} [Fri Dec  6 11:20:59 2019] GET / => generated 2150 bytes in 9 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 53030|app: 0|req: 6/6] 127.0.0.1 () {44 vars in 875 bytes} [Fri Dec  6 11:21:04 2019] GET /admin/ => generated 0 bytes in 28 msecs (HTTP/1.1 302) 7 headers in 273 bytes (1 switches on core 1)
+[pid: 53030|app: 0|req: 7/7] 127.0.0.1 () {44 vars in 912 bytes} [Fri Dec  6 11:21:04 2019] GET /admin/login/?next=/admin/ => generated 1821 bytes in 50 msecs (HTTP/1.1 200) 7 headers in 403 bytes (2 switches on core 0)
+Not Found: /static/admin/css/base.css
+[pid: 53030|app: 0|req: 8/8] 127.0.0.1 () {42 vars in 822 bytes} [Fri Dec  6 11:21:04 2019] GET /static/admin/css/base.css => generated 2243 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/admin/css/responsive.css
+Not Found: /static/admin/css/login.css
+[pid: 53029|app: 0|req: 1/10] 127.0.0.1 () {42 vars in 834 bytes} [Fri Dec  6 11:21:04 2019] GET /static/admin/css/responsive.css => generated 2261 bytes in 705 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+[pid: 53028|app: 0|req: 1/10] 127.0.0.1 () {42 vars in 824 bytes} [Fri Dec  6 11:21:04 2019] GET /static/admin/css/login.css => generated 2246 bytes in 705 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/admin/css/responsive.css
+[pid: 53029|app: 0|req: 2/11] 127.0.0.1 () {42 vars in 834 bytes} [Fri Dec  6 11:21:30 2019] GET /static/admin/css/responsive.css => generated 2261 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/admin/css/login.css
+[pid: 53030|app: 0|req: 10/12] 127.0.0.1 () {42 vars in 824 bytes} [Fri Dec  6 11:21:30 2019] GET /static/admin/css/login.css => generated 2246 bytes in 5 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /static/admin/css/base.css
+[pid: 53030|app: 0|req: 10/13] 127.0.0.1 () {42 vars in 822 bytes} [Fri Dec  6 11:21:30 2019] GET /static/admin/css/base.css => generated 2243 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 0)
+[pid: 53030|app: 0|req: 11/14] 127.0.0.1 () {46 vars in 942 bytes} [Fri Dec  6 11:21:38 2019] GET /admin/login/?next=/admin/ => generated 1821 bytes in 15 msecs (HTTP/1.1 200) 7 headers in 403 bytes (1 switches on core 1)
+Not Found: /static/admin/css/base.css
+[pid: 53030|app: 0|req: 12/15] 127.0.0.1 () {42 vars in 821 bytes} [Fri Dec  6 11:21:38 2019] GET /static/admin/css/base.css => generated 2243 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /static/admin/css/login.css
+[pid: 53030|app: 0|req: 13/16] 127.0.0.1 () {42 vars in 823 bytes} [Fri Dec  6 11:21:38 2019] GET /static/admin/css/login.css => generated 2246 bytes in 3 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/admin/css/responsive.css
+[pid: 53028|app: 0|req: 2/17] 127.0.0.1 () {42 vars in 833 bytes} [Fri Dec  6 11:21:38 2019] GET /static/admin/css/responsive.css => generated 2261 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+[pid: 53027|app: 0|req: 1/18] 127.0.0.1 () {54 vars in 1120 bytes} [Fri Dec  6 11:21:40 2019] POST /admin/login/?next=/admin/ => generated 0 bytes in 1539 msecs (HTTP/1.1 302) 10 headers in 607 bytes (1 switches on core 1)
+[pid: 53028|app: 0|req: 3/19] 127.0.0.1 () {48 vars in 1020 bytes} [Fri Dec  6 11:21:41 2019] GET /admin/ => generated 11225 bytes in 513 msecs (HTTP/1.1 200) 6 headers in 236 bytes (1 switches on core 0)
+Not Found: /static/admin/css/base.css
+Not Found: /static/admin/css/dashboard.css
+[pid: 53030|app: 0|req: 14/21] 127.0.0.1 () {42 vars in 847 bytes} [Fri Dec  6 11:21:42 2019] GET /static/admin/css/base.css => generated 2243 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 53028|app: 0|req: 4/21] 127.0.0.1 () {42 vars in 857 bytes} [Fri Dec  6 11:21:42 2019] GET /static/admin/css/dashboard.css => generated 2258 bytes in 4 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /static/admin/css/responsive.css
+[pid: 53027|app: 0|req: 2/22] 127.0.0.1 () {42 vars in 859 bytes} [Fri Dec  6 11:21:42 2019] GET /static/admin/css/responsive.css => generated 2261 bytes in 7 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 53029|app: 0|req: 3/23] 127.0.0.1 () {38 vars in 726 bytes} [Fri Dec  6 11:21:52 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 20935 bytes in 466 msecs (HTTP/1.1 200) 6 headers in 200 bytes (2 switches on core 1)
+[pid: 53030|app: 0|req: 15/24] 127.0.0.1 () {38 vars in 687 bytes} [Fri Dec  6 11:21:52 2019] GET /api/v1/news/follow/keywords => generated 79 bytes in 475 msecs (HTTP/1.1 200) 6 headers in 191 bytes (1 switches on core 1)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 53031)
+worker 4 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 11:22:19 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+writing pidfile to uwsgi.pid
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /Users/pengchuanchao/Code/python/fund_back_django/
+your processes number limit is 1392
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :9001 fd 3
+uwsgi socket 0 bound to TCP address :9090 fd 6
+Python version: 3.8.0 (v3.8.0:fa919fdf25, Oct 14 2019, 10:23:27)  [Clang 6.0 (clang-600.0.57)]
+Python main interpreter initialized at 0x7fd12f801320
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416560 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x7fd12f801320 pid: 53108 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 53108)
+spawned uWSGI worker 1 (pid: 53138, cores: 2)
+spawned uWSGI worker 2 (pid: 53139, cores: 2)
+spawned uWSGI worker 3 (pid: 53140, cores: 2)
+spawned uWSGI worker 4 (pid: 53141, cores: 2)
+spawned uWSGI http 1 (pid: 53142)
+[pid: 53138|app: 0|req: 1/1] 127.0.0.1 () {44 vars in 955 bytes} [Fri Dec  6 11:22:26 2019] GET /admin/ => generated 0 bytes in 1178 msecs (HTTP/1.1 302) 8 headers in 350 bytes (1 switches on core 0)
+[pid: 53138|app: 0|req: 2/2] 127.0.0.1 () {44 vars in 948 bytes} [Fri Dec  6 11:22:27 2019] GET /admin/login/?next=/admin/ => generated 1821 bytes in 66 msecs (HTTP/1.1 200) 7 headers in 403 bytes (1 switches on core 1)
+[pid: 53141|app: 0|req: 1/3] 127.0.0.1 () {52 vars in 1150 bytes} [Fri Dec  6 11:22:41 2019] POST /admin/login/?next=/admin/ => generated 0 bytes in 1281 msecs (HTTP/1.1 302) 10 headers in 607 bytes (1 switches on core 1)
+Forbidden (CSRF token missing or incorrect.): /admin/login/
+[pid: 53141|app: 0|req: 3/4] 127.0.0.1 () {52 vars in 1194 bytes} [Fri Dec  6 11:22:43 2019] POST /admin/login/?next=/admin/ => generated 2508 bytes in 4 msecs (HTTP/1.1 403) 5 headers in 156 bytes (2 switches on core 1)
+[pid: 53141|app: 0|req: 3/5] 127.0.0.1 () {46 vars in 1011 bytes} [Fri Dec  6 11:22:42 2019] GET /admin/ => generated 11225 bytes in 487 msecs (HTTP/1.1 200) 6 headers in 236 bytes (1 switches on core 0)
+[pid: 53140|app: 0|req: 1/6] 127.0.0.1 () {42 vars in 961 bytes} [Fri Dec  6 11:22:51 2019] GET /admin/login/?next=/admin/ => generated 0 bytes in 998 msecs (HTTP/1.1 302) 7 headers in 254 bytes (1 switches on core 0)
+[pid: 53140|app: 0|req: 2/7] 127.0.0.1 () {42 vars in 924 bytes} [Fri Dec  6 11:22:52 2019] GET /admin/ => generated 11225 bytes in 471 msecs (HTTP/1.1 200) 6 headers in 236 bytes (1 switches on core 1)
+[pid: 53141|app: 0|req: 4/8] 127.0.0.1 () {44 vars in 987 bytes} [Fri Dec  6 11:22:59 2019] GET /admin/api/classify/ => generated 42844 bytes in 642 msecs (HTTP/1.1 200) 7 headers in 404 bytes (1 switches on core 1)
+[pid: 53141|app: 0|req: 5/9] 127.0.0.1 () {42 vars in 838 bytes} [Fri Dec  6 11:22:59 2019] GET /admin/jsi18n/ => generated 7722 bytes in 333 msecs (HTTP/1.1 200) 4 headers in 140 bytes (1 switches on core 0)
+[pid: 53140|app: 0|req: 3/10] 127.0.0.1 () {42 vars in 924 bytes} [Fri Dec  6 11:23:04 2019] GET /admin/ => generated 11225 bytes in 391 msecs (HTTP/1.1 200) 6 headers in 236 bytes (1 switches on core 0)
+[pid: 53140|app: 0|req: 4/11] 127.0.0.1 () {44 vars in 975 bytes} [Fri Dec  6 11:23:07 2019] GET /admin/logout/ => generated 1196 bytes in 434 msecs (HTTP/1.1 200) 7 headers in 312 bytes (1 switches on core 1)
+[pid: 53141|app: 0|req: 6/12] 127.0.0.1 () {44 vars in 924 bytes} [Fri Dec  6 11:23:09 2019] GET /admin/ => generated 0 bytes in 1 msecs (HTTP/1.1 302) 7 headers in 273 bytes (1 switches on core 0)
+[pid: 53141|app: 0|req: 7/13] 127.0.0.1 () {44 vars in 961 bytes} [Fri Dec  6 11:23:09 2019] GET /admin/login/?next=/admin/ => generated 1821 bytes in 12 msecs (HTTP/1.1 200) 7 headers in 403 bytes (1 switches on core 1)
+[pid: 53140|app: 0|req: 5/14] 127.0.0.1 () {52 vars in 1150 bytes} [Fri Dec  6 11:23:15 2019] POST /admin/login/?next=/admin/ => generated 0 bytes in 785 msecs (HTTP/1.1 302) 10 headers in 607 bytes (2 switches on core 1)
+[pid: 53140|app: 0|req: 6/15] 127.0.0.1 () {46 vars in 1011 bytes} [Fri Dec  6 11:23:16 2019] GET /admin/ => generated 11225 bytes in 391 msecs (HTTP/1.1 200) 6 headers in 236 bytes (1 switches on core 0)
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 53142)
+worker 4 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 11:25:38 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+writing pidfile to uwsgi.pid
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /Users/pengchuanchao/Code/python/fund_back_django/
+your processes number limit is 1392
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :9001 fd 3
+uwsgi socket 0 bound to TCP address :9090 fd 6
+Python version: 3.8.0 (v3.8.0:fa919fdf25, Oct 14 2019, 10:23:27)  [Clang 6.0 (clang-600.0.57)]
+Python main interpreter initialized at 0x7ff047c08230
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416560 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x7ff047c08230 pid: 53231 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 53231)
+spawned uWSGI worker 1 (pid: 53261, cores: 2)
+spawned uWSGI worker 2 (pid: 53262, cores: 2)
+spawned uWSGI worker 3 (pid: 53263, cores: 2)
+spawned uWSGI worker 4 (pid: 53264, cores: 2)
+spawned uWSGI http 1 (pid: 53265)
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+[pid: 53262|app: 0|req: 1/1] 127.0.0.1 () {38 vars in 714 bytes} [Fri Dec  6 11:29:08 2019] GET /api/v1/summary/bc => generated 2786 bytes in 1892 msecs (HTTP/1.1 200) 6 headers in 199 bytes (2 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 53265)
+worker 4 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 11:31:46 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+writing pidfile to uwsgi.pid
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /Users/pengchuanchao/Code/python/fund_back_django/
+your processes number limit is 1392
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :9001 fd 3
+uwsgi socket 0 bound to TCP address :9090 fd 6
+Python version: 3.8.0 (v3.8.0:fa919fdf25, Oct 14 2019, 10:23:27)  [Clang 6.0 (clang-600.0.57)]
+Python main interpreter initialized at 0x7ffd59502080
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416560 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x7ffd59502080 pid: 53438 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 53438)
+spawned uWSGI worker 1 (pid: 53468, cores: 2)
+spawned uWSGI worker 2 (pid: 53469, cores: 2)
+spawned uWSGI worker 3 (pid: 53470, cores: 2)
+spawned uWSGI worker 4 (pid: 53471, cores: 2)
+spawned uWSGI http 1 (pid: 53472)
+[pid: 53470|app: 0|req: 1/1] 127.0.0.1 () {38 vars in 715 bytes} [Fri Dec  6 11:31:51 2019] GET /api/v1/summary/bc => generated 2786 bytes in 1833 msecs (HTTP/1.1 200) 6 headers in 199 bytes (1 switches on core 0)
+[pid: 53470|app: 0|req: 2/2] 127.0.0.1 () {38 vars in 782 bytes} [Fri Dec  6 11:31:53 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 20935 bytes in 465 msecs (HTTP/1.1 200) 6 headers in 200 bytes (2 switches on core 1)
+[pid: 53471|app: 0|req: 1/3] 127.0.0.1 () {38 vars in 743 bytes} [Fri Dec  6 11:31:53 2019] GET /api/v1/news/follow/keywords => generated 79 bytes in 948 msecs (HTTP/1.1 200) 6 headers in 191 bytes (2 switches on core 0)
+[pid: 53471|app: 0|req: 2/4] 127.0.0.1 () {38 vars in 786 bytes} [Fri Dec  6 11:55:33 2019] GET /api/v1/news/newslist?page=1&section=economy&date= => generated 14043 bytes in 559 msecs (HTTP/1.1 200) 6 headers in 200 bytes (2 switches on core 1)
+[pid: 53471|app: 0|req: 3/5] 127.0.0.1 () {38 vars in 786 bytes} [Fri Dec  6 11:55:33 2019] GET /api/v1/news/newslist?page=1&section=economy&date= => generated 14043 bytes in 386 msecs (HTTP/1.1 200) 6 headers in 200 bytes (2 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 53472)
+worker 4 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 11:58:56 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+writing pidfile to uwsgi.pid
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /Users/pengchuanchao/Code/python/fund_back_django/
+your processes number limit is 1392
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :9001 fd 3
+uwsgi socket 0 bound to TCP address :9090 fd 6
+Python version: 3.8.0 (v3.8.0:fa919fdf25, Oct 14 2019, 10:23:27)  [Clang 6.0 (clang-600.0.57)]
+Python main interpreter initialized at 0x7fcf15407b10
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416560 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x7fcf15407b10 pid: 53794 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 53794)
+spawned uWSGI worker 1 (pid: 53824, cores: 2)
+spawned uWSGI worker 2 (pid: 53825, cores: 2)
+spawned uWSGI worker 3 (pid: 53826, cores: 2)
+spawned uWSGI worker 4 (pid: 53827, cores: 2)
+spawned uWSGI http 1 (pid: 53828)
+[pid: 53827|app: 0|req: 1/1] 127.0.0.1 () {38 vars in 786 bytes} [Fri Dec  6 11:59:01 2019] GET /api/v1/news/newslist?page=1&section=finance&date= => generated 13005 bytes in 1130 msecs (HTTP/1.1 200) 7 headers in 245 bytes (2 switches on core 0)
+[pid: 53826|app: 0|req: 1/2] 127.0.0.1 () {38 vars in 782 bytes} [Fri Dec  6 11:59:03 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 20935 bytes in 857 msecs (HTTP/1.1 200) 7 headers in 245 bytes (2 switches on core 0)
+[pid: 53826|app: 0|req: 2/3] 127.0.0.1 () {38 vars in 715 bytes} [Fri Dec  6 11:59:05 2019] GET /api/v1/summary/bc => generated 2786 bytes in 1142 msecs (HTTP/1.1 200) 7 headers in 244 bytes (2 switches on core 1)
+/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/rest_framework/pagination.py:200: UnorderedObjectListWarning: Pagination may yield inconsistent results with an unordered object_list: <class 'api.models.fund.Fund'> QuerySet.
+  paginator = self.django_paginator_class(queryset, page_size)
+[pid: 53827|app: 0|req: 2/4] 127.0.0.1 () {38 vars in 736 bytes} [Fri Dec  6 11:59:10 2019] GET /api/v1/summary/info?page=1 => generated 5313 bytes in 531 msecs (HTTP/1.1 200) 7 headers in 244 bytes (1 switches on core 1)
+[pid: 53827|app: 0|req: 3/5] 127.0.0.1 () {38 vars in 714 bytes} [Fri Dec  6 11:59:12 2019] GET /api/v1/summary/bc => generated 2786 bytes in 1103 msecs (HTTP/1.1 200) 7 headers in 244 bytes (1 switches on core 0)
+[pid: 53827|app: 0|req: 4/6] 127.0.0.1 () {38 vars in 782 bytes} [Fri Dec  6 12:00:31 2019] GET /api/v1/news/newslist?page=1&section=whole&date= => generated 20935 bytes in 435 msecs (HTTP/1.1 200) 7 headers in 245 bytes (2 switches on core 1)
+[pid: 53826|app: 0|req: 3/7] 127.0.0.1 () {38 vars in 743 bytes} [Fri Dec  6 12:00:31 2019] GET /api/v1/news/follow/keywords => generated 79 bytes in 495 msecs (HTTP/1.1 200) 7 headers in 236 bytes (2 switches on core 0)
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
