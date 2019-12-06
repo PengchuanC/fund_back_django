@@ -23,7 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'u2tktv%e7!%hbkmfzo_4!l-*)x5s*tnqe3al3r*w9^h@f@kqy@'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
+
+APPEND_SLASH = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -147,17 +149,34 @@ REST_FRAMEWORK = {
 
 CORS_ORIGIN_WHITELIST = (
     'http://127.0.0.1:8080',
+    'http://127.0.0.1:80',
+    'http://127.0.0.1',
     'http://localhost:8080',
     'http://localhost:80',
-    'http://127.0.0.1:80',
+    'http://localhost',
     "http://10.170.139.10:8080",
     "http://10.170.139.10",
     "http://10.170.139.10:80",
     'http://0.0.0.0:80',
     'http://0.0.0.0:8080',
-    'http://*',
-    'http://0.0.0.0',
-    'http://127.0.0.1',
-    'http://localhost'
+    'http://0.0.0.0'
 )
+
+CORS_ORIGIN_ALLOW_ALL = True
 CORS_ALLOW_CREDENTIALS = True
+
+CORS_ALLOW_HEADERS = (
+    'XMLHttpRequest',
+    'X_FILENAME',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+    'Pragma',
+    'if-modified-since',
+    'XMLHttpRequest',
+)
