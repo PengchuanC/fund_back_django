@@ -33,13 +33,8 @@ class Indicator(models.Model):
         verbose_name_plural = verbose_name
         ordering = ['id']
 
-    def to_dict(self):
-        items = self.__dict__
-        attrs = {}
-        for k, v in items.items():
-            if k != "_sa_instance_state":
-                attrs[k] = v
-        return attrs
+    def __str__(self):
+        return self.windcode
 
 
 class IndicatorIndex(models.Model):
@@ -56,3 +51,6 @@ class IndicatorIndex(models.Model):
         verbose_name = "指数筛选用数据"
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+    def __str__(self):
+        return self.windcode

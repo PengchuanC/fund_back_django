@@ -23,3 +23,6 @@ class Brinson(models.Model):
         db_table = "t_ff_brinson"
         verbose_name = "业绩归因(Brinson)"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.windcode

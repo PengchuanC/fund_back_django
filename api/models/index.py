@@ -25,3 +25,6 @@ class IndexClosePrice(models.Model):
         db_table = "t_ff_index_cp"
         verbose_name = "指数收盘数据"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.windcode

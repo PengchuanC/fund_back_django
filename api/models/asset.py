@@ -18,6 +18,9 @@ class Asset(models.Model):
         verbose_name = "资产配置"
         verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return self.windcode
+
 
 class AssetIndustry(models.Model):
     windcode = models.ForeignKey(Fund, to_field="windcode", on_delete=models.CASCADE)
@@ -31,6 +34,9 @@ class AssetIndustry(models.Model):
         db_table = "t_ff_asset_industry"
         verbose_name = "行业配置"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.windcode
 
 
 class StockHolding(models.Model):
@@ -47,6 +53,9 @@ class StockHolding(models.Model):
         verbose_name = "股票配置"
         verbose_name_plural = verbose_name
 
+    def __str__(self):
+        return self.stock_name
+
 
 class BondHolding(models.Model):
     windcode = models.ForeignKey(Fund, to_field="windcode", on_delete=models.CASCADE)
@@ -61,3 +70,6 @@ class BondHolding(models.Model):
         db_table = "t_ff_asset_bond"
         verbose_name = "股票配置"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.bond_name

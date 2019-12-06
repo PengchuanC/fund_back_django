@@ -13,3 +13,6 @@ class FundPerformance(models.Model):
         db_table = "t_ff_performance"
         verbose_name = "基金近期表现"
         verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.windcode
