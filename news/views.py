@@ -24,7 +24,7 @@ class Breaking(APIView):
 def following_keywords(request):
     queryset = News.objects.all().filter(keyword__isnull=False).values('keyword').distinct()
     ret = {x['keyword'] for x in queryset}
-    return Response(ret)
+    return Response({'data': ret})
 
 
 class NewsList(APIView):

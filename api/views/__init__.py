@@ -6,3 +6,4 @@ from api.views.info import *
 from api.views.manager import *
 from api.views.attribution import *
 from api.views.assetallocate import *
+from api.views.portfolio import *

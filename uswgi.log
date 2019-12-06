@@ -863,3 +863,150 @@ spawned uWSGI http 1 (pid: 53828)
 invalid request block size: 21573 (max 4096)...skip
 invalid request block size: 21573 (max 4096)...skip
 invalid request block size: 21573 (max 4096)...skip
+invalid request block size: 21573 (max 4096)...skip
+[pid: 53826|app: 0|req: 4/8] 127.0.0.1 () {40 vars in 802 bytes} [Fri Dec  6 13:21:55 2019] GET /admin/ => generated 0 bytes in 46 msecs (HTTP/1.1 302) 7 headers in 273 bytes (1 switches on core 0)
+[pid: 53825|app: 0|req: 1/9] 127.0.0.1 () {40 vars in 839 bytes} [Fri Dec  6 13:21:55 2019] GET /admin/login/?next=/admin/ => generated 1821 bytes in 777 msecs (HTTP/1.1 200) 7 headers in 403 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 53828)
+worker 4 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 13:23:35 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+writing pidfile to uwsgi.pid
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /home/web/back/fund_back_django
+chdir(): No such file or directory [core/uwsgi.c line 2623]
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 13:24:29 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+writing pidfile to uwsgi.pid
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /Users/pengchuanchao/Code/python/fund_back_django/
+your processes number limit is 1392
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :9001 fd 3
+uwsgi socket 0 bound to TCP address :9090 fd 6
+Python version: 3.8.0 (v3.8.0:fa919fdf25, Oct 14 2019, 10:23:27)  [Clang 6.0 (clang-600.0.57)]
+Python main interpreter initialized at 0x7f86bfc07e10
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416560 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 1 seconds on interpreter 0x7f86bfc07e10 pid: 55297 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 55297)
+spawned uWSGI worker 1 (pid: 55326, cores: 2)
+spawned uWSGI worker 2 (pid: 55327, cores: 2)
+spawned uWSGI worker 3 (pid: 55328, cores: 2)
+spawned uWSGI worker 4 (pid: 55329, cores: 2)
+spawned uWSGI http 1 (pid: 55330)
+[pid: 55329|app: 0|req: 1/1] 127.0.0.1 () {44 vars in 922 bytes} [Fri Dec  6 13:24:33 2019] GET /admin/ => generated 0 bytes in 709 msecs (HTTP/1.1 302) 7 headers in 273 bytes (1 switches on core 0)
+[pid: 55329|app: 0|req: 2/2] 127.0.0.1 () {44 vars in 959 bytes} [Fri Dec  6 13:24:33 2019] GET /admin/login/?next=/admin/ => generated 1818 bytes in 43 msecs (HTTP/1.1 200) 7 headers in 403 bytes (1 switches on core 1)
+Not Found: /admin/login/static/admin/css/base.css
+Not Found: /admin/login/static/admin/css/login.css
+[pid: 55329|app: 0|req: 4/4] 127.0.0.1 () {42 vars in 868 bytes} [Fri Dec  6 13:24:33 2019] GET /admin/login/static/admin/css/base.css => generated 5674 bytes in 33 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+[pid: 55329|app: 0|req: 4/4] 127.0.0.1 () {42 vars in 870 bytes} [Fri Dec  6 13:24:33 2019] GET /admin/login/static/admin/css/login.css => generated 5677 bytes in 32 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /admin/login/static/admin/css/responsive.css
+[pid: 55328|app: 0|req: 1/5] 127.0.0.1 () {42 vars in 880 bytes} [Fri Dec  6 13:24:33 2019] GET /admin/login/static/admin/css/responsive.css => generated 5692 bytes in 412 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /admin/login/static/admin/css/base.css
+[pid: 55329|app: 0|req: 6/6] 127.0.0.1 () {42 vars in 868 bytes} [Fri Dec  6 13:24:37 2019] GET /admin/login/static/admin/css/base.css => generated 5674 bytes in 8 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /admin/login/static/admin/css/login.css
+[pid: 55329|app: 0|req: 6/7] 127.0.0.1 () {42 vars in 870 bytes} [Fri Dec  6 13:24:37 2019] GET /admin/login/static/admin/css/login.css => generated 5677 bytes in 12 msecs (HTTP/1.1 404) 4 headers in 116 bytes (2 switches on core 1)
+Not Found: /admin/login/static/admin/css/responsive.css
+[pid: 55326|app: 0|req: 1/8] 127.0.0.1 () {42 vars in 880 bytes} [Fri Dec  6 13:24:37 2019] GET /admin/login/static/admin/css/responsive.css => generated 5692 bytes in 463 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+[pid: 55327|app: 0|req: 1/9] 127.0.0.1 () {44 vars in 959 bytes} [Fri Dec  6 13:24:43 2019] GET /admin/login/?next=/admin/ => generated 1818 bytes in 499 msecs (HTTP/1.1 200) 7 headers in 403 bytes (1 switches on core 1)
+Not Found: /admin/login/static/admin/css/responsive.css
+[pid: 55327|app: 0|req: 2/10] 127.0.0.1 () {42 vars in 880 bytes} [Fri Dec  6 13:24:44 2019] GET /admin/login/static/admin/css/responsive.css => generated 5692 bytes in 6 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+Not Found: /admin/login/static/admin/css/login.css
+[pid: 55329|app: 0|req: 8/11] 127.0.0.1 () {42 vars in 870 bytes} [Fri Dec  6 13:24:44 2019] GET /admin/login/static/admin/css/login.css => generated 5677 bytes in 8 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 1)
+Not Found: /admin/login/static/admin/css/base.css
+[pid: 55329|app: 0|req: 8/12] 127.0.0.1 () {42 vars in 868 bytes} [Fri Dec  6 13:24:44 2019] GET /admin/login/static/admin/css/base.css => generated 5674 bytes in 13 msecs (HTTP/1.1 404) 4 headers in 116 bytes (1 switches on core 0)
+SIGINT/SIGQUIT received...killing workers...
+gateway "uWSGI http 1" has been buried (pid: 55330)
+worker 4 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 1 buried after 1 seconds
+goodbye to uWSGI.
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 13:25:20 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+writing pidfile to uwsgi.pid
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /Users/pengchuanchao/Code/python/fund_back_django/
+your processes number limit is 1392
+your memory page size is 4096 bytes
+detected max file descriptor number: 10240
+lock engine: OSX spinlocks
+thunder lock: disabled (you can enable it with --thunder-lock)
+uWSGI http bound on :9001 fd 3
+uwsgi socket 0 bound to TCP address :9090 fd 6
+Python version: 3.8.0 (v3.8.0:fa919fdf25, Oct 14 2019, 10:23:27)  [Clang 6.0 (clang-600.0.57)]
+Python main interpreter initialized at 0x7fe958c07700
+python threads support enabled
+your server socket listen backlog is limited to 100 connections
+your mercy for graceful operations on workers is 60 seconds
+mapped 416560 bytes (406 KB) for 8 cores
+*** Operational MODE: preforking+threaded ***
+WSGI app 0 (mountpoint='') ready in 0 seconds on interpreter 0x7fe958c07700 pid: 55397 (default app)
+*** uWSGI is running in multiple interpreter mode ***
+spawned uWSGI master process (pid: 55397)
+spawned uWSGI worker 1 (pid: 55425, cores: 2)
+spawned uWSGI worker 2 (pid: 55426, cores: 2)
+spawned uWSGI worker 3 (pid: 55427, cores: 2)
+spawned uWSGI worker 4 (pid: 55428, cores: 2)
+spawned uWSGI http 1 (pid: 55429)
+[pid: 55427|app: 0|req: 1/1] 127.0.0.1 () {44 vars in 959 bytes} [Fri Dec  6 13:25:23 2019] GET /admin/login/?next=/admin/ => generated 1821 bytes in 719 msecs (HTTP/1.1 200) 7 headers in 403 bytes (1 switches on core 0)
+[pid: 55428|app: 0|req: 1/2] 127.0.0.1 () {44 vars in 959 bytes} [Fri Dec  6 13:30:14 2019] GET /admin/login/?next=/admin/ => generated 1821 bytes in 781 msecs (HTTP/1.1 200) 7 headers in 403 bytes (1 switches on core 0)
+[pid: 55428|app: 0|req: 2/3] 127.0.0.1 () {52 vars in 1161 bytes} [Fri Dec  6 13:41:29 2019] POST /admin/login/?next=/admin/ => generated 0 bytes in 1008 msecs (HTTP/1.1 302) 11 headers in 652 bytes (1 switches on core 1)
+[pid: 55427|app: 0|req: 2/4] 127.0.0.1 () {46 vars in 1022 bytes} [Fri Dec  6 13:41:30 2019] GET /admin/ => generated 11225 bytes in 491 msecs (HTTP/1.1 200) 6 headers in 236 bytes (1 switches on core 1)
+gateway "uWSGI http 1" has been buried (pid: 55429)
+...brutally killing workers...
+worker 4 buried after 1 seconds
+worker 3 buried after 1 seconds
+worker 2 buried after 1 seconds
+worker 1 buried after 1 seconds
+binary reloading uWSGI...
+chdir() to /Users/pengchuanchao/Code/python/fund_back_django
+closing all non-uwsgi socket fds > 2 (max_fd = 10240)...
+found fd 6 mapped to socket 0 (:9090)
+running /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+[uWSGI] getting INI configuration from uwsgi.ini
+*** Starting uWSGI 2.0.18 (64bit) on [Fri Dec  6 13:56:23 2019] ***
+compiled with version: 4.2.1 Compatible Apple LLVM 11.0.0 (clang-1100.0.33.5) on 06 December 2019 01:30:15
+os: Darwin-19.0.0 Darwin Kernel Version 19.0.0: Thu Oct 17 16:17:15 PDT 2019; root:xnu-6153.41.3~29/RELEASE_X86_64
+nodename: pengchuanchaodeMacBook-Pro.local
+machine: x86_64
+clock source: unix
+detected number of CPU cores: 8
+current working directory: /Users/pengchuanchao/Code/python/fund_back_django
+detected binary path: /Users/pengchuanchao/Code/python/fund_back_django/webvenv/bin/uwsgi
+!!! no internal routing support, rebuild with pcre support !!!
+chdir() to /home/web/back/fund_back_django
+chdir(): Connection reset by peer [core/uwsgi.c line 2623]

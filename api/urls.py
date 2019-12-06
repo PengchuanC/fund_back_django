@@ -35,5 +35,8 @@ urlpatterns = [
     path(r"attr", views.BrinsonViews.as_view()),
     path(r"attr/rpt_date", views.RptDateViews.as_view()),
 
-    path(r"asset", views.AssetViews.as_view())
+    path(r"asset", views.AssetViews.as_view()),
+
+    path(r"portfolio", views.PortfolioViews.as_view()),
+    path(r"portfolio/info", views.PortfolioInfoViews.as_view())
 ]
