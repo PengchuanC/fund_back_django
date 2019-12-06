@@ -3,6 +3,9 @@ from django.contrib import admin
 from api import models
 
 
+admin.site.site_header = "产品开发部后台管理系统"
+
+
 @admin.register(models.Fund)
 class FundAdmin(admin.ModelAdmin):
     list_display = ('windcode', 'category')
