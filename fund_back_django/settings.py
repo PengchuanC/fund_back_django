@@ -48,7 +48,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -153,20 +153,10 @@ CORS_ORIGIN_WHITELIST = (
     "http://10.170.236.99:8080",
     "http://10.170.139.10:8080",
     'http://0.0.0.0:80',
+    'http://0.0.0.0:8080',
     'http://*',
     'http://0.0.0.0',
     'http://127.0.0.1',
     'http://localhost'
 )
 CORS_ALLOW_CREDENTIALS = True
-
-CORS_ALLOW_METHODS = (
-    'DELETE',
-    'GET',
-    'OPTIONS',
-    'PATCH',
-    'POST',
-    'PUT',
-    'VIEW',
-)
-
