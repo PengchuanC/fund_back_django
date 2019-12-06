@@ -4,11 +4,11 @@ from django.db import models
 
 
 class News(models.Model):
-    title = models.CharField(max_length=200, unique=True)
+    title = models.CharField(max_length=200, unique=True, db_index=True)
     abstract = models.TextField()
     url = models.TextField()
     source = models.CharField(max_length=20, blank=True, null=True)
-    savedate = models.DateTimeField()
+    savedate = models.DateTimeField(db_index=True)
     keyword = models.CharField(max_length=10, blank=True, null=True)
 
     class Meta:
