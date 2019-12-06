@@ -130,14 +130,14 @@ class PlotManagerViews(APIView):
         latest = util.latest(models.Indicator)
         ret = models.Fund.objects.filter(
             Q(windcode__in=funds) & Q(indicator__indicator="FUND_MANAGER_MANAGERWORKINGYEARS")
-            & Q(indicator__update_date=latest), Q(manager__managerexpand__rank=1)
+            & Q(indicator__update_date=latest), Q(manager__manager_info__rank=1)
         ).all().values(
-            'manager__fund_fundmanager', 'manager__managerexpand__fund_manager_totalnetasset',
-            'manager__managerexpand__nav_periodicannualizedreturn', 'indicator__numeric'
+            'manager__fund_fundmanager', 'manager__manager_info__fund_manager_totalnetasset',
+            'manager__manager_info__nav_periodicannualizedreturn', 'indicator__numeric'
             )
         ret = [[round(x["indicator__numeric"], 2),
-                round(x['manager__managerexpand__nav_periodicannualizedreturn'], 4),
-                round(x['manager__managerexpand__fund_manager_totalnetasset']/1e8, 2),
+                round(x['manager__manager_info__nav_periodicannualizedreturn'], 4),
+                round(x['manager__manager_info__fund_manager_totalnetasset']/1e8, 2),
                 x['manager__fund_fundmanager']] for x in ret]
         return Response(ret)
 
