@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Fund(models.Model):
-    windcode = models.CharField(max_length=12, unique=True, verbose_name="证券代码")
+    windcode = models.CharField(max_length=20, unique=True, verbose_name="证券代码")
     category = models.IntegerField(choices=((1, "公募基金"), (2, "私募基金"), (3, "银行理财")), verbose_name="证券类别")
 
     class Meta:
@@ -24,6 +24,7 @@ class FundNav(models.Model):
         db_table = "t_ff_fund_nav"
         verbose_name = "基金净值"
         verbose_name_plural = verbose_name
+        index_together = ['windcode', 'date']
 
     def __str__(self):
         return f"{self.windcode} - {self.date.strftime('%Y-%m-%d')}"

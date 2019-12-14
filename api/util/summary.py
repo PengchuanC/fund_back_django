@@ -7,7 +7,6 @@ from api import models, util
 
 def summary():
     """基金分类总结"""
-    _latest_update_date = latest_update_date()
     latest = util.latest(models.Classify)
     total_count = models.Classify.objects.filter(update_date=latest).values("windcode").distinct().count()
     branch = models.Classify.objects.filter(update_date=latest).values("branch").distinct()
@@ -38,8 +37,8 @@ def summarise():
     latest_rpt = models.Indicator.objects.aggregate(Max('rpt_date')).get('rpt_date__max')
     data = models.Fund.objects.filter(
         Q(classify__update_date=latest_cls) & Q(indicator__update_date=latest_ins) & Q(indicator__rpt_date=latest_rpt)
-        & Q(indicator__indicator="NETASSET_TOTAL")
-    ).values_list('windcode', 'classify__branch', 'classify__classify', 'indicator__numeric')
+        & Q(indicator__indicator="FUND_FUNDSCALE")
+    ).values_list('windcode', 'classify__branch', 'classify__classify', 'indicator__numeric').distinct()
     total = {x[0]: float(x[-1]) if x[-1] else 0 for x in data}
     t_c, t_s = len(total.keys()), format(round(sum(total.values()) / 1e8, 0), '0,.0f')
 

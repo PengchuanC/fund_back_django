@@ -75,3 +75,14 @@ class BrinsonSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Brinson
         fields = '__all__'
+
+
+class FundNavSerializer(serializers.ModelSerializer):
+    windcode = serializers.CharField()
+    nav = serializers.FloatField()
+    nav_adj = serializers.FloatField()
+    date = serializers.DateField()
+
+    class Meta:
+        model = models.FundNav
+        fields = ['windcode', 'nav', 'nav_adj', 'date']

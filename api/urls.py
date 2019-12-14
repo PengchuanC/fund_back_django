@@ -32,11 +32,15 @@ urlpatterns = [
     path(r"manager", views.ManagerViews.as_view()),
     path(r"manager/managed", views.ManagedViews.as_view()),
 
-    path(r"attr", views.BrinsonViews.as_view()),
+    path(r"attr/", views.BrinsonViews.as_view()),
     path(r"attr/rpt_date", views.RptDateViews.as_view()),
 
     path(r"asset", views.AssetViews.as_view()),
 
     path(r"portfolio", views.PortfolioViews.as_view()),
-    path(r"portfolio/info", views.PortfolioInfoViews.as_view())
+    path(r"portfolio/info", views.PortfolioInfoViews.as_view()),
+
+    path(r'nav', views.NavOfPrivateFundViews.as_view()),
+
+    path(r'benchmark', views.BenchmarkNameViews.as_view())
 ]

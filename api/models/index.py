@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Index(models.Model):
-    windcode = models.CharField(max_length=12, db_index=True, unique=True, verbose_name="指数简称")
+    windcode = models.CharField(max_length=20, db_index=True, unique=True, verbose_name="指数简称")
     sec_name = models.CharField(max_length=45, verbose_name="指数简称")
     launch_date = models.DateField()
     kind = models.CharField(max_length=20, default="normal")
@@ -25,6 +25,7 @@ class IndexClosePrice(models.Model):
         db_table = "t_ff_index_cp"
         verbose_name = "指数收盘数据"
         verbose_name_plural = verbose_name
+        index_together = ['windcode', 'date']
 
     def __str__(self):
         return self.windcode

@@ -8,8 +8,8 @@ conn = default_engine()
 windcode = Fund.objects.all().values('windcode')
 codes = [x['windcode'] for x in windcode]
 
-"""同步filter
-data = pd.read_sql("select * from t_ff_indicator_for_filter;", con=conn)
+"""同步filter"""
+data = pd.read_sql("select * from t_ff_indicator_for_filter where update_date > '2019-09-30';", con=conn)
 data = data[data.windcode.isin(codes)]
 data = data.drop("id", axis=1)
 data = data.drop_duplicates()
@@ -19,7 +19,6 @@ for_filter = [Indicator(
     rpt_date=x['rpt_date'], update_date=x['update_date']
 ) for x in data]
 Indicator.objects.bulk_create(for_filter)
-"""
 
 """同步plot
 data = pd.read_sql("select * from t_ff_indicator_for_plot;", con=conn)
@@ -39,11 +38,11 @@ IndicatorForPlot.objects.bulk_create(for_plot)
 """
 
 
-windcode = Index.objects.all().values('windcode')
-codes = [x['windcode'] for x in windcode]
-codes = "'" + "','".join(codes) + "'"
-data = pd.read_sql(f"select * from t_ff_indicator_for_filter where windcode in ({codes});", con=conn)
-print(data)
+# windcode = Index.objects.all().values('windcode')
+# codes = [x['windcode'] for x in windcode]
+# codes = "'" + "','".join(codes) + "'"
+# data = pd.read_sql(f"select * from t_ff_indicator_for_filter where windcode in ({codes});", con=conn)
+# print(data)
 # try:
 #     data = data.drop("id", axis=1)
 # except KeyError:

@@ -16,7 +16,7 @@ class Portfolio(models.Model):
 
 
 class PortfolioObserve(models.Model):
-    port_id = models.ForeignKey(Portfolio,to_field="port_id", on_delete=models.CASCADE)
+    port_id = models.ForeignKey(Portfolio, to_field="port_id", on_delete=models.CASCADE)
     windcode = models.CharField(max_length=12, verbose_name="证券代码")
     update_date = models.DateField(verbose_name="更新日期")
 
