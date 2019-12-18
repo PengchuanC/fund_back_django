@@ -26,3 +26,39 @@ class BasicInfo(models.Model):
 
     def __str__(self):
         return f"{self.windcode}-{self.sec_name}>"
+
+
+class Basic(models.Model):
+    windcode = models.ForeignKey(Fund, to_field='windcode', on_delete=models.CASCADE, related_name='basic')
+    sec_name = models.CharField(max_length=50, verbose_name='产品名称')
+    company = models.CharField(max_length=100, verbose_name='管理人', null=True)
+    invest_type = models.CharField(max_length=20, verbose_name='投资策略')
+
+    class Meta:
+        db_table = 't_ff_basic'
+        verbose_name = '产品基本信息表'
+        verbose_name_plural = verbose_name
+        ordering = ['id']
+
+    def __str__(self):
+        return self.sec_name
+
+    def __repr__(self):
+        return self.sec_name
+
+
+class Label(models.Model):
+    windcode = models.ForeignKey(Basic, to_field='windcode', on_delete=models.CASCADE, related_name='label')
+    label = models.CharField(max_length=20, verbose_name='标签')
+
+    class Meta:
+        db_table ='t_ff_basic_label'
+        verbose_name = '产品标签'
+        verbose_name_plural = verbose_name
+        ordering =['id']
+
+    def __str__(self):
+        return f'{self.windcode}-{self.label}'
+
+    def __repr__(self):
+        return f'{self.windcode}-{self.label}'
