@@ -13,8 +13,8 @@ class SearchViews(APIView):
 
     def post(self, request):
         search = request.data.get("search")
-        queryset = models.BasicInfo.objects.filter(
+        queryset = models.Basic.objects.filter(
             Q(windcode__windcode__contains=search) | Q(sec_name__contains=search)
-        ).all().values('windcode', 'sec_name').distinct()
+        ).values('windcode', 'sec_name').distinct()
         ret = [(x['windcode'], x['sec_name']) for x in queryset]
         return Response(ret[:10])
