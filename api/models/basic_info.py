@@ -52,7 +52,7 @@ class Label(models.Model):
     label = models.CharField(max_length=20, verbose_name='标签')
 
     class Meta:
-        db_table ='t_ff_basic_label'
+        db_table = 't_ff_basic_label'
         verbose_name = '产品标签'
         verbose_name_plural = verbose_name
         ordering =['id']
