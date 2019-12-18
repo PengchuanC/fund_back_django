@@ -55,7 +55,7 @@ class Label(models.Model):
         db_table = 't_ff_basic_label'
         verbose_name = '产品标签'
         verbose_name_plural = verbose_name
-        ordering =['id']
+        ordering = ['id']
 
     def __str__(self):
         return f'{self.windcode}-{self.label}'
