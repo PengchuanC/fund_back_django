@@ -54,3 +54,13 @@ class IndexAdmin(admin.ModelAdmin):
 @admin.register(models.IndicatorIndex)
 class IndicatorIndexAdmin(admin.ModelAdmin):
     list_display = ['windcode', 'indicator', 'numeric', 'text', 'note', 'rpt_date', 'update_date']
+
+
+@admin.register(models.Basic)
+class BasicAdmin(admin.ModelAdmin):
+    list_display = ['windcode', 'sec_name', 'company', 'invest_type']
+
+
+@admin.register(models.Label)
+class LabelAdmin(admin.ModelAdmin):
+    list_display = ['windcode', 'label']

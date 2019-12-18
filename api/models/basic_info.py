@@ -29,7 +29,9 @@ class BasicInfo(models.Model):
 
 
 class Basic(models.Model):
-    windcode = models.ForeignKey(Fund, to_field='windcode', on_delete=models.CASCADE, related_name='basic')
+    windcode = models.OneToOneField(
+        Fund, to_field='windcode', on_delete=models.CASCADE, related_name='basic', unique=True
+    )
     sec_name = models.CharField(max_length=50, verbose_name='产品名称')
     company = models.CharField(max_length=100, verbose_name='管理人', null=True)
     invest_type = models.CharField(max_length=20, verbose_name='投资策略')
