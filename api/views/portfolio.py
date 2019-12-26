@@ -18,7 +18,10 @@ class PortfolioInfoViews(APIView):
     def get(self, request):
         port_id = request.query_params.get('port_id')
         _type = request.query_params.get('port_type')
-        latest = util.latest(models.PortfolioCore)
+        date = request.query_params.get('date')
+        latest = date
+        if not latest:
+            latest = util.latest(models.PortfolioCore)
 
         if _type == "核心池":
             portfolio = models.PortfolioCore.objects
@@ -65,3 +68,17 @@ class PortfolioInfoViews(APIView):
         df = df.fillna(0)
         ret = df.to_dict(orient="record")
         return Response(ret)
+
+
+class PortfolioDateViews(APIView):
+    def get(self, request):
+        port_id = request.query_params.get('port_id')
+        _type = request.query_params.get('port_type')
+        if _type == "核心池":
+            portfolio = models.PortfolioCore.objects
+
+        else:
+            portfolio = models.PortfolioObserve.objects
+        dates = portfolio.filter(port_id=port_id).values_list('update_date').distinct()
+        dates = [x[0] for x in dates]
+        return Response(dates)
