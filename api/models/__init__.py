@@ -9,3 +9,5 @@ from api.models.brinson import *
 from api.models.performance import *
 from api.models.portfolio import *
 from api.models.style import *
+from api.models.stock import *
+from api.models.barra import *
