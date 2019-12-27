@@ -85,6 +85,13 @@ def multi_period(windcode, benchmark, rpt_date: list):
 class RptDateViews(APIView):
     def get(self, request):
         windcode = request.query_params.get('windcode')
+        branch = FundBranchViews.branch(windcode)['branch']
+        if branch == "债券类":
+            dates = models.BondStyle.objects.filter(windcode=windcode).order_by(
+                '-value_date'
+            ).values_list('value_date').distinct()
+            dates = [x[0].strftime("%Y-%m-%d") for x in dates]
+            return Response({'date': dates})
         is_in = models.Brinson.objects.filter(windcode=windcode).values('windcode').first()
         if not is_in:
             return
@@ -96,3 +103,40 @@ class RptDateViews(APIView):
             Q(rpt_date=dates[0]) & Q(windcode=windcode) & Q(freq="S")
         ).values_list('benchmark').distinct()[0]
         return Response({"date": dates, "benchmark": benchs})
+
+
+class FundBranchViews(APIView):
+    def get(self, request):
+        windcode = request.query_params.get('windcode')
+        queryset = FundBranchViews.branch(windcode)
+        return Response(queryset)
+
+    @staticmethod
+    def branch(windcode):
+        latest = util.latest(models.Classify)
+        queryset = models.Classify.objects.filter(Q(windcode=windcode) & Q(update_date=latest)).values('branch').first()
+        return queryset
+
+
+class BondAttributionViews(APIView):
+    def get(self, request):
+        windcode = request.query_params.get('windcode')
+        table = models.BondStyle.objects.filter(
+            Q(windcode=windcode)
+        ).order_by('-value_date').values(
+            'value_date', 'short', 'long', 'conver', 'cre_short', 'cre_medium', 'cre_long', 'interest'
+        )
+        table = self.format_table(table)
+        return Response({'table': table})
+
+    def format_table(self, data):
+        ret = []
+        for l in data:
+            d = {}
+            for k, v in l.items():
+                if isinstance(v, float):
+                    d[k] = round(v, 4)
+                else:
+                    d[k] = v
+            ret.append(d)
+        return ret

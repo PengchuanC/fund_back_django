@@ -32,8 +32,10 @@ urlpatterns = [
     path(r"manager", views.ManagerViews.as_view()),
     path(r"manager/managed", views.ManagedViews.as_view()),
 
-    path(r"attr/", views.BrinsonViews.as_view()),
+    path(r"attr/stock", views.BrinsonViews.as_view()),
+    path(r"attr/bond", views.BondAttributionViews.as_view()),
     path(r"attr/rpt_date", views.RptDateViews.as_view()),
+    path(r"attr/branch", views.FundBranchViews.as_view()),
 
     path(r"asset", views.AssetViews.as_view()),
 
