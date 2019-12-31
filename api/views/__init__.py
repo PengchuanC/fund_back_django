@@ -9,3 +9,4 @@ from api.views.assetallocate import *
 from api.views.portfolio import *
 from api.views.nav_private import *
 from api.views.benchmark import *
+from api.views.compare import *
