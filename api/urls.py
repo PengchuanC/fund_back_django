@@ -45,5 +45,8 @@ urlpatterns = [
 
     path(r'nav', views.NavOfPrivateFundViews.as_view()),
 
-    path(r'benchmark', views.BenchmarkNameViews.as_view())
+    path(r'benchmark', views.BenchmarkNameViews.as_view()),
+
+    path(r"compare/type", views.ProductTypeViews.as_view()),
+    path(r"compare/filter", views.ProductFilterViews.as_view())
 ]
