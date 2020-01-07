@@ -19,6 +19,7 @@ class FundNav(models.Model):
     nav = models.FloatField(null=True, verbose_name="净值")
     nav_adj = models.FloatField(null=True, verbose_name="复权净值")
     date = models.DateField(verbose_name="净值日期")
+    objects = models.Manager()
 
     class Meta:
         db_table = "t_ff_fund_nav"
