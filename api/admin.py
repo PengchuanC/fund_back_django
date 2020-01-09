@@ -48,7 +48,7 @@ class PortfolioAdmin(admin.ModelAdmin):
 
 @admin.register(models.Index)
 class IndexAdmin(admin.ModelAdmin):
-    list_display = ['id', 'windcode', 'launch_date', 'kind']
+    list_display = ['windcode', 'launch_date', 'kind']
 
 
 @admin.register(models.IndicatorIndex)

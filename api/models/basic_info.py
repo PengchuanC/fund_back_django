@@ -24,9 +24,6 @@ class BasicInfo(models.Model):
         verbose_name_plural = verbose_name
         ordering = ['id']
 
-    def __str__(self):
-        return f"{self.windcode}-{self.sec_name}>"
-
 
 class Basic(models.Model):
     windcode = models.OneToOneField(
@@ -43,10 +40,7 @@ class Basic(models.Model):
         ordering = ['id']
 
     def __str__(self):
-        return self.sec_name
-
-    def __repr__(self):
-        return self.sec_name
+        return f"{self.windcode.windcode}-{self.sec_name}"
 
 
 class Label(models.Model):
@@ -58,9 +52,3 @@ class Label(models.Model):
         verbose_name = '产品标签'
         verbose_name_plural = verbose_name
         ordering = ['id']
-
-    def __str__(self):
-        return f'{self.windcode}-{self.label}'
-
-    def __repr__(self):
-        return f'{self.windcode}-{self.label}'

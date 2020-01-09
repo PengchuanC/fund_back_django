@@ -26,6 +26,3 @@ class FundNav(models.Model):
         verbose_name = "基金净值"
         verbose_name_plural = verbose_name
         index_together = ['windcode', 'date']
-
-    def __str__(self):
-        return f"{self.windcode} - {self.date.strftime('%Y-%m-%d')}"

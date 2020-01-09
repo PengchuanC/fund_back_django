@@ -13,6 +13,3 @@ class Classify(models.Model):
         db_table = "t_ff_classify"
         verbose_name = "公募基金分类"
         verbose_name_plural = verbose_name
-
-    def __str__(self):
-        return f"{self.windcode}-{self.branch}-{self.classify}"

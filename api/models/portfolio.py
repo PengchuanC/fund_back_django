@@ -25,9 +25,6 @@ class PortfolioObserve(models.Model):
         verbose_name = "观察池"
         verbose_name_plural = verbose_name
 
-    def __repr__(self):
-        return f"观察池-{self.port_id}>"
-
 
 class PortfolioCore(models.Model):
     port_id = models.ForeignKey(Portfolio, to_field="port_id", on_delete=models.CASCADE)
@@ -38,6 +35,3 @@ class PortfolioCore(models.Model):
         db_table = "t_ff_portfolio_core"
         verbose_name = "核心池"
         verbose_name_plural = verbose_name
-
-    def __repr__(self):
-        return f"核心池-{self.port_id}>"

@@ -32,6 +32,3 @@ class ManagerExpand(models.Model):
         db_table = "t_ff_manager_expand"
         verbose_name = "基金经理-扩展数据"
         verbose_name_plural = verbose_name
-
-    def __str__(self):
-        return f"{self.windcode}-{self.rank}"
