@@ -17,7 +17,7 @@ class PortfolioViews(APIView):
 class PortfolioInfoViews(APIView):
     def get(self, request):
         port_id = request.query_params.get('port_id')
-        _type = request.query_params.get('port_type')
+        _type = request.query_params.get('type')
         date = request.query_params.get('date')
         latest = date
         if not latest:
