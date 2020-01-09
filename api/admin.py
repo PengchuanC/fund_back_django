@@ -27,7 +27,7 @@ class BasicInfo(admin.ModelAdmin):
 @admin.register(models.Classify)
 class ClassifyAdmin(admin.ModelAdmin):
     list_display = ["windcode", "branch", "classify", "update_date"]
-    search_fields = ["windcode", "branch", "classify"]
+    search_fields = ["branch", "classify"]
 
 
 @admin.register(models.Manager)
