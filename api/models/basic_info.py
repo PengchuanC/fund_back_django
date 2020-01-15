@@ -32,6 +32,7 @@ class Basic(models.Model):
     sec_name = models.CharField(max_length=50, verbose_name='产品名称')
     company = models.CharField(max_length=100, verbose_name='管理人', null=True)
     invest_type = models.CharField(max_length=20, verbose_name='投资策略')
+    comment = models.TextField(null=True, verbose_name="基金评价")
 
     class Meta:
         db_table = 't_ff_basic'

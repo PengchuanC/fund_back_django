@@ -4,6 +4,8 @@ from django.db.models import Q
 
 import pandas as pd
 
+from datetime import date
+
 from api import util
 from api import models
 
@@ -17,18 +19,16 @@ class PortfolioViews(APIView):
 class PortfolioInfoViews(APIView):
     def get(self, request):
         port_id = request.query_params.get('port_id')
-        _type = request.query_params.get('type')
+        _type = request.query_params.get('port_type')
         date = request.query_params.get('date')
         latest = date
-        if not latest:
-            latest = util.latest(models.PortfolioCore)
-
-        if _type == "核心池":
-            portfolio = models.PortfolioCore.objects
-
+        if not date:
+            latest = util.latest(models.PortfolioExpand)
+        portfolio = models.PortfolioExpand.objects
+        if port_id in [1, 2]:
+            ret = portfolio.filter(Q(port_id=port_id) & Q(update_date=latest) & Q(port_type=_type)).values_list('windcode')
         else:
-            portfolio = models.PortfolioObserve.objects
-        ret = portfolio.filter(Q(port_id=port_id) & Q(update_date=latest)).values_list('windcode')
+            ret = portfolio.filter(Q(port_id=port_id) & Q(port_type=_type)).values_list('windcode')
         ret = [x[0] for x in ret]
         basic_info = models.BasicInfo.objects.filter(
             Q(windcode_id__in=ret)).values('windcode', 'sec_name', 'setup_date').distinct()
@@ -69,16 +69,59 @@ class PortfolioInfoViews(APIView):
         ret = df.to_dict(orient="record")
         return Response(ret)
 
+    def put(self, request):
+        params = request.data
+        windcode = params.get('windcode')
+        port_id = params.get('port_id')
+        if windcode:
+            try:
+                for w in windcode:
+                    p = models.Portfolio.objects.get(port_id=port_id)
+                    pe = models.PortfolioExpand(windcode=w, port_id=p, port_type=3, update_date=date.today())
+                    pe.save()
+                return Response({'msg': 'success'})
+            except Exception as e:
+                print(e)
+                return Response({'msg': 'failed', 'error': str(e)})
+
+    def delete(self, request):
+        params = request.data
+        windcode = params.get('windcode')
+        port_id = params.get('port_id')
+        if windcode:
+            try:
+                for w in windcode:
+                    pe = models.PortfolioExpand.objects.filter(Q(windcode=w) & Q(port_id__port_id=port_id))
+                    pe.delete()
+                return Response({'msg': 'success'})
+            except Exception as e:
+                print(e)
+                return Response({'msg': 'failed', 'error': str(e)})
+
 
 class PortfolioDateViews(APIView):
     def get(self, request):
         port_id = request.query_params.get('port_id')
         _type = request.query_params.get('port_type')
-        if _type == "核心池":
-            portfolio = models.PortfolioCore.objects
-
-        else:
-            portfolio = models.PortfolioObserve.objects
-        dates = portfolio.filter(port_id=port_id).values_list('update_date').distinct()
+        portfolio = models.PortfolioExpand.objects
+        dates = portfolio.filter(Q(port_id=port_id) & Q(port_type=_type)).values_list('update_date').distinct()
         dates = [x[0] for x in dates]
         return Response(dates)
+
+
+class CommentViews(APIView):
+    def get(self, request):
+        windcode = request.query_params.get('windcode')
+        if windcode:
+            query = models.Basic.objects.filter(windcode=windcode).values('windcode', 'sec_name', 'comment')[0]
+        else:
+            query = models.Basic.objects.filter(comment__isnull=False).values('windcode', 'sec_name', 'comment')
+        return Response(query)
+
+    def put(self, request):
+        windcode = request.data.get('windcode')
+        comment = request.data.get('comment')
+        fund = models.Basic.objects.get(windcode=windcode)
+        fund.comment = comment
+        fund.save()
+        return Response()

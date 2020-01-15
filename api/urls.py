@@ -42,6 +42,7 @@ urlpatterns = [
     path(r"portfolio", views.PortfolioViews.as_view()),
     path(r"portfolio/date", views.PortfolioDateViews.as_view()),
     path(r"portfolio/info", views.PortfolioInfoViews.as_view()),
+    path(r"portfolio/comment", views.CommentViews.as_view()),
 
     path(r'nav', views.NavOfPrivateFundViews.as_view()),
 

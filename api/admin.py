@@ -46,6 +46,12 @@ class PortfolioAdmin(admin.ModelAdmin):
     search_fields = ['port_name']
 
 
+@admin.register(models.PortfolioExpand)
+class PortfolioExpandAdmin(admin.ModelAdmin):
+    list_display = ["port_id", "port_type", "windcode", "update_date"]
+    search_fields = ['port_id', "port_type", "windcode"]
+
+
 @admin.register(models.Index)
 class IndexAdmin(admin.ModelAdmin):
     list_display = ['windcode', 'launch_date', 'kind']
@@ -58,7 +64,7 @@ class IndicatorIndexAdmin(admin.ModelAdmin):
 
 @admin.register(models.Basic)
 class BasicAdmin(admin.ModelAdmin):
-    list_display = ['windcode', 'sec_name', 'company', 'invest_type']
+    list_display = ['windcode', 'sec_name', 'company', 'invest_type', 'comment']
 
 
 @admin.register(models.Label)
