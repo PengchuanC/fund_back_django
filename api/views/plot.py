@@ -135,7 +135,7 @@ class PlotManagerViews(APIView):
             'manager__fund_fundmanager', 'manager__manager_info__fund_manager_totalnetasset',
             'manager__manager_info__nav_periodicannualizedreturn', 'indicator__numeric'
             )
-        ret = [[round(x["indicator__numeric"], 2),
+        ret = [[round(x["indicator__numeric"], 2) if x["indicator__numeric"] else 0,
                 round(x['manager__manager_info__nav_periodicannualizedreturn'], 4),
                 round(x['manager__manager_info__fund_manager_totalnetasset']/1e8, 2),
                 x['manager__fund_fundmanager']] for x in ret]
