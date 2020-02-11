@@ -54,4 +54,4 @@ def summarise():
             c_data = {x[0]: float(x[-1]) if x[-1] else 0 for x in data if x[1] == b and x[2] == c}
             c_c, c_s = len(c_data.keys()), format(round(sum(c_data.values()) / 1e8, 0), '0,.0f')
             children.append({"branch": b, "classify": c, "count": c_c, "scale": c_s})
-    return {"total": {"count": t_c, "scale": t_s}, "branch": b_ret}
+    return {"total": {"count": t_c, "scale": t_s}, "branch": b_ret, 'date': latest_cls}
