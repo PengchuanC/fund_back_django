@@ -52,19 +52,25 @@ def filter_public(public):
 
 
 def filter_private(private, private_label):
-    queryset = models.Basic.objects.filter(
-        invest_type__in=private
-    ).values_list("windcode")
-    codes1 = list({x[0] for x in queryset})
-    if not private_label:
-        return codes1
-    queryset = models.Label.objects.filter(
-        label__in=private_label
-    ).values_list("windcode")
-    codes2 = list({x[0] for x in queryset})
-    if not private:
-        return codes2
-    codes = [x for x in codes2 if x in codes1]
+    print(private, private_label)
+    if not private and not private_label:
+        queryset = models.Basic.objects.filter(windcode__category=2).values_list("windcode")
+        codes = list({x[0] for x in queryset})
+    elif not private and private_label:
+        queryset = models.Label.objects.filter(
+            label__in=private_label
+        ).values_list("windcode")
+        codes = list({x[0] for x in queryset})
+    elif private and not private_label:
+        queryset = models.Basic.objects.filter(
+            invest_type__in=private
+        ).values_list("windcode")
+        codes = list({x[0] for x in queryset})
+    else:
+        queryset = models.Basic.objects.filter(
+            Q(invest_type__in=private) & Q(invest_type__in=private)
+        ).values_list("windcode")
+        codes = list({x[0] for x in queryset})
     return codes
 
 
