@@ -21,7 +21,6 @@ class PortfolioInfoViews(APIView):
     def process(request):
         port_id = request.query_params.get('port_id')
         _type = request.query_params.get('port_type')
-        print(_type)
         date = request.query_params.get('date')
         portfolio = models.PortfolioExpand.objects
         latest = date
@@ -100,15 +99,19 @@ class PortfolioInfoViews(APIView):
 
         performance = pd.DataFrame(performance).pivot("windcode", "indicator")["value"]
 
+        manager = models.Manager.objects.filter(windcode__in=codes).values('windcode', 'fund_fundmanager')
+        manager = pd.DataFrame(manager).set_index('windcode')
+
         df = pd.merge(basic_info, indicators, left_index=True, right_index=True, how="inner")
         df = pd.merge(df, performance, left_index=True, right_index=True, how="inner")
+        df = pd.merge(df, manager, left_index=True, right_index=True, how='outer')
         df = df.rename(columns={
             "sec_name": "基金简称", "setup_date": "成立日期", 'FUND_FUNDSCALE': "基金规模(亿元)",
             'NETASSET_TOTAL': "基金资产", 'NAV': "当前净值", 'NAV_ACC': "累计净值",
             'RETURN_1M': "近1月回报", 'RETURN_1Y': "近1年回报",
             'RETURN_3M': "近3月回报", 'RETURN_3Y': "近3年回报",
             'RETURN_6M': "近6月回报", 'RETURN_STD': "成立年化回报",
-            'RETURN_1W': "近1周回报"
+            'RETURN_1W': "近1周回报", 'fund_fundmanager': '基金经理'
         })
         df['成立日期'] = df['成立日期'].apply(lambda x: x.strftime("%Y/%m/%d"))
         df["基金代码"] = df.index

@@ -4,6 +4,7 @@ from django.db.models import Q
 
 from pandas import cut
 from math import ceil
+from collections import Counter
 
 from api import util
 from api import models
@@ -14,6 +15,7 @@ class BranchView(APIView):
         latest = util.latest(models.Classify)
         classify = models.Classify.objects.filter(update_date=latest).all().values('branch', 'classify').distinct()
         branch = list(set([x['branch'] for x in classify]))
+        branch = sorted(branch, reverse=True)
         bc = {x: [] for x in branch}
         for c in classify:
             bc[c['branch']].append(c['classify'])

@@ -23,7 +23,7 @@ class FilterBasicInfoViews(APIView):
     def post(self, request):
         data = request.data
         funds = data["funds"]
-        page = data["page"]
+        page = data.get("page", None)
         _filters = data["filter"]
         data, page, per_page, total = util.filters.fund_details(request, self, funds, _filters, page)
         return Response({"data": data, "page": page, "total": total, "per_page": per_page})
@@ -34,5 +34,5 @@ class InfoResultViews(APIView):
         data = request.data
         funds = data["funds"]
         _filters = data["filter"]
-        util.filters.fund_details_to_excel(funds, _filters)
-        return {'message': "OK", "url": "api/v1/filter/info/results"}
+        data, page, per_page, total = util.filters.fund_details(request, self, funds, _filters)
+        return Response({"data": data, "page": page, "total": total, "per_page": per_page})

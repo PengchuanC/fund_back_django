@@ -66,12 +66,12 @@ def net_asset(funds, recent_asset_level, avg_asset_level):
     annual = [x for x in rpt if x.month == 12][0]
     funds = ins.objects.filter(
         Q(windcode__in=funds) & Q(rpt_date=recent) & Q(indicator="NETASSET_TOTAL")
-        & Q(numeric__gte=recent_asset_level * 1e8)).values_list('windcode')
+        & (Q(numeric__gte=recent_asset_level * 1e8) | Q(numeric__isnull=True))).values_list('windcode')
     funds = {x[0] for x in funds}
     funds = ins.objects.filter(
-        Q(windcode__in=funds) & Q(rpt_date=annual) & Q(indicator="PRT_AVGNETASSET") & Q(
-            numeric__gte=avg_asset_level * 1e8)
-    ).values_list('windcode')
+        Q(windcode__in=funds) & Q(rpt_date=annual) & Q(indicator="PRT_AVGNETASSET") & (Q(
+            numeric__gte=avg_asset_level * 1e8) | Q(numeric__isnull=True)
+    )).values_list('windcode')
     funds = {x[0] for x in funds}
     return funds
 
@@ -84,8 +84,14 @@ def single_hold_shares(funds, percent: int = 40):
         Q(update_date=latest) & Q(windcode__in=funds) & Q(indicator="HOLDER_SINGLE_TOTALHOLDINGPCT")
     ).values_list('windcode', 'numeric')
     funds = [(x[0], x[1] or 0) for x in funds]
-    funds = {x[0] for x in funds if x[1] < percent if x[1]}
-    return funds
+    ret = []
+    for fund in funds:
+        if not fund[1]:
+            ret.append(fund[0])
+        else:
+            if fund[1] < percent:
+                ret.append(fund[0])
+    return ret
 
 
 def over_index_return(funds, index_code, year):
@@ -147,12 +153,22 @@ def max_downside_over_average(funds, year, ratio=None):
     """最大回撤优于平均"""
     ins = models.Indicator
     latest = latest_day_in_indicators()
+    latest_cls = latest_day_in_classify()
+    funds = list(funds)
+    classify = models.Classify.objects.filter(Q(windcode=funds[0]) & Q(update_date=latest_cls)).values("classify", 'branch').distinct()[0]
+    all_funds = models.Classify.objects.filter(
+        Q(branch=classify['branch']) & Q(classify=classify['classify']) & Q(update_date=latest_cls)
+    ).values_list('windcode')
+    all_funds = list({x[0] for x in all_funds})
+    all_funds = ins.objects.filter(
+        Q(update_date=latest) & Q(indicator="RISK_MAXDOWNSIDE") & Q(note=str(year)) & Q(windcode__in=all_funds)
+    ).values_list('windcode', 'numeric')
+    all_funds = [(x[0], x[1] or 0) for x in all_funds]
     funds = ins.objects.filter(
         Q(update_date=latest) & Q(indicator="RISK_MAXDOWNSIDE") & Q(note=str(year)) & Q(windcode__in=funds)
     ).values_list('windcode', 'numeric')
-    funds = [(x[0], x[1] or 0) for x in funds]
     if str(ratio) == "平均":
-        mmd = [x[1] for x in funds]
+        mmd = [x[1] for x in all_funds]
         mean = sum(mmd) / len(mmd)
         funds = {x[0] for x in funds if x[1] > mean}
     else:
@@ -165,13 +181,6 @@ def corp_scale_level(funds, level):
     ins = models.Indicator
     latest_c = latest_day_in_classify()
     latest_i = latest_day_in_indicators()
-    cursor = connection.cursor()
-    # all_funds = cursor.execute(
-    #     f'SELECT a.windcode, a.text, IFNULL(b.numeric, 0) FROM t_ff_indicator_for_filter a JOIN t_ff_indicator_for_'
-    #     f'filter b ON a.windcode = b.windcode JOIN t_ff_classify c ON a.windcode = c.windcode where '
-    #     f'a.update_date = "{latest_i}" and c.UPDATE_DATE = "{latest_c}" and a.indicator = "FUND_CORP_FUNDMANAGEMENTCOMPANY" '
-    #     f'AND b.indicator = "FUND_FUNDSCALE"; '
-    # ).fetchall()
     all_funds1 = models.Fund.objects.filter(
         Q(indicator__update_date=latest_i) & Q(classify__update_date=latest_c)
         & Q(indicator__indicator="FUND_CORP_FUNDMANAGEMENTCOMPANY")
