@@ -115,6 +115,24 @@ def single_hold_shares(funds, percent: int = 40):
     return ret
 
 
+def organization_hold_shares(funds, percent: int = 50):
+    """机构投资者持仓比例限制，默认低于50%"""
+    ins = models.Indicator
+    latest = latest_day_in_indicators()
+    funds = ins.objects.filter(
+        Q(update_date=latest) & Q(windcode__in=funds) & Q(indicator="HOLDER_INSTITUTION_HOLDINGPCT")
+    ).values_list('windcode', 'numeric')
+    funds = [(x[0], x[1] or 0) for x in funds]
+    ret = []
+    for fund in funds:
+        if not fund[1]:
+            ret.append(fund[0])
+        else:
+            if fund[1] < percent:
+                ret.append(fund[0])
+    return ret
+
+
 def over_index_return(funds, index_code, year):
     """区间收益超过指定的指数的区间收益"""
     index_code = index_code.split(",")
@@ -210,7 +228,7 @@ def stdev_yearly_over_range(funds, year, ratio=None):
         mean = sum(mmd) / len(mmd)
         funds = {x[0] for x in funds if x[1] > mean}
     else:
-        funds = {x[0] for x in funds if x[1] / 100 > ratio}
+        funds = {x[0] for x in funds if x[1] / 100 < ratio}
     return funds
 
 
