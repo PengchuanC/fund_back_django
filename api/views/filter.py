@@ -36,3 +36,8 @@ class InfoResultViews(APIView):
         _filters = data["filter"]
         data, page, per_page, total = util.filters.fund_details(request, self, funds, _filters)
         return Response({"data": data, "page": page, "total": total, "per_page": per_page})
+
+
+class BondFilterView(APIView):
+    def get(self, request):
+        pass

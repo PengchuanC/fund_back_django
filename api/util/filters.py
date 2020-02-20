@@ -1,12 +1,10 @@
 from datetime import timedelta
 from functools import lru_cache
 from math import floor, pow
-from copy import deepcopy
 
 import pandas as pd
 
 from django.db.models import Q
-from django.db import connection
 from rest_framework.pagination import PageNumberPagination
 
 from api import models, util
@@ -28,6 +26,18 @@ def latest_day_in_indicators():
 def latest_day_in_classify():
     latest = util.latest(models.Classify)
     return latest
+
+
+def funds_by_classify_from_fund(fund):
+    """根据基金代码获取同类型基金"""
+    latest = util.latest(models.Classify)
+    classify = models.Classify.objects.filter(
+        Q(windcode=fund) & Q(update_date=latest)).values("classify", 'branch').distinct()[0]
+    funds = models.Classify.objects.filter(
+        Q(branch=classify['branch']) & Q(classify=classify['classify']) & Q(update_date=latest)
+    ).values_list('windcode')
+    funds = list({x[0] for x in funds})
+    return funds
 
 
 def funds_by_classify(cls: list):
@@ -54,6 +64,17 @@ def fund_years(funds, left, right=50):
     right = latest - timedelta(right * 365)
     funds = bi.objects.filter(Q(setup_date__range=(right, left)) & Q(windcode__in=funds)).values_list('windcode')
     funds = set([x[0] for x in funds])
+    return funds
+
+
+def regular_open(funds, yes_or_not):
+    """债券型基金是否定开，关键字为是或者否"""
+    ind = models.Indicator
+    latest = latest_day_in_indicators()
+    funds = ind.objects.filter(
+        Q(update_date=latest) & Q(indicator="FUND_REGULOPENFUNDORNOT") & Q(windcode__in=funds)
+    ).values_list('windcode', 'text')
+    funds = list({x[0] for x in funds if x[1] == yes_or_not})
     return funds
 
 
@@ -153,13 +174,8 @@ def max_downside_over_average(funds, year, ratio=None):
     """最大回撤优于平均"""
     ins = models.Indicator
     latest = latest_day_in_indicators()
-    latest_cls = latest_day_in_classify()
     funds = list(funds)
-    classify = models.Classify.objects.filter(Q(windcode=funds[0]) & Q(update_date=latest_cls)).values("classify", 'branch').distinct()[0]
-    all_funds = models.Classify.objects.filter(
-        Q(branch=classify['branch']) & Q(classify=classify['classify']) & Q(update_date=latest_cls)
-    ).values_list('windcode')
-    all_funds = list({x[0] for x in all_funds})
+    all_funds = funds_by_classify_from_fund(funds[0])
     all_funds = ins.objects.filter(
         Q(update_date=latest) & Q(indicator="RISK_MAXDOWNSIDE") & Q(note=str(year)) & Q(windcode__in=all_funds)
     ).values_list('windcode', 'numeric')
@@ -173,6 +189,28 @@ def max_downside_over_average(funds, year, ratio=None):
         funds = {x[0] for x in funds if x[1] > mean}
     else:
         funds = {x[0] for x in funds if x[1] / 100 > -ratio}
+    return funds
+
+
+def stdev_yearly_over_range(funds, year, ratio=None):
+    """年化波动率优于平均"""
+    ins = models.Indicator
+    latest = latest_day_in_indicators()
+    funds = list(funds)
+    all_funds = funds_by_classify_from_fund(funds[0])
+    all_funds = ins.objects.filter(
+        Q(update_date=latest) & Q(indicator="RISK_STDEVYEARLY") & Q(note=str(year)) & Q(windcode__in=all_funds)
+    ).values_list('windcode', 'numeric')
+    all_funds = [(x[0], x[1] or 0) for x in all_funds]
+    funds = ins.objects.filter(
+        Q(update_date=latest) & Q(indicator="RISK_STDEVYEARLY") & Q(note=str(year)) & Q(windcode__in=funds)
+    ).values_list('windcode', 'numeric')
+    if str(ratio) == "平均":
+        mmd = [x[1] for x in all_funds]
+        mean = sum(mmd) / len(mmd)
+        funds = {x[0] for x in funds if x[1] > mean}
+    else:
+        funds = {x[0] for x in funds if x[1] / 100 > ratio}
     return funds
 
 
