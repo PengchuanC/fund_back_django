@@ -201,6 +201,7 @@ def max_downside_over_average(funds, year, ratio=None):
     funds = ins.objects.filter(
         Q(update_date=latest) & Q(indicator="RISK_MAXDOWNSIDE") & Q(note=str(year)) & Q(windcode__in=funds)
     ).values_list('windcode', 'numeric')
+    funds = [(x[0], x[1] or 0) for x in funds]
     if str(ratio) == "平均":
         mmd = [x[1] for x in all_funds]
         mean = sum(mmd) / len(mmd)
@@ -217,18 +218,19 @@ def stdev_yearly_over_range(funds, year, ratio=None):
     funds = list(funds)
     all_funds = funds_by_classify_from_fund(funds[0])
     all_funds = ins.objects.filter(
-        Q(update_date=latest) & Q(indicator="RISK_STDEVYEARLY") & Q(note=str(year)) & Q(windcode__in=all_funds)
+        Q(update_date=latest) & Q(indicator="RISK_STDEVYEARLY") & Q(windcode__in=all_funds)
     ).values_list('windcode', 'numeric')
     all_funds = [(x[0], x[1] or 0) for x in all_funds]
     funds = ins.objects.filter(
-        Q(update_date=latest) & Q(indicator="RISK_STDEVYEARLY") & Q(note=str(year)) & Q(windcode__in=funds)
+        Q(update_date=latest) & Q(indicator="RISK_STDEVYEARLY") & Q(windcode__in=funds)
     ).values_list('windcode', 'numeric')
+    funds = [(x[0], x[1] or 0) for x in funds]
     if str(ratio) == "平均":
         mmd = [x[1] for x in all_funds]
         mean = sum(mmd) / len(mmd)
-        funds = {x[0] for x in funds if x[1] > mean}
+        funds = {x[0] for x in funds if x[1] < mean}
     else:
-        funds = {x[0] for x in funds if x[1] / 100 < ratio}
+        funds = {x[0] for x in funds if x[1] < ratio}
     return funds
 
 
@@ -345,12 +347,16 @@ def execute_basic_filter(data):
         return -1
     if data["lever"]:
         funds = lever(funds, data["lever"])
+    if data["regularOpen"]:
+        funds = regular_open(funds, data["regularOpen"])
     if data["existYear"]:
         funds = fund_years(funds, data["existYear"])
     if data["netValue"]:
         funds = net_asset(funds, data["netValue"], data["netValue"])
     if data["singleHolder"]:
         funds = single_hold_shares(funds, data["singleHolder"])
+    if data["organizationHolder"]:
+        funds = organization_hold_shares(funds, data["organizationHolder"])
     if data["overIndex"]:
         funds = over_index_return(funds, data["overIndex"], data["existYear"])
     if data["overBench"] == "是":
@@ -359,6 +365,8 @@ def execute_basic_filter(data):
         funds = month_win_ratio(funds, data["existYear"], data["monthWin"])
     if data["maxDownside"]:
         funds = max_downside_over_average(funds, data["existYear"], data["maxDownside"])
+    if data["stdev"]:
+        funds = stdev_yearly_over_range(funds, data["existYear"], data["stdev"])
     return funds
 
 
