@@ -105,14 +105,8 @@ def single_hold_shares(funds, percent: int = 40):
         Q(update_date=latest) & Q(windcode__in=funds) & Q(indicator="HOLDER_SINGLE_TOTALHOLDINGPCT")
     ).values_list('windcode', 'numeric')
     funds = [(x[0], x[1] or 0) for x in funds]
-    ret = []
-    for fund in funds:
-        if not fund[1]:
-            ret.append(fund[0])
-        else:
-            if fund[1] < percent:
-                ret.append(fund[0])
-    return ret
+    funds = [x[0] for x in funds if x[1] <= percent]
+    return funds
 
 
 def organization_hold_shares(funds, percent: int = 50):
@@ -123,14 +117,8 @@ def organization_hold_shares(funds, percent: int = 50):
         Q(update_date=latest) & Q(windcode__in=funds) & Q(indicator="HOLDER_INSTITUTION_HOLDINGPCT")
     ).values_list('windcode', 'numeric')
     funds = [(x[0], x[1] or 0) for x in funds]
-    ret = []
-    for fund in funds:
-        if not fund[1]:
-            ret.append(fund[0])
-        else:
-            if fund[1] < percent:
-                ret.append(fund[0])
-    return ret
+    funds = [x[0] for x in funds if x[1] <= percent]
+    return funds
 
 
 def over_index_return(funds, index_code, year):
