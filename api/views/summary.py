@@ -45,5 +45,6 @@ class SummaryInfoViews(APIView):
 
 class BranchClassifyViews(APIView):
     def get(self, request):
-        ret = util.summarise()
+        # ret = util.summarise()
+        ret = util.summarise2()
         return Response(ret)

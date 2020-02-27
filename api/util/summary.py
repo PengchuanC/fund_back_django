@@ -1,4 +1,4 @@
-from functools import lru_cache
+import pandas as pd
 
 from django.db.models import Q, Max
 
@@ -55,6 +55,45 @@ def summarise():
         for c in classify:
             c_data = {x[0]: float(x[-1]) if x[-1] else 0 for x in data if x[1] == b and x[2] == c}
             c_c, c_s = len(c_data.keys()), round(sum(c_data.values()) / 1e8, 0)
+            children.append({"branch": b, "classify": c, "count": c_c, "scale": c_s})
+    b_ret = sorted(b_ret, key=lambda x: x['scale'], reverse=True)
+    b_ret_m = []
+    for ret in b_ret:
+        ret['children'] = sorted(ret['children'], key=lambda x: x['scale'], reverse=True)
+        b_ret_m.append(ret)
+    return {"total": {"count": t_c, "scale": t_s}, "branch": b_ret_m, 'date': latest_cls}
+
+
+def summarise2():
+    """基金分类概况"""
+    latest_cls = util.latest(models.Classify)
+    latest_ind = util.latest(models.Indicator)
+    latest_rpt = models.Indicator.objects.aggregate(Max('rpt_date')).get('rpt_date__max')
+    funds = models.BasicInfo.objects.filter(setup_date__lte=latest_cls).values_list('windcode').distinct()
+    funds = list({x[0] for x in funds})
+    data = models.Indicator.objects.filter(
+        Q(windcode__in=funds) & Q(indicator='NETASSET_TOTAL') & Q(update_date=latest_ind)).values_list(
+        'windcode', 'numeric', 'windcode__basicinfo__fullname'
+    ).distinct()
+    data = pd.DataFrame(data, columns=['windcode', 'scale', 'fullname'])
+    classify = models.Classify.objects.filter(update_date=latest_cls).values_list('windcode', 'branch', 'classify')
+    classify = pd.DataFrame(classify, columns=['windcode', 'branch', 'classify'])
+    data = data.drop_duplicates('windcode')
+    t_c = len(data)
+    t_s = round(data.drop_duplicates('fullname')['scale'].sum()/1e8, 0)
+    branch = set(list(classify['branch']))
+    b_ret, c_ret = [], []
+    for b in branch:
+        b_data = data[data['windcode'].isin(classify[classify['branch'] == b]['windcode'])]
+        b_c = len(b_data)
+        b_s = round(b_data.drop_duplicates('fullname')['scale'].sum()/1e8, 0)
+        children = []
+        b_ret.append({"branch": b, 'count': b_c, 'scale': b_s, "children": children})
+        clas = set(list(classify[classify['branch'] == b]['classify']))
+        for c in clas:
+            c_data = b_data[b_data['windcode'].isin(classify[(classify['branch'] == b) & (classify['classify'] == c)]['windcode'])]
+            c_c = len(c_data)
+            c_s = round(c_data.drop_duplicates('fullname')['scale'].sum() / 1e8, 0)
             children.append({"branch": b, "classify": c, "count": c_c, "scale": c_s})
     b_ret = sorted(b_ret, key=lambda x: x['scale'], reverse=True)
     b_ret_m = []
