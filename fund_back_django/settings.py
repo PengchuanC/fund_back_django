@@ -136,16 +136,16 @@ STATIC_ROOT = os.path.join(BASE_DIR, '/static')
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
     'PAGE_SIZE': 25,
-    'DEFAULT_PERMISSION_CLASSES': (
-        #   设置访问权限为只读
-        'rest_framework.permissions.IsAuthenticatedOrReadOnly',
-        #   设置访问权限为必须是用户
-        # 'rest_framework.permissions.IsAuthenticated',
-    ),
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-    )
+    # 'DEFAULT_PERMISSION_CLASSES': (
+    #     #   设置访问权限为只读
+    #     'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+    #     #   设置访问权限为必须是用户
+    #     # 'rest_framework.permissions.IsAuthenticated',
+    # ),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+    #     'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+    #     'rest_framework.authentication.BasicAuthentication',
+    # )
 }
 
 # CORS
