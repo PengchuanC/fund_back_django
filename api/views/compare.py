@@ -111,5 +111,4 @@ def performance_private(codes):
     tile = pd.DataFrame([tile_025, mean, tile_050, tile_075])
     tile = tile.to_dict()
     data = data.to_dict(orient="records")
-    print(tile)
     return {"data": data, "percent": tile}

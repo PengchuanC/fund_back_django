@@ -31,40 +31,6 @@ def summary():
 
 
 def summarise():
-    """基金分类概括"""
-    latest_cls = util.latest(models.Classify)
-    latest_ins = util.latest(models.Indicator)
-    latest_rpt = models.Indicator.objects.aggregate(Max('rpt_date')).get('rpt_date__max')
-    funds = models.BasicInfo.objects.filter(Q(structured=1) & Q(setup_date__lte=latest_cls)).values_list('windcode').distinct()
-    funds = list({x[0] for x in funds})
-    data = models.Fund.objects.filter(
-        Q(classify__update_date=latest_cls) & Q(indicator__update_date=latest_ins) & Q(indicator__rpt_date=latest_rpt)
-        & Q(indicator__indicator="FUND_FUNDSCALE") & Q(windcode__in=funds)
-    ).values_list('windcode', 'classify__branch', 'classify__classify', 'indicator__numeric').distinct()
-    total = {x[0]: float(x[-1]) if x[-1] else 0 for x in data}
-    t_c, t_s = len(total.keys()), round(sum(total.values()) / 1e8, 0)
-
-    b_ret, c_ret = [], []
-    branch = set([x[1] for x in data])
-    for b in branch:
-        classify = set(x[2] for x in data if x[1] == b)
-        b_data = {x[0]: float(x[-1]) if x[-1] else 0 for x in data if x[1] == b}
-        b_c, b_s = len(b_data.keys()), round(sum(b_data.values()) / 1e8, 0)
-        children = []
-        b_ret.append({"branch": b, 'count': b_c, 'scale': b_s, "children": children})
-        for c in classify:
-            c_data = {x[0]: float(x[-1]) if x[-1] else 0 for x in data if x[1] == b and x[2] == c}
-            c_c, c_s = len(c_data.keys()), round(sum(c_data.values()) / 1e8, 0)
-            children.append({"branch": b, "classify": c, "count": c_c, "scale": c_s})
-    b_ret = sorted(b_ret, key=lambda x: x['scale'], reverse=True)
-    b_ret_m = []
-    for ret in b_ret:
-        ret['children'] = sorted(ret['children'], key=lambda x: x['scale'], reverse=True)
-        b_ret_m.append(ret)
-    return {"total": {"count": t_c, "scale": t_s}, "branch": b_ret_m, 'date': latest_cls}
-
-
-def summarise2():
     """基金分类概况"""
     latest_cls = util.latest(models.Classify)
     latest_ind = util.latest(models.Indicator)
