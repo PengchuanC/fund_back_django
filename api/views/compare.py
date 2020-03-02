@@ -8,6 +8,7 @@ import numpy as np
 from datetime import date
 
 from api import util, models, serializer
+from api.util.performance import Performance
 
 
 class ProductTypeViews(APIView):
@@ -18,7 +19,6 @@ class ProductTypeViews(APIView):
 class ProductFilterViews(APIView):
     def post(self, request):
         params = request.data
-        print(params)
         public = filter_public(params.get('public'))
         private = filter_private(params.get('private'), params.get('privateLabel'))
         private = performance_private(private)
@@ -76,24 +76,18 @@ def filter_private(private, private_label):
 
 def performance(codes):
     """此处待修改"""
-    print(codes)
-    day = f"{date.today().year-1}-01-01"
-    data = models.FundNav.objects.filter(
-        Q(windcode__in=codes) & Q(date__gt=day)
-    ).values("windcode_id", "date", "nav_adj")
-    data = pd.DataFrame(data).sort_values('date')
-    data = pd.pivot_table(data, index='date', columns='windcode_id', values='nav_adj')
-    data = data.fillna(method="bfill")
-    data = data.fillna(method="ffill")
-    pct = np.round(data.iloc[-1, :] / data.iloc[0, :] - 1, 4)
-    pct.name = "ytd"
-    std = np.round(data.std()*math.sqrt(52), 4)
-    std.name = "sigma"
-    data = pd.DataFrame([pct, std]).T
-    data['windcode_id'] = data.index
-    data = data.reset_index(drop=True)
-    # data = data.to_dict(orient="records")
-    return data
+    data = models.FundNav.objects.filter(windcode__in=codes).values("windcode_id", "revised_date", "nav_adj").distinct()
+    data = pd.DataFrame(data).sort_values('revised_date')
+    data = pd.pivot_table(data, index='revised_date', columns='windcode_id', values='nav_adj')
+    # data = data.fillna(method="bfill")
+    # data = data.fillna(method="ffill")
+    ret = []
+    for code in data.columns:
+        p = Performance(data[code])
+        ret.append({'windcode_id': code, 'r1y': p.r1y(), 'r3y': p.r3y(), 'ytd': p.ytd(), 'sigma': p.sigma()})
+    ret = pd.DataFrame(ret)
+    print(ret)
+    return ret
 
 
 def performance_private(codes):
