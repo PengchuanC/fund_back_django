@@ -3,6 +3,8 @@ import datetime
 
 import numpy as np
 
+from pandas import isna
+
 
 class Performance(object):
 
@@ -31,7 +33,7 @@ class Performance(object):
         chg = self.d.pct_change().dropna()
         std = chg.std()
         sigma = std * math.sqrt(52)
-        return sigma
+        return round(sigma, 4)
 
     @staticmethod
     def term_return(d):
@@ -41,4 +43,5 @@ class Performance(object):
         if any({length == 0, d.index[0] == 0}):
             return None
         r = np.power(d[-1]/d[0], 365/length) - 1
+        r = round(r, 4)
         return r

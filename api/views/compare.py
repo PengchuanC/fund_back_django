@@ -2,10 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import Q, Max
 
-import math
 import pandas as pd
-import numpy as np
-from datetime import date
 
 from api import util, models, serializer
 from api.util.performance import Performance
@@ -79,14 +76,12 @@ def performance(codes):
     data = models.FundNav.objects.filter(windcode__in=codes).values("windcode_id", "revised_date", "nav_adj").distinct()
     data = pd.DataFrame(data).sort_values('revised_date')
     data = pd.pivot_table(data, index='revised_date', columns='windcode_id', values='nav_adj')
-    # data = data.fillna(method="bfill")
-    # data = data.fillna(method="ffill")
     ret = []
     for code in data.columns:
         p = Performance(data[code])
         ret.append({'windcode_id': code, 'r1y': p.r1y(), 'r3y': p.r3y(), 'ytd': p.ytd(), 'sigma': p.sigma()})
     ret = pd.DataFrame(ret)
-    print(ret)
+    ret = ret[ret['r1y'].notnull()]
     return ret
 
 
