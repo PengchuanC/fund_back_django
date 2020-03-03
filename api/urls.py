@@ -23,7 +23,6 @@ urlpatterns = [
     path(r"filter/advance_filter", views.AdvanceViews.as_view()),
     path(r"filter/info", views.FilterBasicInfoViews.as_view()),
     path(r"filter/info/result", views.InfoResultViews.as_view()),
-    path(r"filter/bond", views.BondFilterView.as_view()),
 
     path(r"fundinfo", views.PerformanceViews.as_view()),
     path(r"fundinfo/style", views.StyleViews.as_view()),

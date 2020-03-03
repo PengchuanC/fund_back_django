@@ -16,10 +16,13 @@ class ProductTypeViews(APIView):
 class ProductFilterViews(APIView):
     def post(self, request):
         params = request.data
+        codes = []
         public = filter_public(params.get('public'))
         private = filter_private(params.get('private'), params.get('privateLabel'))
-        private = performance_private(private)
-        return Response(private)
+        codes.extend(public)
+        codes.extend(private)
+        data = performance_and_basic_info(codes)
+        return Response(data)
 
 
 def product_type():
@@ -30,7 +33,7 @@ def product_type():
     private_label = models.Label.objects.values_list("label").distinct()
     private_label = list({x[0] for x in private_label})
     private = models.Fund.objects.filter(category=2).values_list("basic__invest_type").distinct()
-    private = [x[0] for x in private if x]
+    private = [x[0] for x in private if x[0]]
     wealth = models.Fund.objects.filter(category=3).values_list("basic__invest_type").distinct()
     wealth = [x[0] for x in wealth if x]
     return {"public": public, "privateLabel": private_label, "private": private, "wealth": wealth}
@@ -38,6 +41,8 @@ def product_type():
 
 def filter_public(public):
     codes = []
+    if not public:
+        return codes
     latest = util.latest(models.Classify)
     for f in public:
         code = models.Classify.objects.filter(
@@ -49,7 +54,6 @@ def filter_public(public):
 
 
 def filter_private(private, private_label):
-    print(private, private_label)
     if not private and not private_label:
         queryset = models.Basic.objects.filter(windcode__category=2).values_list("windcode")
         codes = list({x[0] for x in queryset})
@@ -72,8 +76,9 @@ def filter_private(private, private_label):
 
 
 def performance(codes):
-    """此处待修改"""
-    data = models.FundNav.objects.filter(windcode__in=codes).values("windcode_id", "revised_date", "nav_adj").distinct()
+    """根据基金列表获取相应的收益数据"""
+    data = models.FundNav.objects.filter(windcode__in=codes).values("windcode_id", "revised_date", "nav_adj")\
+        .order_by('-date').distinct()
     data = pd.DataFrame(data).sort_values('revised_date')
     data = pd.pivot_table(data, index='revised_date', columns='windcode_id', values='nav_adj')
     ret = []
@@ -85,7 +90,7 @@ def performance(codes):
     return ret
 
 
-def performance_private(codes):
+def performance_and_basic_info(codes):
     perf = performance(codes)
     info = models.Basic.objects.filter(windcode__in=codes).values(
         "windcode_id", "sec_name", "company", "invest_type"
