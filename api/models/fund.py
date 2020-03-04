@@ -3,7 +3,7 @@ from django.db import models
 
 class Fund(models.Model):
     windcode = models.CharField(max_length=20, unique=True, verbose_name="证券代码")
-    category = models.IntegerField(choices=((1, "公募基金"), (2, "私募基金"), (3, "银行理财")), verbose_name="证券类别")
+    category = models.IntegerField(choices=((1, "公募基金"), (2, "私募基金"), (3, "银行理财"), (4, '券商资管')), verbose_name="证券类别")
 
     class Meta:
         db_table = 't_ff_funds'
