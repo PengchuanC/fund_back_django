@@ -31,10 +31,10 @@ class NavOfPrivateFundViews(APIView):
         queryset = models.FundNav.objects.filter(
             Q(windcode=windcode) & Q(date__range=(ago, today))
         )
-        data = queryset.values('date', 'nav', 'nav_adj')
+        data = queryset.values('date', 'nav', 'nav_adj').order_by('date')
         queryset_b = models.IndexClosePrice.objects.filter(
             Q(windcode=benchmark) & Q(date__range=(ago, today))
-        ).values('date', 'close')
+        ).values('date', 'close').order_by('date')
         data = pd.DataFrame(data)
         ben = pd.DataFrame(queryset_b)
         data = pd.merge(ben, data.copy(), how='outer', on='date')
