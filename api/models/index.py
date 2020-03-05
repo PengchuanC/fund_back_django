@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Index(models.Model):
-    windcode = models.CharField(max_length=20, db_index=True, unique=True, verbose_name="指数简称")
+    windcode = models.CharField(max_length=20, db_index=True, unique=True, verbose_name="指数代码")
     sec_name = models.CharField(max_length=45, verbose_name="指数简称")
     launch_date = models.DateField(verbose_name="成立日期")
     kind = models.CharField(max_length=20, default="normal", verbose_name="类型")

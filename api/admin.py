@@ -38,9 +38,15 @@ class ClassifyAdmin(admin.ModelAdmin):
     search_fields = ["branch", "classify"]
 
 
+class ManagerResource(resources.ModelResource):
+    class Meta:
+        model = models.Manager
+
+
 @admin.register(models.Manager)
-class ManagerAdmin(admin.ModelAdmin):
+class ManagerAdmin(ImportExportModelAdmin):
     list_display = ["windcode", "fund_fundmanager", "fund_corp_fundmanagementcompany", "update_date"]
+    resource_class = ManagerResource
 
 
 @admin.register(models.ManagerExpand)

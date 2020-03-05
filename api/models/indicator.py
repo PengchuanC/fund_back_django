@@ -48,3 +48,6 @@ class IndicatorIndex(models.Model):
         verbose_name = "指数筛选用数据"
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+    def __str__(self):
+        return self.windcode.windcode
