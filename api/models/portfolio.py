@@ -8,10 +8,13 @@ class Portfolio(models.Model):
 
     class Meta:
         db_table = "t_ff_portfolio"
-        verbose_name = "基金池"
+        verbose_name = "基金池基础信息"
         verbose_name_plural = verbose_name
 
     def __repr__(self):
+        return self.port_name
+
+    def __str__(self):
         return self.port_name
 
 
@@ -23,10 +26,10 @@ class PortfolioExpand(models.Model):
 
     class Meta:
         db_table = "t_ff_portfolio_expand"
-        verbose_name = "基金池"
+        verbose_name = "基金池扩展信息"
         verbose_name_plural = verbose_name
 
-    def __repr__(self):
+    def __str__(self):
         return self.port_id
 
 

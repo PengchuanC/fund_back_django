@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'corsheaders',
+    "import_export",
 
     'news.apps.AppConfig',
     'api.apps.ApiConfig',
@@ -88,6 +89,14 @@ DATABASES = {
         'PASSWORD': '123456',
         'HOST': 'cdb-p3ccshwm.cd.tencentcdb.com',
         'PORT': '10053'
+    },
+    'product': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'fund_filter_django',
+        'USER': 'fund',
+        'PASSWORD': '123456',
+        'HOST': '10.170.139.10',
+        'PORT': '3306'
     }
 }
 

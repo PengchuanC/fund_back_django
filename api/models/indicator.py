@@ -21,9 +21,9 @@ class IndicatorForPlot(models.Model):
 class Indicator(models.Model):
     windcode = models.ForeignKey(Fund, to_field="windcode", on_delete=models.CASCADE)
     indicator = models.CharField(max_length=50, verbose_name="指标名称")
-    numeric = models.FloatField(null=True)
-    text = models.TextField(null=True)
-    note = models.CharField(max_length=2, null=True)
+    numeric = models.FloatField(null=True, verbose_name="数值")
+    text = models.TextField(null=True, verbose_name="文本数据")
+    note = models.CharField(max_length=2, null=True, verbose_name="年份")
     rpt_date = models.DateField(verbose_name="报告期")
     update_date = models.DateField(verbose_name="更新日期")
 
@@ -38,8 +38,8 @@ class IndicatorIndex(models.Model):
     windcode = models.ForeignKey(Index, to_field="windcode", on_delete=models.CASCADE, verbose_name="证券代码")
     indicator = models.CharField(max_length=50, verbose_name="指标名称")
     numeric = models.FloatField(null=True, verbose_name="数值")
-    text = models.TextField(null=True, blank=True)
-    note = models.CharField(max_length=2, null=True, blank=True)
+    text = models.TextField(null=True, blank=True, verbose_name="文本数据")
+    note = models.CharField(max_length=2, null=True, blank=True, verbose_name="年份")
     rpt_date = models.DateField(verbose_name="报告期")
     update_date = models.DateField(verbose_name="更新日期")
 
