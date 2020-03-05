@@ -46,24 +46,30 @@ def summarise():
     classify = pd.DataFrame(classify, columns=['windcode', 'branch', 'classify'])
     data = data.drop_duplicates('windcode')
     t_c = len(data)
-    t_s = round(data.drop_duplicates('fullname')['scale'].sum()/1e8, 0)
+    data_dd = data.drop_duplicates('fullname')
+    t_s = round(data_dd['scale'].sum()/1e8, 0)
+    t_c_dd = len(data_dd)
     branch = set(list(classify['branch']))
     b_ret, c_ret = [], []
     for b in branch:
         b_data = data[data['windcode'].isin(classify[classify['branch'] == b]['windcode'])]
         b_c = len(b_data)
-        b_s = round(b_data.drop_duplicates('fullname')['scale'].sum()/1e8, 0)
+        b_data_dd = b_data.drop_duplicates('fullname')
+        b_s = round(b_data_dd['scale'].sum()/1e8, 0)
+        b_c_dd = len(b_data_dd)
         children = []
-        b_ret.append({"branch": b, 'count': b_c, 'scale': b_s, "children": children})
+        b_ret.append({"branch": b, 'count': b_c, 'count2': b_c_dd, 'scale': b_s, "children": children})
         clas = set(list(classify[classify['branch'] == b]['classify']))
         for c in clas:
             c_data = b_data[b_data['windcode'].isin(classify[(classify['branch'] == b) & (classify['classify'] == c)]['windcode'])]
             c_c = len(c_data)
-            c_s = round(c_data.drop_duplicates('fullname')['scale'].sum() / 1e8, 0)
-            children.append({"branch": b, "classify": c, "count": c_c, "scale": c_s})
+            c_data_dd = c_data.drop_duplicates('fullname')
+            c_s = round(c_data_dd['scale'].sum() / 1e8, 0)
+            c_c_dd = len(c_data_dd)
+            children.append({"branch": b, "classify": c, "count": c_c, 'count2': c_c_dd, "scale": c_s})
     b_ret = sorted(b_ret, key=lambda x: x['scale'], reverse=True)
     b_ret_m = []
     for ret in b_ret:
         ret['children'] = sorted(ret['children'], key=lambda x: x['scale'], reverse=True)
         b_ret_m.append(ret)
-    return {"total": {"count": t_c, "scale": t_s}, "branch": b_ret_m, 'date': latest_cls}
+    return {"total": {"count": t_c, 'count2': t_c_dd, "scale": t_s}, "branch": b_ret_m, 'date': latest_cls}
