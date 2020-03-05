@@ -24,14 +24,19 @@ class BasicInfo(models.Model):
         verbose_name_plural = verbose_name
         ordering = ['id']
 
+    def __str__(self):
+        return self.windcode.windcode
+
 
 class Basic(models.Model):
     windcode = models.OneToOneField(
-        Fund, to_field='windcode', on_delete=models.CASCADE, related_name='basic', unique=True
+        Fund, to_field='windcode', on_delete=models.CASCADE, unique=True
     )
     sec_name = models.CharField(max_length=50, verbose_name='产品名称')
     company = models.CharField(max_length=100, verbose_name='管理人', null=True)
     invest_type = models.CharField(max_length=20, verbose_name='投资策略')
+    scale = models.CharField(max_length=30, null=True, verbose_name="基金规模")
+    manager = models.CharField(max_length=10, null=True, verbose_name="基金经理")
     comment = models.TextField(null=True, verbose_name="基金评价")
 
     class Meta:
@@ -41,7 +46,7 @@ class Basic(models.Model):
         ordering = ['id']
 
     def __str__(self):
-        return f"{self.windcode.windcode}-{self.sec_name}"
+        return self.windcode.windcode
 
 
 class Label(models.Model):
@@ -53,3 +58,6 @@ class Label(models.Model):
         verbose_name = '产品标签'
         verbose_name_plural = verbose_name
         ordering = ['id']
+
+    def __str__(self):
+        return self.windcode.windcode

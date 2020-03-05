@@ -1,6 +1,7 @@
 from django.contrib import admin
-from import_export import resources
+from import_export import resources, fields
 from import_export.admin import ImportExportModelAdmin
+from import_export.widgets import ForeignKeyWidget
 
 from api import models
 
@@ -21,6 +22,12 @@ class FundAdmin(ImportExportModelAdmin):
 
 
 class BasicInfoResource(resources.ModelResource):
+    windcode = fields.Field(
+        column_name='windcode',
+        attribute='windcode',
+        widget=ForeignKeyWidget(models.Fund, 'windcode')
+    )
+
     class Meta:
         model = models.BasicInfo
 
@@ -77,29 +84,64 @@ class IndexAdmin(admin.ModelAdmin):
     list_display = ['windcode', 'launch_date', 'kind']
 
 
+class IndexClosePriceResource(resources.ModelResource):
+    windcode = fields.Field(
+        column_name='windcode',
+        attribute='windcode',
+        widget=ForeignKeyWidget(models.Index, 'windcode')
+    )
+
+    class Meta:
+        model = models.IndexClosePrice
+
+
+@admin.register(models.IndexClosePrice)
+class IndexClosePriceAdmin(ImportExportModelAdmin):
+    list_display = ['id', 'windcode', 'close', 'date']
+    resource_class = IndexClosePriceResource
+
+
 class IndicatorIndexResource(resources.ModelResource):
+    windcode = fields.Field(
+        column_name='windcode',
+        attribute='windcode',
+        widget=ForeignKeyWidget(models.Index, 'windcode')
+    )
+
     class Meta:
         model = models.IndicatorIndex
 
 
 @admin.register(models.IndicatorIndex)
 class IndicatorIndexAdmin(ImportExportModelAdmin):
-    list_display = ['windcode', 'indicator', 'numeric', 'text', 'note', 'rpt_date', 'update_date']
+    list_display = ['id', 'windcode', 'indicator', 'numeric', 'text', 'note', 'rpt_date', 'update_date']
     resource_class = IndicatorIndexResource
 
 
 class BasicResource(resources.ModelResource):
+    windcode = fields.Field(
+        column_name='windcode',
+        attribute='windcode',
+        widget=ForeignKeyWidget(models.Fund, 'windcode')
+    )
+
     class Meta:
         model = models.Basic
 
 
 @admin.register(models.Basic)
 class BasicAdmin(ImportExportModelAdmin):
-    list_display = ['windcode', 'sec_name', 'company', 'invest_type', 'comment']
+    list_display = ['id', 'windcode', 'sec_name', 'company', 'invest_type', 'scale', 'manager', 'comment']
     resources_class = BasicResource
 
 
 class LabelResource(resources.ModelResource):
+    windcode = fields.Field(
+        column_name='windcode',
+        attribute='windcode',
+        widget=ForeignKeyWidget(models.Basic, 'windcode')
+    )
+
     class Meta:
         model = models.Label
 
