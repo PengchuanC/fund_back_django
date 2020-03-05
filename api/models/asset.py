@@ -19,7 +19,7 @@ class Asset(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.windcode
+        return self.windcode.windcode
 
 
 class AssetIndustry(models.Model):
@@ -36,7 +36,7 @@ class AssetIndustry(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.windcode
+        return self.windcode.windcode
 
 
 class StockHolding(models.Model):

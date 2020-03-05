@@ -23,7 +23,7 @@ class Style(models.Model):
         index_together = ['value_date', "windcode"]
 
     def __repr__(self):
-        return f"Style-{self.windcode}"
+        return f"Style-{self.windcode.windcode}"
 
 
 class BondStyle(models.Model):
@@ -44,4 +44,4 @@ class BondStyle(models.Model):
         index_together = ['value_date', "windcode"]
 
     def __repr__(self):
-        return f"Style-{self.windcode}"
+        return f"Style-{self.windcode.windcode}"

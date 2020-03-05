@@ -16,7 +16,7 @@ class Manager(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return f"{self.windcode}-{self.fund_fundmanager}"
+        return f"{self.windcode.windcode}-{self.fund_fundmanager}"
 
 
 class ManagerExpand(models.Model):

@@ -25,4 +25,4 @@ class Brinson(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.windcode
+        return self.windcode.windcode

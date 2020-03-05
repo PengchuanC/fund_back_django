@@ -24,4 +24,4 @@ class Exposure(models.Model):
         index_together = ['date', "windcode"]
 
     def __repr__(self):
-        return f"Exposure-{self.windcode}"
+        return f"Exposure-{self.windcode.windcode}"
