@@ -38,6 +38,8 @@ class NavOfPrivateFundViews(APIView):
         data = pd.DataFrame(data)
         ben = pd.DataFrame(queryset_b)
         data = pd.merge(ben, data.copy(), how='outer', on='date')
+        data = data.sort_values('date')
         data = data[~data['nav_adj'].isnull()]
         data = data.fillna(method='ffill')
+        data = data.fillna(method='bfill')
         return data.to_dict(orient='records')

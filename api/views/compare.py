@@ -93,7 +93,7 @@ def performance(codes):
 def performance_and_basic_info(codes):
     perf = performance(codes)
     info = models.Basic.objects.filter(windcode__in=codes).values(
-        "windcode_id", "sec_name", "company", "invest_type"
+        "windcode_id", "sec_name", "company", "invest_type", 'scale'
     )
     info = pd.DataFrame(info)
     data = pd.merge(info, perf, how="inner", on="windcode_id")
@@ -104,5 +104,6 @@ def performance_and_basic_info(codes):
     tile_075 = data.quantile(0.75)
     tile = pd.DataFrame([tile_025, mean, tile_050, tile_075])
     tile = tile.to_dict()
+    data = data.fillna("")
     data = data.to_dict(orient="records")
     return {"data": data, "percent": tile}
