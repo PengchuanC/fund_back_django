@@ -81,16 +81,13 @@ def regular_open(funds, yes_or_not):
 def net_asset(funds, recent_asset_level, avg_asset_level):
     """对最新一期季报和年报的基金净值规模作出要求"""
     ins = models.Indicator
-    rpt = ins.objects.values_list('rpt_date').distinct().order_by('-rpt_date')
-    rpt = [x[0] for x in rpt]
-    recent = rpt[0]
-    annual = [x for x in rpt if x.month == 12][0]
+    latest = util.latest(ins)
     funds = ins.objects.filter(
-        Q(windcode__in=funds) & Q(rpt_date=recent) & Q(indicator="NETASSET_TOTAL")
-        & (Q(numeric__gte=recent_asset_level * 1e8) | Q(numeric__isnull=True))).values_list('windcode')
+        Q(windcode__in=funds) & Q(update_date=latest) & Q(indicator="NETASSET_TOTAL") &
+        Q(numeric__gte=recent_asset_level * 1e8)).values_list('windcode')
     funds = {x[0] for x in funds}
     funds = ins.objects.filter(
-        Q(windcode__in=funds) & Q(rpt_date=annual) & Q(indicator="PRT_AVGNETASSET") & (Q(
+        Q(windcode__in=funds) & Q(update_date=latest) & Q(indicator="PRT_AVGNETASSET") & (Q(
             numeric__gte=avg_asset_level * 1e8) | Q(numeric__isnull=True)
     )).values_list('windcode')
     funds = {x[0] for x in funds}
@@ -151,6 +148,7 @@ def over_bench_return(funds, year):
     latest = latest_day_in_indicators()
     funds = ins.objects.filter(
         Q(update_date=latest) & Q(indicator="NAV_OVER_BENCH_RETURN_PER") & Q(note=str(year)) & Q(windcode__in=funds)
+        & Q(numeric__isnull=False)
     ).values_list('windcode', 'numeric')
     funds = {x[0] for x in funds if x[1] >= 0}
     return funds
