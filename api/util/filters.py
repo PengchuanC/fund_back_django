@@ -180,20 +180,16 @@ def max_downside_over_average(funds, year, ratio=None):
     latest = latest_day_in_indicators()
     funds = list(funds)
     all_funds = funds_by_classify_from_fund(funds[0])
+    all_funds = fund_years(all_funds, year)
     all_funds = ins.objects.filter(
         Q(update_date=latest) & Q(indicator="RISK_MAXDOWNSIDE") & Q(note=str(year)) & Q(windcode__in=all_funds)
     ).values_list('windcode', 'numeric')
-    all_funds = [(x[0], x[1] or 0) for x in all_funds]
-    funds = ins.objects.filter(
-        Q(update_date=latest) & Q(indicator="RISK_MAXDOWNSIDE") & Q(note=str(year)) & Q(windcode__in=funds)
-    ).values_list('windcode', 'numeric')
-    funds = [(x[0], x[1] or 0) for x in funds]
     if str(ratio) == "平均":
         mmd = [x[1] for x in all_funds]
         mean = sum(mmd) / len(mmd)
-        funds = {x[0] for x in funds if x[1] > mean}
+        funds = {x[0] for x in all_funds if x[1] > mean and x[0] in funds}
     else:
-        funds = {x[0] for x in funds if x[1] / 100 > -ratio}
+        funds = {x[0] for x in all_funds if x[1] / 100 > -ratio and x[0] in funds}
     return funds
 
 
@@ -363,7 +359,7 @@ def execute_advance_filter(funds, f):
     if f["workYear"]:
         funds = manager_working_years(funds, f["workYear"])
     if f["workOnThis"]:
-        funds = manager_return_on_this_fund(funds, f["workOnThis"])
+        funds = manager_working_years_on_this_fund(funds, f["workOnThis"])
     if f["geoReturn"]:
         funds = manager_geometry_return(funds, f["geoReturn"] * 100)
     if f["thisReturn"]:
