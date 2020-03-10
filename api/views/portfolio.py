@@ -1,6 +1,6 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.db.models import Q
+from django.db.models import Q, Max
 
 import pandas as pd
 
@@ -13,6 +13,7 @@ from api import models
 class PortfolioViews(APIView):
     def get(self, request):
         ret = models.Portfolio.objects.values('port_id', 'port_name', 'port_type')
+        ret = [{'port_id': 0, 'port_name': '全部组合', 'port_type': 1}] + [x for x in ret]
         return Response(ret)
 
 
@@ -24,6 +25,18 @@ class PortfolioInfoViews(APIView):
         date = request.query_params.get('date')
         portfolio = models.PortfolioExpand.objects
         latest = date
+        if port_id[0] == '0':
+            if _type != "4":
+                latest = portfolio.filter(port_type=1).aggregate(Max('update_date'))['update_date__max']
+                if _type in ['1', '2']:
+                    ret = portfolio.filter(Q(port_type=_type)
+                                           & Q(update_date=latest)).values_list("windcode").distinct()
+                else:
+                    ret = portfolio.filter(port_type=_type).values_list('windcode').distinct()
+            else:
+                ret = models.Basic.objects.filter(comment__isnull=False).values_list('windcode')
+            ret = {x[0]: "-" for x in ret}
+            return ret
         if not date and _type != '4':
             report_dates = portfolio.filter(Q(port_id=port_id) & Q(port_type=_type)) \
                 .order_by('-update_date').values_list('update_date').distinct()
@@ -133,8 +146,12 @@ class PortfolioInfoViews(APIView):
     @staticmethod
     def invest_pool(request):
         """备投池"""
+        port_id = request.query_params.get('port_id')
         portfolio = models.PortfolioExpand.objects
-        ret = portfolio.filter(port_type='3').values('windcode', 'port_id__port_name')
+        if port_id == "0":
+            ret = portfolio.filter(Q(port_type='3')).values('windcode', 'port_id__port_name')
+        else:
+            ret = portfolio.filter(Q(port_type='3') & Q(port_id=port_id)).values('windcode', 'port_id__port_name')
         data = {}
         for x in ret:
             data[x['windcode']] = x['port_id__port_name']
@@ -146,7 +163,16 @@ class PortfolioInfoViews(APIView):
     @staticmethod
     def visit_pool(request):
         """访谈池"""
-        ret = models.Basic.objects.filter(comment__isnull=False).values_list('windcode')
+        port_id = request.query_params.get('port_id')
+        if port_id == "0":
+            ret = models.Basic.objects.filter(comment__isnull=False).values_list('windcode')
+        else:
+            port_name = models.Portfolio.objects.filter(port_id=port_id).values('port_name').first()['port_name']
+            latest = util.latest(models.Classify)
+            ret = models.Basic.objects.filter(
+                Q(comment__isnull=False) & Q(windcode__classify__classify=port_name)
+                & Q(windcode__classify__update_date=latest)
+            ).values_list('windcode').distinct()
         data = {}
         for x in ret:
             data[x[0]] = '新增'
@@ -154,6 +180,17 @@ class PortfolioInfoViews(APIView):
         for x in ret:
             x['状态'] = data.get(x['基金代码'])
         return ret
+
+    @staticmethod
+    def classify_by_windcode(windcode):
+        latest = util.latest(models.Classify)
+        cls = models.Classify.objects.filter(Q(windcode=windcode) & Q(update_date=latest)).values("classify").first()
+        return cls['classify']
+
+    @staticmethod
+    def portid_by_portname(port_name):
+        port_id = models.Portfolio.objects.filter(Q(port_name=port_name)).values("port_id").first()
+        return port_id['port_id']
 
     def get(self, request):
         port_type = request.query_params.get('port_type')
@@ -172,22 +209,25 @@ class PortfolioInfoViews(APIView):
         if windcode:
             try:
                 for w in windcode:
-                    p = models.Portfolio.objects.get(port_id=port_id)
+                    cls = self.classify_by_windcode(w)
+                    _port_id = self.portid_by_portname(cls)
+                    p = models.Portfolio.objects.get(port_id=_port_id)
                     pe = models.PortfolioExpand(windcode=w, port_id=p, port_type=3, update_date=date.today())
                     pe.save()
-                return Response({'msg': 'success'})
+                return Response({'msg': 'success', 'info': f"添加{w}到{cls}"})
             except Exception as e:
                 print(e)
-                return Response({'msg': 'failed', 'error': str(e)})
+                return Response({'msg': 'failed', 'info': f"没有组合-{cls}"})
 
     def delete(self, request):
         params = request.data
         windcode = params.get('windcode')
-        port_id = params.get('port_id')
         if windcode:
             try:
                 for w in windcode:
-                    pe = models.PortfolioExpand.objects.filter(Q(windcode=w) & Q(port_id__port_id=port_id))
+                    cls = self.classify_by_windcode(w)
+                    _port_id = self.portid_by_portname(cls)
+                    pe = models.PortfolioExpand.objects.filter(Q(windcode=w) & Q(port_id__port_id=_port_id))
                     pe.delete()
                 return Response({'msg': 'success'})
             except Exception as e:
@@ -218,9 +258,8 @@ class CommentViews(APIView):
         windcode = request.data.get('windcode')
         comment = request.data.get('comment', '')
         fund = models.Basic.objects.get(windcode=windcode)
-        if len(comment) == 0:
+        if comment is not None and len(comment) == 0:
             fund.comment = None
-        else:
-            fund.comment = comment
+        fund.comment = comment
         fund.save()
         return Response()
