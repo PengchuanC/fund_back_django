@@ -83,7 +83,7 @@ def net_asset(funds, recent_asset_level, avg_asset_level):
     ins = models.Indicator
     latest = util.latest(ins)
     funds = ins.objects.filter(
-        Q(windcode__in=funds) & Q(update_date=latest) & Q(indicator="NETASSET_TOTAL") &
+        Q(windcode__in=funds) & Q(update_date=latest) & Q(indicator="PRT_NETASSET") &
         Q(numeric__gte=recent_asset_level * 1e8)).values_list('windcode')
     funds = {x[0] for x in funds}
     funds = ins.objects.filter(
