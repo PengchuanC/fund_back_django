@@ -17,10 +17,12 @@ class ProductFilterViews(APIView):
     def post(self, request):
         params = request.data
         codes = []
-        public = filter_public(params.get('public'))
-        private = filter_private(params.get('private'), params.get('privateLabel'))
-        codes.extend(public)
-        codes.extend(private)
+        if "公募基金" in params['product']:
+            public = filter_public(params.get('public'))
+            codes.extend(public)
+        if "私募基金" in params['product']:
+            private = filter_private(params.get('private'), params.get('privateLabel'))
+            codes.extend(private)
         data = performance_and_basic_info(codes)
         return Response(data)
 
@@ -79,6 +81,8 @@ def performance(codes):
     """根据基金列表获取相应的收益数据"""
     data = models.FundNav.objects.filter(windcode__in=codes).values("windcode_id", "revised_date", "nav_adj")\
         .order_by('-date').distinct()
+    if len(data) == 0:
+        return None
     data = pd.DataFrame(data).sort_values('revised_date')
     data = pd.pivot_table(data, index='revised_date', columns='windcode_id', values='nav_adj')
     ret = []
@@ -92,6 +96,8 @@ def performance(codes):
 
 def performance_and_basic_info(codes):
     perf = performance(codes)
+    if perf is None:
+        return None
     info = models.Basic.objects.filter(windcode__in=codes).values(
         "windcode_id", "sec_name", "company", "invest_type", 'scale'
     )
