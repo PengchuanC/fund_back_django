@@ -100,10 +100,10 @@ class PlotPerformanceViews(APIView):
         data["date"] = data.index
         data["date"] = data["date"].apply(lambda x: x.strftime("%Y-%m-%d"))
         data = data.to_dict(orient="list")
-
-        return {"data": data, "fund": name, "style": style_name, "benchmark": benchmark_name,
+        ret = {"data": data, "fund": name, "style": style_name, "benchmark": benchmark_name,
                 "performance": performance, "yearly": year_performance, "yearly_chart": year_performance_chart,
                 "msg": 0}
+        return ret
 
     @staticmethod
     def performance(data: pd.DataFrame):
@@ -143,6 +143,7 @@ class PlotPerformanceViews(APIView):
                 y = dates.index(y)
             table[f"y{x}"] = round((data.iloc[end] / data.iloc[y] - 1) * 100, 2)
 
+        data = data.fillna(method='bfill')
         total = round((data.iloc[end] / data.iloc[start] - 1) * 100, 2)
         table["total"] = total
 
@@ -165,8 +166,10 @@ class PlotPerformanceViews(APIView):
             if y == start_y:
                 d1 = dates.index(start)
             else:
-                d1 = dates.index(date(y-1, 12, 31))
-            d2 = dates.index(date(y, 12, 13))
+                d1 = list(filter(lambda x: x <= date(y-1, 12, 31), dates))[-1]
+                d1 = dates.index(d1)
+            d2 = list(filter(lambda x: x <= date(y, 12, 31), dates))[-1]
+            d2 = dates.index(d2)
             table[f"{y}"] = round((data.iloc[d2]/data.iloc[d1]-1)*100, 2)
         ytd = dates.index(date(end_y-1, 12, 31))
         table["ytd"] = round((data.iloc[-1]/data.iloc[ytd]-1)*100, 2)
