@@ -152,9 +152,11 @@ class PortfolioInfoViews(APIView):
             ret = portfolio.filter(Q(port_type='3')).values('windcode', 'port_id__port_name')
         else:
             ret = portfolio.filter(Q(port_type='3') & Q(port_id=port_id)).values('windcode', 'port_id__port_name')
-        data = {}
-        for x in ret:
-            data[x['windcode']] = x['port_id__port_name']
+        latest = util.latest(models.Classify)
+        funds = {x['windcode'] for x in ret}
+        data = models.Classify.objects.filter(
+            Q(windcode__in=funds) & Q(update_date=latest)).values_list("windcode", "classify").distinct()
+        data = {x[0]: x[1] for x in data}
         ret = PortfolioInfoViews.retrieve_data(data)
         for x in ret:
             x['状态'] = data.get(x['基金代码'])
@@ -192,6 +194,8 @@ class PortfolioInfoViews(APIView):
     @staticmethod
     def portid_by_portname(port_name):
         port_id = models.Portfolio.objects.filter(Q(port_name=port_name)).values("port_id").first()
+        if port_id is None:
+            return 10
         return port_id['port_id']
 
     def get(self, request):
@@ -213,6 +217,7 @@ class PortfolioInfoViews(APIView):
                 for w in windcode:
                     cls = self.classify_by_windcode(w)
                     _port_id = self.portid_by_portname(cls)
+                    print(_port_id)
                     p = models.Portfolio.objects.get(port_id=_port_id)
                     pe = models.PortfolioExpand(windcode=w, port_id=p, port_type=3, update_date=date.today())
                     pe.save()
