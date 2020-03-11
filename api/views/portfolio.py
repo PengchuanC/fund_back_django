@@ -173,9 +173,11 @@ class PortfolioInfoViews(APIView):
                 Q(comment__isnull=False) & Q(windcode__classify__classify=port_name)
                 & Q(windcode__classify__update_date=latest)
             ).values_list('windcode').distinct()
-        data = {}
-        for x in ret:
-            data[x[0]] = '新增'
+        latest = util.latest(models.Classify)
+        funds = {x[0] for x in ret}
+        data = models.Classify.objects.filter(
+            Q(windcode__in=funds) & Q(update_date=latest)).values_list("windcode", "classify").distinct()
+        data = {x[0]: x[1] for x in data}
         ret = PortfolioInfoViews.retrieve_data(data)
         for x in ret:
             x['状态'] = data.get(x['基金代码'])
