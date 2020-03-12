@@ -108,6 +108,7 @@ class PlotPerformanceViews(APIView):
     @staticmethod
     def performance(data: pd.DataFrame):
         """|index|fund|style|benchmark|"""
+        data = data.fillna(method='bfill')
         dates = list(data.index)
         table = pd.DataFrame()
         date = dates[-1]
@@ -116,38 +117,39 @@ class PlotPerformanceViews(APIView):
         end = -1
         start = 0
         if ytd not in dates:
-            ytd = not_in_series()
+            table['ytd'] = not_in_series()
         else:
             ytd = dates.index(ytd)
-        table["ytd"] = round((data.iloc[end] / data.iloc[ytd] - 1) * 100, 2)
+            table["ytd"] = round((data.iloc[end] / data.iloc[ytd] - 1) * 100, 2)
 
         m3 = du.x_months_ago(3)
         if m3 not in dates:
-            m3 = not_in_series()
+            table['m3'] = not_in_series()
         else:
             m3 = dates.index(m3)
-        table["m3"] = round((data.iloc[end] / data.iloc[m3] - 1) * 100, 2)
+            table["m3"] = round((data.iloc[end] / data.iloc[m3] - 1) * 100, 2)
 
         m6 = du.x_months_ago(6)
         if m6 not in dates:
-            m6 = not_in_series()
+            table['m6'] = not_in_series()
         else:
             m6 = dates.index(m6)
-        table["m6"] = round((data.iloc[end] / data.iloc[m6] - 1) * 100, 2)
+            table["m6"] = round((data.iloc[end] / data.iloc[m6] - 1) * 100, 2)
 
         for x in [1, 2, 3, 5]:
             y = du.x_years_ago(x)
-            if y not in dates:
-                y = not_in_series()
+            dates_ = list(filter(lambda d: d <= y, dates))
+            if not dates_:
+                table[f"y{x}"] = not_in_series()
             else:
-                y = dates.index(y)
-            table[f"y{x}"] = round((data.iloc[end] / data.iloc[y] - 1) * 100, 2)
+                y = dates.index(dates_[-1])
+                table[f"y{x}"] = round((data.iloc[end] / data.iloc[y] - 1) * 100, 2)
 
         data = data.fillna(method='bfill')
         total = round((data.iloc[end] / data.iloc[start] - 1) * 100, 2)
         table["total"] = total
 
-        annual = round((np.power(1+total, 365/len(dates)) - 1)*100, 2)
+        annual = round((np.power(1+total/100, 365/len(dates)) - 1)*100, 2)
         table["annual"] = annual
 
         return table
