@@ -154,6 +154,12 @@ class LabelAdmin(ImportExportModelAdmin):
 
 
 class FundNavResource(resources.ModelResource):
+    windcode = fields.Field(
+        column_name='windcode',
+        attribute='windcode',
+        widget=ForeignKeyWidget(models.Fund, 'windcode')
+    )
+
     class Meta:
         model = models.FundNav
 

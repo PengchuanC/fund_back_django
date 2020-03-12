@@ -30,26 +30,26 @@ class PortfolioExpand(models.Model):
         verbose_name_plural = verbose_name
 
     def __str__(self):
-        return self.port_id
-
-
-class PortfolioObserve(models.Model):
-    port_id = models.ForeignKey(Portfolio, to_field="port_id", on_delete=models.CASCADE)
-    windcode = models.CharField(max_length=12, verbose_name="证券代码")
-    update_date = models.DateField(verbose_name="更新日期")
-
-    class Meta:
-        db_table = "t_ff_portfolio_observe"
-        verbose_name = "观察池"
-        verbose_name_plural = verbose_name
-
-
-class PortfolioCore(models.Model):
-    port_id = models.ForeignKey(Portfolio, to_field="port_id", on_delete=models.CASCADE)
-    windcode = models.CharField(max_length=12, verbose_name="证券代码")
-    update_date = models.DateField(verbose_name="更新日期")
-
-    class Meta:
-        db_table = "t_ff_portfolio_core"
-        verbose_name = "核心池"
-        verbose_name_plural = verbose_name
+        return self.port_id.port_name
+#
+#
+# class PortfolioObserve(models.Model):
+#     port_id = models.ForeignKey(Portfolio, to_field="port_id", on_delete=models.CASCADE)
+#     windcode = models.CharField(max_length=12, verbose_name="证券代码")
+#     update_date = models.DateField(verbose_name="更新日期")
+#
+#     class Meta:
+#         db_table = "t_ff_portfolio_observe"
+#         verbose_name = "观察池"
+#         verbose_name_plural = verbose_name
+#
+#
+# class PortfolioCore(models.Model):
+#     port_id = models.ForeignKey(Portfolio, to_field="port_id", on_delete=models.CASCADE)
+#     windcode = models.CharField(max_length=12, verbose_name="证券代码")
+#     update_date = models.DateField(verbose_name="更新日期")
+#
+#     class Meta:
+#         db_table = "t_ff_portfolio_core"
+#         verbose_name = "核心池"
+#         verbose_name_plural = verbose_name
