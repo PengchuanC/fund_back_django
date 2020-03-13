@@ -42,16 +42,14 @@ class AssetViews(APIView):
     def industry(self, windcode):
         """行业配置-针对股票仓位"""
         ai = models.AssetIndustry.objects
-        rpt_date = ai.filter(windcode=windcode).values_list('date').order_by('industry', '-date').values_list('date')
-        rpt_date = [x[0] for x in rpt_date]
-        if not rpt_date:
+        latest = util.latest(models.AssetIndustry)
+        if not latest:
             return
-        latest = ai.filter(Q(windcode=windcode) & Q(date=rpt_date[0])).order_by('rank').all()
-        if sum([x.ratio for x in latest]) == 0:
+        ret = ai.filter(Q(windcode=windcode) & Q(update_date=latest)).values_list('industry', 'ratio', 'change')
+        if sum([x[1] for x in ret]) <= 0:
             return
-        prev = ai.filter(Q(windcode=windcode) & Q(date=rpt_date[-1])).order_by('rank').all()
-        change = [round(latest[i].ratio-prev[i].ratio, 2) for i in range(0, len(latest))]
-        ret = [[latest[i].industry, round(latest[i].ratio, 2), change[i]] for i in range(0, len(latest)) if latest[i].ratio]
+        ret = list(filter(lambda x: x[1] != 0, ret))
+        ret = [[x[0], round(x[1], 2), round(x[2], 2) if x[2] else None] for x in ret]
         ret = sorted(ret, key=lambda x: x[1], reverse=True)
         return ret
 

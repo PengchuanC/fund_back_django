@@ -29,7 +29,8 @@ class AssetIndustry(models.Model):
     rank = models.IntegerField(verbose_name="排序")
     ratio = models.FloatField(verbose_name="占比")
     change = models.FloatField(null=True, verbose_name="变化")
-    date = models.DateField(verbose_name="更新时间")
+    date = models.DateField(verbose_name="报告期")
+    update_date = models.DateField(verbose_name="更新时间")
 
     class Meta:
         db_table = "t_ff_asset_industry"
