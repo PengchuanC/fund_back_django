@@ -31,13 +31,12 @@ class AssetViews(APIView):
         if not rpt_date:
             return
         ret = models.Asset.objects.filter(Q(windcode=windcode) & Q(date__in=rpt_date[-2:])).values_list(
-            'stock', 'bond', 'fund', 'warrant', 'cash', 'other'
-        )
-        ret = [x for x in ret]
-        change = [round(ret[-1][i]-ret[0][i], 2) for i in range(0, len(ret[0]))]
-        ret = [round(x, 2) for x in ret[-1]]
+            'stock', 'bond', 'fund', 'warrant', 'cash', 'other', 'status'
+        ).order_by('status')
+        change = ret[0]
+        value = ret[1]
         names = ["股票", "债券", "基金", "权证", "现金", "其他"]
-        ret = [[names[i], ret[i], change[i]] for i in range(0, len(names)) if ret[i] != 0]
+        ret = [[names[x], round(value[x], 2), round(change[x], 2)] for x in range(0, len(names))]
         return ret
 
     def industry(self, windcode):
