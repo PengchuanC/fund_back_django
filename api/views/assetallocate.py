@@ -70,11 +70,9 @@ class AssetViews(APIView):
     def bond(self, windcode):
         """10大重债券"""
         bh = models.BondHolding.objects
-        latest = bh.filter(windcode=windcode).order_by('-date').values_list('date').first()
+        latest = util.latest(models.BondHolding)
         if not latest:
             return
-        latest = latest[0]
-        latest = latest
-        ret = bh.filter(Q(windcode=windcode) & Q(date=latest)).values_list('bond_name', 'ratio', 'change')
-        ret = [[x[0], round(x[1], 2), round(x[2], 2)] for x in ret]
+        ret = bh.filter(Q(windcode=windcode) & Q(update_date=latest)).values_list('bond_name', 'ratio', 'change')
+        ret = [[x[0], round(x[1], 2), round(x[2], 2) if x[2] else None] for x in ret]
         return ret
