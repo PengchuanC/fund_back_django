@@ -88,47 +88,35 @@ class PortfolioInfoViews(APIView):
         return ret
 
     @staticmethod
-    def retrieve_data(codes: dict):
-        types = codes
-        ret = list(types.keys())
-        basic_info = models.BasicInfo.objects.filter(
-            Q(windcode_id__in=ret)).values('windcode', 'sec_name', 'setup_date').distinct()
-        basic_info = pd.DataFrame(basic_info).set_index("windcode")
-
+    def retrieve_data(codes: list):
+        funds = list(codes.keys())
         latest_ind = util.latest(models.Indicator)
-        indicators = models.Indicator.objects.filter(
-            Q(indicator__in=["NETASSET_TOTAL", "FUND_FUNDSCALE"]) | Q(update_date=latest_ind) & Q(windcode_id__in=ret)
-        ).values('windcode', 'numeric', 'indicator').distinct()
-        indicators = pd.DataFrame(indicators)
-        indicators["numeric"] = indicators["numeric"].astype("float")
-        indicators = indicators.drop_duplicates(['windcode', 'indicator'])
-        indicators = indicators.pivot("windcode", "indicator")["numeric"]
-        indicators = indicators / 1e8
-
         latest_performance = util.latest(models.FundPerformance)
+        ret = models.Fund.objects.filter(
+            Q(windcode__in=funds) & Q(indicator__update_date=latest_ind) & Q(indicator__indicator='FUND_FUNDSCALE')
+        ).values(
+            'windcode', 'basicinfo__sec_name', 'basicinfo__setup_date', 'indicator__numeric',
+            'manager__fund_fundmanager'
+        ).distinct()
+        data = pd.DataFrame(ret).set_index('windcode')
         performance = models.FundPerformance.objects.filter(
-            Q(windcode_id__in=ret) & Q(update_date=latest_performance)
+            Q(windcode_id__in=funds) & Q(update_date=latest_performance)
         ).values('windcode', 'indicator', 'value').distinct()
 
         performance = pd.DataFrame(performance).pivot("windcode", "indicator")["value"]
-
-        manager = models.Manager.objects.filter(windcode__in=codes).values('windcode', 'fund_fundmanager')
-        manager = pd.DataFrame(manager).set_index('windcode')
-
-        df = pd.merge(basic_info, indicators, left_index=True, right_index=True, how="inner")
-        df = pd.merge(df, performance, left_index=True, right_index=True, how="inner")
-        df = pd.merge(df, manager, left_index=True, right_index=True, how='outer')
-        df = df.rename(columns={
-            "sec_name": "基金简称", "setup_date": "成立日期", 'FUND_FUNDSCALE': "基金规模(亿元)",
-            'NETASSET_TOTAL': "基金资产", 'NAV': "当前净值", 'NAV_ACC': "累计净值",
+        data = pd.merge(data, performance, left_index=True, right_index=True, how='outer')
+        df = data.rename(columns={
+            "basicinfo__sec_name": "基金简称", "basicinfo__setup_date": "成立日期", 'indicator__numeric': "基金规模(亿元)",
+            'NAV': "当前净值", 'NAV_ACC': "累计净值",
             'RETURN_1M': "近1月回报", 'RETURN_1Y': "近1年回报",
             'RETURN_3M': "近3月回报", 'RETURN_3Y': "近3年回报",
             'RETURN_6M': "近6月回报", 'RETURN_STD': "成立年化回报",
-            'RETURN_1W': "近1周回报", 'fund_fundmanager': '基金经理'
+            'RETURN_1W': "近1周回报", 'manager__fund_fundmanager': '基金经理'
         })
+        df["基金规模(亿元)"] = round(df["基金规模(亿元)"]/1e8, 2)
         df['成立日期'] = df['成立日期'].apply(lambda x: x.strftime("%Y/%m/%d"))
         df["基金代码"] = df.index
-        for col in ["基金规模(亿元)", "基金资产", "当前净值", "累计净值", "近1月回报", "近3月回报", "近6月回报", "近1年回报", "近3年回报", "成立年化回报", "近1周回报"]:
+        for col in ["基金规模(亿元)", "当前净值", "近1月回报", "近3月回报", "近6月回报", "近1年回报", "近3年回报", "成立年化回报", "近1周回报"]:
             df[col] = df[col].apply(lambda x: round(x, 2))
         df = df.fillna(0)
         ret = df.to_dict(orient="record")
