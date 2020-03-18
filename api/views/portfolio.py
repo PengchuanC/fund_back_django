@@ -16,6 +16,20 @@ class PortfolioViews(APIView):
         ret = [{'port_id': 0, 'port_name': '全部组合', 'port_type': 1}] + [x for x in ret]
         return Response(ret)
 
+    def post(self, request):
+        try:
+            params = request.data
+            port_id = params.get('port_id')
+            port_type = params.get('port_type')
+            funds = params.get('funds')
+            date_ = params.get('date')[:10]
+            portfolio = models.Portfolio.objects.get(port_id=port_id)
+            ports = [models.PortfolioExpand(port_id=portfolio, port_type=port_type, update_date=date_, windcode=x) for x in funds]
+            models.PortfolioExpand.objects.bulk_create(ports)
+        except Exception as e:
+            return Response({'msg': 'failed', 'code': -1})
+        return Response({'msg': 'success', 'code': 0})
+
 
 class PortfolioInfoViews(APIView):
     @staticmethod
@@ -235,7 +249,7 @@ class PortfolioDateViews(APIView):
         port_id = request.query_params.get('port_id')
         _type = request.query_params.get('port_type')
         portfolio = models.PortfolioExpand.objects
-        dates = portfolio.filter(Q(port_id=port_id) & Q(port_type=_type)).values_list('update_date').distinct()
+        dates = portfolio.filter(Q(port_id=port_id) & Q(port_type=_type)).values_list('update_date').distinct().order_by("-update_date")
         dates = [x[0] for x in dates]
         return Response(dates)
 
