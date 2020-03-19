@@ -24,9 +24,10 @@ class PortfolioViews(APIView):
             funds = params.get('funds')
             date_ = params.get('date')[:10]
             portfolio = models.Portfolio.objects.get(port_id=port_id)
-            ports = [models.PortfolioExpand(port_id=portfolio, port_type=port_type, update_date=date_, windcode=x) for x in funds]
+            ports = [models.PortfolioExpand(port_id=portfolio, port_type=port_type, update_date=date_, windcode=x) for x
+                     in funds]
             models.PortfolioExpand.objects.bulk_create(ports)
-        except Exception as e:
+        except:
             return Response({'msg': 'failed', 'code': -1})
         return Response({'msg': 'success', 'code': 0})
 
@@ -71,12 +72,13 @@ class PortfolioInfoViews(APIView):
                 ret = portfolio.filter(Q(port_id=port_id) & Q(update_date=prev_rpt) & Q(port_type=_type)).values_list(
                     'windcode')
                 prev = [x[0] for x in ret]  # 上一期
-                ret = portfolio.filter(Q(port_id=port_id) & Q(update_date__lt=prev_rpt) & Q(port_type=_type)).values_list(
+                ret = portfolio.filter(
+                    Q(port_id=port_id) & Q(update_date__lt=prev_rpt) & Q(port_type=_type)).values_list(
                     'windcode')
                 old = list({x[0] for x in ret})  # 历史
-            add = [x for x in new if all({x not in prev, x not in old})]    # 新增
-            hold = [x for x in new if x in prev]    # 保持
-            back = [x for x in new if all({x not in prev, x in old})]   # 回归
+            add = [x for x in new if all({x not in prev, x not in old})]  # 新增
+            hold = [x for x in new if x in prev]  # 保持
+            back = [x for x in new if all({x not in prev, x in old})]  # 回归
             delete = [x for x in prev if x not in new]
         elif _type == '3':
             ret = portfolio.filter(Q(port_id=port_id) & Q(port_type=_type)).values_list('windcode')
@@ -127,7 +129,7 @@ class PortfolioInfoViews(APIView):
             'RETURN_6M': "近6月回报", 'RETURN_STD': "成立年化回报",
             'RETURN_1W': "近1周回报", 'manager__fund_fundmanager': '基金经理'
         })
-        df["基金规模(亿元)"] = round(df["基金规模(亿元)"]/1e8, 2)
+        df["基金规模(亿元)"] = round(df["基金规模(亿元)"] / 1e8, 2)
         df['成立日期'] = df['成立日期'].apply(lambda x: x.strftime("%Y/%m/%d"))
         df["基金代码"] = df.index
         for col in ["基金规模(亿元)", "当前净值", "近1月回报", "近3月回报", "近6月回报", "近1年回报", "近3年回报", "成立年化回报", "近1周回报"]:
@@ -249,7 +251,8 @@ class PortfolioDateViews(APIView):
         port_id = request.query_params.get('port_id')
         _type = request.query_params.get('port_type')
         portfolio = models.PortfolioExpand.objects
-        dates = portfolio.filter(Q(port_id=port_id) & Q(port_type=_type)).values_list('update_date').distinct().order_by("-update_date")
+        dates = portfolio.filter(Q(port_id=port_id) & Q(port_type=_type)).values_list(
+            'update_date').distinct().order_by("-update_date")
         dates = [x[0] for x in dates]
         return Response(dates)
 
