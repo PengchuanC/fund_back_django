@@ -55,14 +55,20 @@ class PlotPerformanceViews(APIView):
         name = models.BasicInfo.objects.filter(windcode=windcode).first().sec_name
         style = params.get("style")
         benchmark = params.get("benchmark")
+
+        latest = util.latest(models.Classify)
+        branch = models.Classify.objects.filter(Q(update_date=latest) & Q(windcode=windcode)).first().branch
+
         if not benchmark:
-            benchmark = "000300.SH"
+            basic_benchmark = {
+                "股票类": "000906.SH", "债券类": "CBA00301.CS", "货币类": "H11025.CSI",
+                "另类": "000001.SH", "QDII": "000300.SH", "FOF": "000300.SH"
+            }
+            benchmark = basic_benchmark.get(branch, "8000300.SH")
         benchmark_name = models.Index.objects.filter(windcode=benchmark).first().sec_name
         if not style:
             basic_style = {"股票类": "885012.WI", "债券类": "885005.WI", "货币类": "885009.WI",
                            "另类": "885010.WI", "QDII": "885054.WI", "FOF": "885010.WI"}
-            latest = util.latest(models.Classify)
-            branch = models.Classify.objects.filter(update_date=latest).first().branch
             style = basic_style.get(branch, "885010.WI")
         style_name = models.Index.objects.filter(windcode=style).first().sec_name
         start = models.FundNav.objects.filter(windcode=windcode).aggregate(Min('date')).get('date__min')

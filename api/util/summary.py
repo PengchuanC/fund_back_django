@@ -34,7 +34,6 @@ def summarise():
     """基金分类概况"""
     latest_cls = util.latest(models.Classify)
     latest_ind = util.latest(models.Indicator)
-    latest_rpt = models.Indicator.objects.aggregate(Max('rpt_date')).get('rpt_date__max')
     funds = models.BasicInfo.objects.filter(setup_date__lte=latest_cls).values_list('windcode').distinct()
     funds = list({x[0] for x in funds})
     data = models.Indicator.objects.filter(
