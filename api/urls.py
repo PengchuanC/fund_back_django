@@ -29,6 +29,8 @@ urlpatterns = [
     path(r"fundinfo/style&benchmark", views.StyleAndBenchmarkViews.as_view()),
     path(r"fundinfo/plotperformance", views.PlotPerformanceViews.as_view()),
 
+    path(r"evaluate", views.EvaluationViews.as_view()),
+
     path(r"manager", views.ManagerViews.as_view()),
     path(r"manager/managed", views.ManagedViews.as_view()),
 
