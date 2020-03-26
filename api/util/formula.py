@@ -129,17 +129,17 @@ def max_drawback(data):
     """最大回撤"""
     drawback = []
     max_ = 0
-    max_date = None
+    max_date = data.index[0]
     for date, value in data.iteritems():
         if value > max_:
             max_ = value
             max_date = date
         else:
-            drawback.append((date, value/max_ - 1))
-    drawback = sorted(drawback, key=lambda x: x[1])[0]
-    start = max_date
-    end = drawback[0]
-    back = round(drawback[1], 4)
+            drawback.append((max_date, date, value/max_ - 1))
+    drawback = sorted(drawback, key=lambda x: x[2])[0]
+    start = drawback[0]
+    end = drawback[1]
+    back = round(drawback[2], 4)
     return start, end, back
 
 

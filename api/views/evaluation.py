@@ -32,7 +32,6 @@ class EvaluationViews(APIView):
         product = ProductInfo(windcode)
         ret.update(product.run())
         ret.update(self.format(data))
-        print(ret)
         return Response(ret)
 
     @staticmethod
