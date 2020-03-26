@@ -33,6 +33,7 @@ class Formula(object):
 
     @staticmethod
     def daily_change(data):
+        """日收益统计"""
         data = data.pct_change().dropna()
         y = data.agg(['mean', 'max', 'min', win_ratio])
         y = round(y, 4)
@@ -40,12 +41,14 @@ class Formula(object):
 
     @staticmethod
     def trading_day_count(data):
+        """交易日统计"""
         data = data.pct_change().dropna()
         count = data.agg([win, lose, draw])
         return count
 
     @staticmethod
     def annualized_volatility(data):
+        """年化波动率及下行波动率"""
         data = data.pct_change().dropna()
         std = data.agg([vol, downside_vol])
         std = round(std, 4)
@@ -53,6 +56,7 @@ class Formula(object):
 
     @staticmethod
     def max_drawback(data):
+        """最大回撤及发生日期"""
         ret = data.agg(max_drawback)
         ret = pd.DataFrame(ret, columns=['ret'])
         ret['start'] = ret['ret'].apply(lambda x: x[0].strftime("%Y-%m-%d"))
@@ -63,6 +67,7 @@ class Formula(object):
 
     @staticmethod
     def sharpe_ratio(data):
+        """夏普比"""
         annual_return = Formula.annualized_return_yield(data)
         volatility = Formula.annualized_volatility(data).loc['vol', :]
         sharpe = (annual_return - NO_RISK_RATIO) / volatility
@@ -71,6 +76,7 @@ class Formula(object):
 
     @staticmethod
     def calmar_ratio(data):
+        """卡玛比"""
         annualized_return = Formula.annualized_return_yield(data)
         drawback = Formula.max_drawback(data).loc['drawback', :]
         calmar = - annualized_return / drawback
@@ -80,6 +86,7 @@ class Formula(object):
 
     @staticmethod
     def sortino_ratio(data):
+        """索提诺值"""
         annual_return = Formula.annualized_return_yield(data)
         pct = data.pct_change().dropna()
         dr = pct.agg(downside_risk)
