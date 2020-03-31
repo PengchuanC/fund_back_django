@@ -156,3 +156,21 @@ def downside_risk(pct):
     pct = pct[pct < 0]
     std = np.sqrt(sum(pct**2)/len(pct)*250)
     return std
+
+
+def var(hist_change, days=7, alpha=0.05):
+    """
+    计算var
+    """
+    hist_change = hist_change.values[-days:]
+    p = np.percentile(hist_change, alpha*100, interpolation='midpoint')
+    return p
+
+
+def cvar(hist_change, days=7, alpha=0.05):
+    """计算CVAR"""
+    hist_change = hist_change.values[-days:]
+    hist_change = sorted(hist_change)
+    p = np.percentile(hist_change, alpha * 100, interpolation='midpoint')
+    data = [x for x in hist_change if x < p]
+    return sum(data) / len(data)
