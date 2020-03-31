@@ -48,6 +48,25 @@ def funds_by_classify(cls: list):
     return funds
 
 
+@lru_cache(None)
+def initial_fund():
+    """获取初始基金"""
+    ret = models.BasicInfo.objects.values('windcode', 'fullname').distinct()
+    ret = pd.DataFrame(ret)
+    ret = ret.sort_values('fullname')
+    ret = ret.drop_duplicates('fullname')
+    funds = list(ret['windcode'].values)
+    return funds
+
+
+def funds_by_classify_from_initial_fund(fund):
+    """通过基金获取同一分类下的主基金"""
+    funds = funds_by_classify_from_fund(fund)
+    if_ = initial_fund()
+    funds = list({x[0] for x in funds if x in if_})
+    return funds
+
+
 def lever(funds, yes_or_no):
     """是否是杠杆基金"""
     yes_or_no = 0 if yes_or_no == "是" else 1
@@ -179,11 +198,14 @@ def max_downside_over_average(funds, year, ratio=None):
     ins = models.Indicator
     latest = latest_day_in_indicators()
     funds = list(funds)
-    all_funds = funds_by_classify_from_fund(funds[0])
+    all_funds = funds_by_classify_from_initial_fund(funds[0])
     all_funds = fund_years(all_funds, year)
     all_funds = ins.objects.filter(
         Q(update_date=latest) & Q(indicator="RISK_MAXDOWNSIDE") & Q(note=str(year)) & Q(windcode__in=all_funds)
     ).values_list('windcode', 'numeric')
+    funds = ins.objects.filter(
+            Q(update_date=latest) & Q(indicator="RISK_MAXDOWNSIDE") & Q(note=str(year)) & Q(windcode__in=funds)
+        ).values_list('windcode', 'numeric')
     if str(ratio) == "平均":
         mmd = [x[1] for x in all_funds]
         mean = sum(mmd) / len(mmd)
@@ -200,19 +222,17 @@ def stdev_yearly_over_range(funds, year, ratio=None):
     funds = list(funds)
     all_funds = funds_by_classify_from_fund(funds[0])
     all_funds = ins.objects.filter(
-        Q(update_date=latest) & Q(indicator="RISK_STDEVYEARLY") & Q(windcode__in=all_funds)
+        Q(update_date=latest) & Q(indicator="RISK_STDEVYEARLY") & Q(windcode__in=all_funds) & Q(numeric__isnull=False)
     ).values_list('windcode', 'numeric')
-    all_funds = [(x[0], x[1] or 0) for x in all_funds]
     funds = ins.objects.filter(
-        Q(update_date=latest) & Q(indicator="RISK_STDEVYEARLY") & Q(windcode__in=funds)
+        Q(update_date=latest) & Q(indicator="RISK_STDEVYEARLY") & Q(windcode__in=funds) & Q(numeric__isnull=False)
     ).values_list('windcode', 'numeric')
-    funds = [(x[0], x[1] or 0) for x in funds]
     if str(ratio) == "平均":
         mmd = [x[1] for x in all_funds]
         mean = sum(mmd) / len(mmd)
-        funds = {x[0] for x in funds if x[1] < mean}
+        funds = {x[0] for x in funds if x[1] > mean}
     else:
-        funds = {x[0] for x in funds if x[1] < ratio}
+        funds = {x[0] for x in funds if x[1] > -ratio}
     return funds
 
 
