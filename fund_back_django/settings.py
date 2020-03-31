@@ -82,14 +82,6 @@ WSGI_APPLICATION = 'fund_back_django.wsgi.application'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'test': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'fund_filter_django',
-        'USER': 'fund',
-        'PASSWORD': '123456',
-        'HOST': 'cdb-p3ccshwm.cd.tencentcdb.com',
-        'PORT': '10053'
-    },
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'fund_filter_django',

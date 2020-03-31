@@ -63,7 +63,7 @@ def funds_by_classify_from_initial_fund(fund):
     """通过基金获取同一分类下的主基金"""
     funds = funds_by_classify_from_fund(fund)
     if_ = initial_fund()
-    funds = list({x[0] for x in funds if x in if_})
+    funds = list({x for x in funds if x in if_})
     return funds
 
 
@@ -198,20 +198,27 @@ def max_downside_over_average(funds, year, ratio=None):
     ins = models.Indicator
     latest = latest_day_in_indicators()
     funds = list(funds)
-    all_funds = funds_by_classify_from_initial_fund(funds[0])
+    for x in funds:
+        all_funds = funds_by_classify_from_initial_fund(x)
+        if all_funds:
+            break
+    else:
+        return None
     all_funds = fund_years(all_funds, year)
     all_funds = ins.objects.filter(
         Q(update_date=latest) & Q(indicator="RISK_MAXDOWNSIDE") & Q(note=str(year)) & Q(windcode__in=all_funds)
+        & Q(numeric__isnull=False)
     ).values_list('windcode', 'numeric')
     funds = ins.objects.filter(
             Q(update_date=latest) & Q(indicator="RISK_MAXDOWNSIDE") & Q(note=str(year)) & Q(windcode__in=funds)
+            & Q(numeric__isnull=False)
         ).values_list('windcode', 'numeric')
     if str(ratio) == "平均":
         mmd = [x[1] for x in all_funds]
         mean = sum(mmd) / len(mmd)
-        funds = {x[0] for x in all_funds if x[1] > mean and x[0] in funds}
+        funds = {x[0] for x in funds if x[1] > mean}
     else:
-        funds = {x[0] for x in all_funds if x[1] / 100 > -ratio and x[0] in funds}
+        funds = {x[0] for x in funds if x[1] / 100 > -ratio}
     return funds
 
 
