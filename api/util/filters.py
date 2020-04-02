@@ -58,6 +58,19 @@ def initial_fund():
     return funds
 
 
+@lru_cache(None)
+def initial_fund_by_scale():
+    """获取同一基金中规模较大的那只"""
+    latest = util.latest(models.Indicator)
+    ret = models.BasicInfo.objects.values('windcode', 'fullname').filter(
+        Q(windcode__indicator__indicator='FUND_FUNDSCALE') & Q(windcode__indicator__update_date=latest)
+    ).order_by('windcode__indicator__numeric').disinct()
+    ret = pd.DataFrame(ret)
+    ret = ret.drop_duplicates('fullname')
+    funds = list(ret['windcode'].values)
+    return funds
+
+
 def funds_by_classify_from_initial_fund(fund):
     """通过基金获取同一分类下的主基金"""
     funds = funds_by_classify_from_fund(fund)
@@ -423,7 +436,7 @@ def fund_details(request, cls, funds, filters, page=None):
     :param filters: 筛选规则
     :return: 基金详细信息
     """
-    if_ = initial_fund()
+    if_ = initial_fund_by_scale()
     funds = [x for x in funds if x in if_]
     date = latest_day_in_indicators()
     year = filters['existYear'] if filters['existYear'] else 1

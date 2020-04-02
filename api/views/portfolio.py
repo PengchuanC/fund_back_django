@@ -104,8 +104,10 @@ class PortfolioInfoViews(APIView):
         return ret
 
     @staticmethod
-    def retrieve_data(codes: list):
+    def retrieve_data(codes: dict):
         funds = list(codes.keys())
+        ifs = util.filters.initial_fund_by_scale()
+        funds = [ x for x in funds if x in ifs]
         latest_ind = util.latest(models.Indicator)
         latest_performance = util.latest(models.FundPerformance)
         ret = models.Fund.objects.filter(
