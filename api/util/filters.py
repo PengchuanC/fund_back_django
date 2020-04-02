@@ -51,9 +51,8 @@ def funds_by_classify(cls: list):
 @lru_cache(None)
 def initial_fund():
     """获取初始基金"""
-    ret = models.BasicInfo.objects.values('windcode', 'fullname').distinct()
+    ret = models.BasicInfo.objects.values('windcode', 'fullname').order_by('setup_date').distinct()
     ret = pd.DataFrame(ret)
-    ret = ret.sort_values('fullname')
     ret = ret.drop_duplicates('fullname')
     funds = list(ret['windcode'].values)
     return funds
@@ -424,6 +423,8 @@ def fund_details(request, cls, funds, filters, page=None):
     :param filters: 筛选规则
     :return: 基金详细信息
     """
+    if_ = initial_fund()
+    funds = [x for x in funds if x in if_]
     date = latest_day_in_indicators()
     year = filters['existYear'] if filters['existYear'] else 1
     rpt = models.Indicator.objects.filter(update_date=date).order_by('-rpt_date').values_list('rpt_date').distinct()[0][
