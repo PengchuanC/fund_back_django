@@ -64,7 +64,7 @@ def initial_fund_by_scale():
     latest = util.latest(models.Indicator)
     ret = models.BasicInfo.objects.values('windcode', 'fullname').filter(
         Q(windcode__indicator__indicator='FUND_FUNDSCALE') & Q(windcode__indicator__update_date=latest)
-    ).order_by('windcode__indicator__numeric').distinct()
+    ).order_by('-windcode__indicator__numeric').distinct()
     ret = pd.DataFrame(ret)
     ret = ret.drop_duplicates('fullname')
     funds = list(ret['windcode'].values)
