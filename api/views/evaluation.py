@@ -27,6 +27,7 @@ class EvaluationViews(APIView):
         data = data.drop_duplicates(['date'])
         data = data.drop_duplicates(['fund', 'benchmark'])
         data = data.set_index('date')
+        data = data.dropna(how='any')
         ret = {}
         ret.update({'duration': [start, end]})
         product = ProductInfo(windcode)

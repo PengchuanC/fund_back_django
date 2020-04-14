@@ -135,7 +135,7 @@ def downside_vol(pct):
 def max_drawback(data):
     """最大回撤"""
     drawback = []
-    max_ = 0
+    max_ = 0.1e-5
     max_date = data.index[0]
     for date, value in data.iteritems():
         if value > max_:

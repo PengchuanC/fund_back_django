@@ -17,7 +17,7 @@ class ManagerViews(APIView):
         ).first()
         ret = {"windcdoe": ret[0], "manager": ret[1], "predmanager": ret[2], "company": ret[3], 'update_date': ret[4],
                'manager_info': [{'netasset': ret[5], 'resume': ret[6], 'gender': ret[7], 'return': ret[8]}],
-               'scale': f"{round(float(scale['numeric']) / 1e8, 2)}亿元({scale['rpt_date'].strftime('%Y-%m-%d')})"}
+               'scale': f"{round(float(scale['numeric']) / 1e8, 2) if scale['numeric'] else '--'}亿元({scale['rpt_date'].strftime('%Y-%m-%d')})"}
         basic = models.Fund.objects.filter(
             Q(windcode=windcode) & Q(classify__update_date=util.latest(models.Classify))
         ).values('classify__classify', 'basicinfo__setup_date', 'basicinfo__benchmark').first()
