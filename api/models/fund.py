@@ -23,7 +23,23 @@ class FundNav(models.Model):
 
     class Meta:
         db_table = "t_ff_fund_nav"
-        verbose_name = "基金净值"
+        verbose_name = "基金净值-复权"
+        verbose_name_plural = verbose_name
+        index_together = ['windcode', 'date']
+
+
+class FundNavAll(models.Model):
+    windcode = models.ForeignKey(Fund, to_field="windcode", on_delete=models.CASCADE)
+    nv = models.FloatField(null=True, verbose_name="净资产值(元)")
+    nav = models.FloatField(null=True, verbose_name="单位净值")
+    nav_acc = models.FloatField(null=True, verbose_name="累计单位净值")
+    daily_profit = models.FloatField(null=True, verbose_name="万份收益")
+    weekly = models.FloatField(null=True, verbose_name="七日年化")
+    date = models.DateField(verbose_name="净值日期")
+
+    class Meta:
+        db_table = "t_ff_fund_nav_all"
+        verbose_name = "基金净值-全部"
         verbose_name_plural = verbose_name
         index_together = ['windcode', 'date']
 
