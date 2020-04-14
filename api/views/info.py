@@ -2,7 +2,7 @@ from datetime import date
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.db.models import Q, Min
+from django.db.models import Q, Min, Max
 
 import pandas as pd
 import numpy as np
@@ -22,7 +22,18 @@ class PerformanceViews(APIView):
         data = {"update_date": latest.strftime("%Y-%m-%d"), "sec_name": sec_name}
         for r in ret:
             data[r.indicator] = r.value
-        return Response(data)
+        latest = models.FundNav.objects.filter(Q(windcode=windcode)).aggregate(Max('date'))['date__max']
+        nav_latest = models.FundNav.objects.filter(Q(windcode=windcode) & Q(date=latest)).values('nav', 'nav_adj').first()
+        nav = models.FundNav.objects.filter(Q(windcode=windcode)).order_by('date').values('date', 'nav_adj')
+        nav = pd.DataFrame(nav).set_index('date')['nav_adj']
+        print(nav_latest)
+        ret = {'update_date': latest.strftime("%Y-%m-%d"), "NAV": nav_latest['nav'], 'NAV_ACC': nav_latest['nav_adj']}
+        p = util.Performance(nav)
+        for key in [
+            'return_1w', 'return_1m', 'return_3m', 'return_6m', 'return_1y', 'return_3y', 'return_ytd', 'return_std'
+        ]:
+            ret[key.upper()] = getattr(p, key)()
+        return Response(ret)
 
 
 class StyleViews(APIView):
