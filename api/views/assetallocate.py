@@ -69,6 +69,8 @@ class AssetViews(APIView):
         if not latest:
             return
         latest = latest[0]
-        ret = bh.filter(Q(windcode=windcode) & Q(update_date=latest)).values_list('bond_name', 'ratio', 'change')
+        ret = bh.filter(Q(windcode=windcode) & Q(update_date=latest)).values_list(
+            'bond_name', 'ratio', 'change'
+        ).order_by('ratio')
         ret = [[x[0], round(x[1]*100, 2), round(x[2]*100, 2) if x[2] else None] for x in ret]
         return ret
