@@ -11,8 +11,8 @@ class Asset(models.Model):
     warrant = models.FloatField(default=0.0, verbose_name="权证")
     cash = models.FloatField(default=0.0, verbose_name="现金")
     other = models.FloatField(default=0.0, verbose_name="其他")
-    status = models.CharField(max_length=8, verbose_name="数据类型")
-    date = models.DateField(verbose_name="更新时间")
+    date = models.DateField(verbose_name="报告期")
+    update_date = models.DateField(verbose_name="更新时间")
 
     class Meta:
         db_table = "t_ff_asset"
