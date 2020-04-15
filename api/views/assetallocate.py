@@ -2,9 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import Q, Max
 
-import pandas as pd
-
-from api import util, models, serializer
+from api import util, models
 
 
 class AssetViews(APIView):
@@ -68,9 +66,10 @@ class AssetViews(APIView):
     def bond(self, windcode):
         """10大重债券"""
         bh = models.BondHolding.objects
-        latest = util.latest(models.BondHolding)
+        latest = bh.filter(windcode=windcode).aggregate(Max('date'))
         if not latest:
             return
+        latest = latest['max__date']
         ret = bh.filter(Q(windcode=windcode) & Q(update_date=latest)).values_list('bond_name', 'ratio', 'change')
         ret = [[x[0], round(x[1]*100, 2), round(x[2]*100, 2) if x[2] else None] for x in ret]
         return ret
