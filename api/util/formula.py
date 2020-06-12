@@ -153,8 +153,8 @@ def max_drawback(data):
 def downside_risk(pct):
     """用于计算sortino的下行标准差计算方式"""
     pct = pct - NO_RISK_RATIO/365
-    pct = pct[pct < 0]
-    std = np.sqrt(sum(pct**2)/len(pct)*250)
+    pct = pd.Series([x if x < 0 else 0 for x in pct])
+    std = np.sqrt((pct*pct).sum()/len(pct)*250)
     return std
 
 
