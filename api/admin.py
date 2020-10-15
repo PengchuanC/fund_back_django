@@ -18,6 +18,7 @@ class FundResource(resources.ModelResource):
 class FundAdmin(ImportExportModelAdmin):
     list_display = ('windcode', 'category')
     search_fields = ('windcode', 'category')
+    list_filter = ('category',)
     resource_class = FundResource
 
 

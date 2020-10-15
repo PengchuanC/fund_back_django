@@ -35,7 +35,7 @@ class PerformanceViews(APIView):
 class StyleViews(APIView):
     def get(self, request):
         windcode = request.query_params.get('windcode', '000001.OF')
-        ret = models.Style.objects.filter(windcode=windcode).all()
+        ret = models.Style.objects.filter(windcode=windcode).order_by('value_date').all()
         serialized = serializer.StyleSerializer(ret, many=True)
         return Response(serialized.data)
 
