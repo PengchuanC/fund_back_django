@@ -24,7 +24,7 @@ class AssetViews(APIView):
 
     def asset(self, windcode):
         """资产配置比例"""
-        rpt_date = models.Asset.objects.filter(windcode=windcode).order_by('-date').values_list('date')
+        rpt_date = models.Asset.objects.filter(windcode=windcode).order_by('date').values_list('date')
         rpt_date = [x[0] for x in rpt_date]
         if not rpt_date:
             return
