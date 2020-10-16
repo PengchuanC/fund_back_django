@@ -100,7 +100,7 @@ class RptDateViews(APIView):
         ).order_by('-rpt_date').values_list('rpt_date').distinct()
         dates = [x[0].strftime("%Y-%m-%d") for x in dates]
         benchs = models.Brinson.objects.filter(
-            Q(rpt_date=dates[0]) & Q(windcode=windcode) & Q(freq="S")
+            Q(rpt_date=dates[0]) & Q(windcode=windcode[:6]) & Q(freq="S")
         ).values_list('benchmark').distinct()[0]
         return Response({"date": dates, "benchmark": benchs})
 
