@@ -96,11 +96,12 @@ class RptDateViews(APIView):
         if not is_in:
             return
         dates = models.Brinson.objects.filter(
-            Q(windcode=windcode) & Q(freq="S") & Q(benchmark="000300.SH")
+            Q(windcode=windcode) & Q(freq="S") & Q(benchmark="000906")
         ).order_by('-rpt_date').values_list('rpt_date').distinct()
         dates = [x[0].strftime("%Y-%m-%d") for x in dates]
+        print(dates)
         benchs = models.Brinson.objects.filter(
-            Q(rpt_date=dates[0]) & Q(windcode=windcode[:6]) & Q(freq="S")
+            Q(rpt_date=dates[0]) & Q(windcode=windcode) & Q(freq="S")
         ).values_list('benchmark').distinct()[0]
         return Response({"date": dates, "benchmark": benchs})
 
