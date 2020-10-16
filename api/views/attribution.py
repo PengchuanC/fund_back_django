@@ -13,7 +13,7 @@ class BrinsonViews(APIView):
         if args is None:
             return
         windcode = args.get("windcode")
-        benchmark = args.get("benchmark")
+        benchmark = args.get("benchmark", '000906')
         freq = args.get("freq")
         rpt_date = args.get("rpt_date")
         if freq == "S":
@@ -71,7 +71,7 @@ def multi_period(windcode, benchmark, rpt_date: list):
         for k in ["q1", "q2", "q3", "q4"]:
             init[k] *= other[k].copy()
     for k in ["q1", "q2", "q3", "q4"]:
-        init[k] = (init[k] - 1)*100
+        init[k] = ((init[k] - 1)*100).copy()
 
     init = init.reset_index()
     init["rpt_date"] = init["rpt_date"].apply(lambda x: x.strftime("%Y-%m-%d"))
