@@ -58,7 +58,7 @@ def multi_period(windcode, benchmark, rpt_date: list):
 
     data = b.filter(
         Q(rpt_date__range=(rpt_date[0], rpt_date[1])) & Q(freq="S") & Q(windcode=windcode) & Q(benchmark=benchmark)
-    ).values('industry_code', 'q1', 'q2', 'q3', 'q4', 'rpt_date')
+    ).values('industry_code', 'industry_name' , 'q1', 'q2', 'q3', 'q4', 'rpt_date')
     data = pd.DataFrame(data).fillna(0)
     data = data.set_index("industry_code")
     for k in ["q1", "q2", "q3", "q4"]:
