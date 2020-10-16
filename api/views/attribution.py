@@ -34,7 +34,7 @@ class BrinsonViews(APIView):
             return
         benchmark = args.get("benchmark")
         if benchmark is None:
-            benchmark = "000300.SH"
+            benchmark = "000906"
 
         rpt_date = args.get("rpt_date")
         if rpt_date is None:
