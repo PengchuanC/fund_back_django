@@ -61,6 +61,7 @@ def multi_period(windcode, benchmark, rpt_date: list):
     ).values('industry_code', 'industry_name' , 'q1', 'q2', 'q3', 'q4', 'rpt_date')
     data = pd.DataFrame(data).fillna(0)
     data = data.set_index("industry_code")
+    data = data.sort_index()
     for k in ["q1", "q2", "q3", "q4"]:
         data[k] = data[k] / 100 + 1
     rpts = sorted(list(set(data["rpt_date"])), reverse=True)
