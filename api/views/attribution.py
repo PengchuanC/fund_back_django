@@ -22,6 +22,7 @@ class BrinsonViews(APIView):
             ).order_by('industry_code').all()
         else:
             ret = multi_period(windcode, benchmark, rpt_date)
+            return Response(ret)
         ret = serializer.BrinsonSerializer(ret, many=True)
         return Response(ret.data)
 
@@ -57,7 +58,7 @@ def multi_period(windcode, benchmark, rpt_date: list):
 
     data = b.filter(
         Q(rpt_date__range=(rpt_date[0], rpt_date[1])) & Q(freq="S") & Q(windcode=windcode) & Q(benchmark=benchmark)
-    ).all()
+    ).values('industry_code', 'q1', 'q2', 'q3', 'q4', 'rpt_date')
     data = pd.DataFrame(data).fillna(0)
     data = data.set_index("industry_code")
     for k in ["q1", "q2", "q3", "q4"]:
@@ -66,9 +67,9 @@ def multi_period(windcode, benchmark, rpt_date: list):
     init = data[data["rpt_date"] == rpts[0]]
 
     for rpt in rpts[1:]:
-        other = data[data["rpt_date"] == rpt]
+        other = data[data["rpt_date"] == rpt].copy()
         for k in ["q1", "q2", "q3", "q4"]:
-            init[k] *= other[k]
+            init[k] *= other[k].copy()
     for k in ["q1", "q2", "q3", "q4"]:
         init[k] = (init[k] - 1)*100
 
