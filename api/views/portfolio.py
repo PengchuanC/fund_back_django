@@ -123,14 +123,16 @@ class PortfolioInfoViews(APIView):
 
         performance = pd.DataFrame(performance).pivot("windcode", "indicator")["value"]
         data = pd.merge(data, performance, left_index=True, right_index=True, how='outer')
+        data.columns = [x.upper() for x in data.columns]
         df = data.rename(columns={
-            "basicinfo__sec_name": "基金简称", "basicinfo__setup_date": "成立日期", 'indicator__numeric': "基金规模(亿元)",
+            "BASICINFO__SEC_NAME": "基金简称", "BASICINFO__SETUP_DATE": "成立日期", 'INDICATOR__NUMERIC': "基金规模(亿元)",
             'NAV': "当前净值", 'NAV_ACC': "累计净值",
             'RETURN_1M': "近1月回报", 'RETURN_1Y': "近1年回报",
             'RETURN_3M': "近3月回报", 'RETURN_3Y': "近3年回报",
             'RETURN_6M': "近6月回报", 'RETURN_STD': "成立年化回报",
-            'RETURN_1W': "近1周回报", 'manager__fund_fundmanager': '基金经理'
+            'RETURN_1W': "近1周回报", 'MANAGER__FUND_FUNDMANAGER': '基金经理'
         })
+        print(df)
         df["基金规模(亿元)"] = round(df["基金规模(亿元)"] / 1e8, 2)
         df['成立日期'] = df['成立日期'].apply(lambda x: x.strftime("%Y/%m/%d"))
         df["基金代码"] = df.index
